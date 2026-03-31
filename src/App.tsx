@@ -95,7 +95,7 @@ const SUB_BRANDS = [
     tours: [
       {
         title: "Costa de Portimão à Sra. da Rocha",
-        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop",
+        image: "/tours-coast.jpg",
         duration: "150 Min",
         rating: 5,
         capacity: "Por passageiro",
@@ -104,7 +104,7 @@ const SUB_BRANDS = [
       },
       {
         title: "Rio Arade",
-        image: "https://images.unsplash.com/photo-1516939884455-1445c8652f83?q=80&w=800&auto=format&fit=crop",
+        image: "/tours-river.jpg",
         duration: "120 Min",
         rating: 5,
         capacity: "Por passageiro",
@@ -113,7 +113,7 @@ const SUB_BRANDS = [
       },
       {
         title: "Sunrise & Sunset",
-        image: "https://images.unsplash.com/photo-1464947644273-914a94b3f034?q=80&w=800&auto=format&fit=crop",
+        image: "/tours-sunset.jpg",
         duration: "120 Min",
         rating: 5,
         capacity: "Por passageiro",
