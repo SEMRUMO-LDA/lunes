@@ -1,0 +1,7 @@
+{
+  "name": "LUNES | Time to be You",
+  "description": "Identidade visual e ecossistema de bem-estar: Move, Explore, Feel, Stay.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

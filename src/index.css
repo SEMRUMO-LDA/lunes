@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Kantumruy Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", serif;
+
+  --color-blackout: #1E1E1E;
+  --color-coconut: #FBF9F9;
+  
+  /* Sub-brands */
+  --color-move-citrus: #C3EA4F;
+  --color-move-leaf: #2B4C09;
+  
+  --color-explore-cyan: #D0EFEF;
+  --color-explore-blue: #5D9EA6;
+  
+  --color-feel-athletics: #EAEACB;
+  --color-feel-sage: #BABF9F;
+  
+  --color-stay-creame: #F7EADF;
+  --color-stay-pink: #C09E8C;
+}
+
+@layer base {
+  body {
+    @apply bg-coconut text-blackout font-sans antialiased;
+    cursor: none; /* Esconder cursor padrão */
+  }
+
+  h1, h2, h3 {
+    @apply font-serif;
+  }
+
+  /* Consistência em transições */
+  * {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: none; /* Esconder cursor padrão em todos os elementos */
+  }
+
+  /* Scroll suave */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Manter cursor pointer em elementos interativos */
+  a, button, input, textarea, select {
+    cursor: none;
+  }
+}
+
+.lunes-gradient-move {
+  background: linear-gradient(135deg, var(--color-move-citrus), var(--color-move-leaf));
+}
+
+.lunes-gradient-explore {
+  background: linear-gradient(135deg, var(--color-explore-cyan), var(--color-explore-blue));
+}
+
+.lunes-gradient-feel {
+  background: linear-gradient(135deg, var(--color-feel-athletics), var(--color-feel-sage));
+}
+
+.lunes-gradient-stay {
+  background: linear-gradient(135deg, var(--color-stay-creame), var(--color-stay-pink));
+}
