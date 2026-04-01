@@ -1,9 +1,24 @@
 import { motion, useScroll, useSpring, useMotionValue, useTransform, AnimatePresence, useAnimationFrame } from "motion/react";
-import { ArrowRight, Instagram, Facebook, Mail, X, ArrowUp, Activity, Compass, Leaf, Home, Dumbbell, Anchor, Heart, Bed, Plus, Minus, Star, Clock, Phone } from "lucide-react";
+import { ArrowRight, Mail, X, ArrowUp, Activity, Compass, Leaf, Home, Plus, Minus, Star, Clock, Phone } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import PrivacyPolicy from "./PrivacyPolicy";
 import TermsConditions from "./TermsConditions";
 import ContactForm from "./ContactForm";
+
+// Custom Social Icons (replacing deprecated lucide-react icons)
+const InstagramIcon = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+  </svg>
+);
+
+const FacebookIcon = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
+);
 
 const LunesLogo = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 1501 293" version="1.1" xmlns="http://www.w3.org/2000/svg" style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2 }} className={className}>
@@ -238,7 +253,7 @@ const ManifestoStack = () => {
   const [cards, setCards] = useState(MANIFESTO_CARDS);
 
   const rotateCards = () => {
-    setCards((prev) => {
+    setCards((prev: typeof MANIFESTO_CARDS) => {
       const newCards = [...prev];
       const first = newCards.shift();
       if (first) newCards.push(first);
@@ -252,13 +267,13 @@ const ManifestoStack = () => {
       onClick={rotateCards}
     >
       <AnimatePresence mode="popLayout">
-        {cards.map((card, index) => (
+        {cards.map((card: { id: number; title: string; image: string }, index: number) => (
           <motion.div
             key={card.id}
             layout
             initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ 
-              scale: 1 - index * 0.05, 
+            animate={{
+              scale: 1 - index * 0.05,
               opacity: 1 - index * 0.2,
               y: index * 15,
               zIndex: MANIFESTO_CARDS.length - index,
@@ -268,9 +283,9 @@ const ManifestoStack = () => {
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
             className="absolute inset-0 rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10 bg-blackout"
           >
-            <img 
-              src={card.image} 
-              alt={card.title} 
+            <img
+              src={card.image}
+              alt={card.title}
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
               referrerPolicy="no-referrer"
             />
@@ -294,17 +309,12 @@ const ManifestoStack = () => {
 export default function App() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
 
   const [galleryOrder, setGalleryOrder] = useState<{ [key: string]: number[] }>({});
 
   const handleGalleryClick = (brandId: string, totalCards: number) => {
-    setGalleryOrder(prev => {
-      const currentOrder = prev[brandId] || Array.from({ length: totalCards }, (_, i) => i);
+    setGalleryOrder((prev: { [key: string]: number[] }) => {
+      const currentOrder = prev[brandId] || Array.from({ length: totalCards }, (_: unknown, i: number) => i);
       // Move o primeiro card (topo) para o final da lista
       const newOrder = [...currentOrder];
       const firstCard = newOrder.shift();
@@ -314,18 +324,6 @@ export default function App() {
       return { ...prev, [brandId]: newOrder };
     });
   };
-
-  const ringColor = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.4, 0.6, 0.8, 1],
-    ["#FBF9F9", "#C3EA4F", "#D0EFEF", "#EAEACB", "#F7EADF", "#FBF9F9"]
-  );
-
-  const ringOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.1, 0.9, 1],
-    [0.3, 0.8, 0.8, 0.3]
-  );
 
   // Interactive Logic
   const rotationValue = useMotionValue(0);
@@ -348,17 +346,10 @@ export default function App() {
   const [showContactForm, setShowContactForm] = useState(false);
 
   const cardTransition = {
-    type: "spring",
+    type: "spring" as const,
     damping: 25,
     stiffness: 120,
     mass: 0.8,
-  };
-
-  const sharedTransition = {
-    type: "spring",
-    damping: 30,
-    stiffness: 100,
-    mass: 1,
   };
 
   const cursorX = useSpring(0, { stiffness: 600, damping: 40 });
@@ -442,9 +433,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen selection:bg-blackout selection:text-coconut" ref={containerRef}>
-      {/* Custom Cursor */}
+      {/* Custom Cursor - Hidden on Mobile/Tablet */}
       <motion.div
-        className="fixed top-0 left-0 w-6 h-6 rounded-full pointer-events-none z-[9999] bg-white"
+        className="hidden lg:block fixed top-0 left-0 w-6 h-6 rounded-full pointer-events-none z-[9999] bg-white"
         animate={{
           x: cursorPosition.x - 12,
           y: cursorPosition.y - 12,
@@ -463,7 +454,7 @@ export default function App() {
       />
 
       <motion.div
-        className="fixed top-0 left-0 w-10 h-10 rounded-full pointer-events-none z-[9998] border-2 border-white/50"
+        className="hidden lg:block fixed top-0 left-0 w-10 h-10 rounded-full pointer-events-none z-[9998] border-2 border-white/50"
         animate={{
           x: cursorPosition.x - 20,
           y: cursorPosition.y - 20,
@@ -665,9 +656,9 @@ export default function App() {
 
                 {/* Social Links */}
                 <div className="flex gap-6 justify-center mt-8 pt-8 border-t border-coconut/10">
-                  <Instagram className="w-5 h-5 text-coconut/60 hover:text-coconut cursor-pointer transition-all duration-300" />
-                  <Facebook className="w-5 h-5 text-coconut/60 hover:text-coconut cursor-pointer transition-all duration-300" />
-                  <div 
+                  <InstagramIcon className="w-5 h-5 text-coconut/60 hover:text-coconut cursor-pointer transition-all duration-300" />
+                  <FacebookIcon className="w-5 h-5 text-coconut/60 hover:text-coconut cursor-pointer transition-all duration-300" />
+                  <div
                     onClick={() => {
                       setShowContactForm(true);
                       setIsMobileMenuOpen(false);
@@ -1037,9 +1028,9 @@ export default function App() {
               LUNES não vende tempo. LUNES devolve o tempo. Junte-se à nossa comunidade e redescubra o seu ritmo natural.
             </p>
             <div className="flex gap-6">
-              <Instagram className="w-5 h-5 opacity-80 hover:opacity-100 cursor-pointer transition-opacity" />
-              <Facebook className="w-5 h-5 opacity-80 hover:opacity-100 cursor-pointer transition-opacity" />
-              <div 
+              <InstagramIcon className="w-5 h-5 opacity-80 hover:opacity-100 cursor-pointer transition-opacity" />
+              <FacebookIcon className="w-5 h-5 opacity-80 hover:opacity-100 cursor-pointer transition-opacity" />
+              <div
                 onClick={() => setShowContactForm(true)}
                 className="relative group p-2 -m-2"
               >
@@ -1181,8 +1172,8 @@ export default function App() {
                     </p>
 
                     <div className="grid sm:grid-cols-2 gap-6 pt-8">
-                      {selectedBrand.details.map((detail, i) => (
-                        <motion.div 
+                      {selectedBrand.details.map((detail: string, i: number) => (
+                        <motion.div
                           key={i}
                           initial={{ opacity: 0, filter: "blur(8px)", y: 10 }}
                           whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
