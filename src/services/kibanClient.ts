@@ -1,0 +1,84 @@
+import { KibanClient } from '@kiban/client';
+
+// Initialize Kiban Client
+const kibanClient = new KibanClient({
+  url: import.meta.env.VITE_KIBAN_API_URL || 'http://localhost:5001',
+  apiKey: import.meta.env.VITE_KIBAN_API_KEY,
+});
+
+export default kibanClient;
+
+// Helper to wrap promises with a timeout
+const FETCH_TIMEOUT_MS = 2000; // 2 seconds
+
+const wrapWithTimeout = <T>(promise: Promise<T>, operationName: string): Promise<T> => {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error(`Kiban CMS Timeout: ${operationName} exceeded ${FETCH_TIMEOUT_MS}ms`)), FETCH_TIMEOUT_MS)
+    )
+  ]);
+};
+
+// Type-safe helper functions for common operations
+export const kibanService = {
+  // Get all published entries from a collection
+  async getPublishedEntries(collectionSlug: string) {
+    try {
+      return await wrapWithTimeout(
+        kibanClient.getEntries(collectionSlug, { status: 'published' }),
+        `getPublishedEntries(${collectionSlug})`
+      );
+    } catch (error) {
+      console.warn(`[Kiban Service] Fallback triggered for ${collectionSlug}:`, error);
+      throw error;
+    }
+  },
+
+  // Get a single entry by slug
+  async getEntryBySlug(collectionSlug: string, slug: string) {
+    try {
+      const entries = await wrapWithTimeout(
+        kibanClient.getEntries(collectionSlug, { slug }),
+        `getEntryBySlug(${collectionSlug}, ${slug})`
+      );
+      return entries[0] || null;
+    } catch (error) {
+      console.warn(`[Kiban Service] Fallback triggered for ${collectionSlug}/${slug}:`, error);
+      throw error;
+    }
+  },
+
+  // Get entries with custom filters
+  async getEntries(collectionSlug: string, filters?: Record<string, any>) {
+    try {
+      return await wrapWithTimeout(
+        kibanClient.getEntries(collectionSlug, filters),
+        `getEntries(${collectionSlug})`
+      );
+    } catch (error) {
+      console.warn(`[Kiban Service] Fallback triggered for ${collectionSlug}:`, error);
+      throw error;
+    }
+  },
+
+  // Create a new entry
+  async createEntry(collectionSlug: string, data: Record<string, any>) {
+    return await kibanClient.createEntry(collectionSlug, data);
+  },
+
+  // Update an entry
+  async updateEntry(collectionSlug: string, entryId: string, data: Record<string, any>) {
+    return await kibanClient.updateEntry(collectionSlug, entryId, data);
+  },
+
+  // Delete an entry
+  async deleteEntry(collectionSlug: string, entryId: string) {
+    return await kibanClient.deleteEntry(collectionSlug, entryId);
+  },
+
+  // Upload media
+  async uploadMedia(file: File) {
+    return await kibanClient.uploadMedia(file);
+  },
+};

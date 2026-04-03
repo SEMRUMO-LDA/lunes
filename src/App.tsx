@@ -4,6 +4,8 @@ import { useRef, useState, useEffect } from "react";
 import PrivacyPolicy from "./PrivacyPolicy";
 import TermsConditions from "./TermsConditions";
 import ContactForm from "./ContactForm";
+import { useTestimonials } from "./hooks/useTestimonials";
+import { useTours } from "./hooks/useTours";
 
 // Custom Social Icons (replacing deprecated lucide-react icons)
 const InstagramIcon = ({ className = "" }: { className?: string }) => (
@@ -107,44 +109,7 @@ const SUB_BRANDS = [
       "Retiros em Alto Mar",
       "Conexão com a Natureza Selvagem"
     ],
-    tours: [
-      {
-        title: "Costa de Portimão à Sra. da Rocha",
-        image: "/tours-coast.jpg",
-        duration: "150 Min",
-        rating: 5,
-        capacity: "Por passageiro",
-        priceTotal: "40€",
-        description: "Navegamos entre grutas, falésias douradas e praias icónicas. Contamos histórias, exploramos recantos únicos e paramos para mergulho na inesquecível Praia da Marinha."
-      },
-      {
-        title: "Rio Arade",
-        image: "/tours-river.jpg",
-        duration: "120 Min",
-        rating: 5,
-        capacity: "Por passageiro",
-        priceTotal: "40€",
-        description: "Um passeio calmo, perfeito para quem procura natureza, biodiversidade e silêncio. Aqui o tempo abranda e a ligação ao lugar acontece naturalmente."
-      },
-      {
-        title: "Sunrise & Sunset",
-        image: "/tours-sunset.jpg",
-        duration: "120 Min",
-        rating: 5,
-        capacity: "Por passageiro",
-        priceTotal: "40€",
-        description: "Ao nascer ou ao pôr do sol, a luz transforma tudo. As cores, o mar e a atmosfera criam um momento íntimo e memorável, daqueles que se guardam."
-      },
-      {
-        title: "Passeios Privados",
-        image: "/private-tour.jpg",
-        duration: "Flexível",
-        rating: 5,
-        capacity: "Até 17 pessoas",
-        priceTotal: "550€",
-        description: "Uma experiência feita à sua medida, no seu ritmo. Navegue com quem escolhe, descubra a costa com calma e desfrute de uma bebida de boas-vindas a bordo."
-      }
-    ],
+    tours: [] as any[], // Carregado dinamicamente via KibanCMS (ver useTours hook)
     faqs: [
       { q: "Que cuidados de segurança devo ter?", a: "A segurança é a nossa prioridade. Coletes salva-vidas são fornecidos e obrigatórios em condições específicas." },
       { q: "Qual é o ponto de encontro?", a: "Receberá as coordenadas exatas da Marina e do nosso cais privado na confirmação da reserva." },
@@ -220,26 +185,8 @@ const SUB_BRANDS = [
   }
 ];
 
-const TESTIMONIALS = [
-  {
-    name: "Sofia Martins",
-    role: "LUNES MOVE Member",
-    quote: "A LUNES não é apenas um ginásio, é onde encontro o meu equilíbrio semanal. O ambiente é acolhedor e os treinos são desafiantes mas respeitam o meu ritmo.",
-    image: "https://i.pravatar.cc/150?u=sofia"
-  },
-  {
-    name: "Ricardo Silva",
-    role: "LUNES EXPLORE Guest",
-    quote: "A expedição náutica foi transformadora. Estar em alto mar, com o silêncio curado da LUNES, permitiu-me reconectar com o que realmente importa.",
-    image: "https://i.pravatar.cc/150?u=ricardo"
-  },
-  {
-    name: "Ana Oliveira",
-    role: "LUNES STAY Resident",
-    quote: "Ficar no alojamento da LUNES foi como respirar pela primeira vez em meses. O design minimalista e a luz natural criam uma paz indescritível.",
-    image: "https://i.pravatar.cc/150?u=ana"
-  }
-];
+// Testemunhos são agora carregados dinamicamente via KibanCMS
+// Fallback estático em src/hooks/useTestimonials.ts
 
 const MANIFESTO_CARDS = [
   { id: 1, title: "Manifesto", image: "/manifesto.png" },
@@ -338,6 +285,8 @@ export default function App() {
   const [hoveredBrand, setHoveredBrand] = useState<typeof SUB_BRANDS[0] | null>(null);
   const activeEffectBrand = selectedBrand || hoveredBrand;
   const [isScrolled, setIsScrolled] = useState(false);
+  const { testimonials } = useTestimonials();
+  const { tours: dynamicTours } = useTours();
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [currentSection, setCurrentSection] = useState<string>('hero');
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -433,6 +382,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen selection:bg-blackout selection:text-coconut" ref={containerRef}>
+
+
       {/* Custom Cursor - Hidden on Mobile/Tablet */}
       <motion.div
         className="hidden lg:block fixed top-0 left-0 w-6 h-6 rounded-full pointer-events-none z-[9999] bg-white"
@@ -523,7 +474,7 @@ export default function App() {
           </button>
         </div>
         <button
-          onClick={() => scrollToSection('contact')}
+          onClick={() => setShowContactForm(true)}
           className="hidden md:block border border-white/20 rounded-full px-8 py-2.5 text-[10px] uppercase tracking-[0.5em] font-bold hover:bg-white hover:text-blackout transition-all duration-300 bg-white/5 backdrop-blur-md hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
         >
           CONTACTO
@@ -645,7 +596,7 @@ export default function App() {
                 <div className="mt-auto pt-8">
                   <button
                     onClick={() => {
-                      scrollToSection('contact');
+                      setShowContactForm(true);
                       setIsMobileMenuOpen(false);
                     }}
                     className="w-full border border-coconut/20 rounded-full px-8 py-4 text-[10px] uppercase tracking-[0.5em] font-bold hover:bg-coconut hover:text-blackout transition-all duration-300 bg-coconut/5 backdrop-blur-md"
@@ -689,7 +640,7 @@ export default function App() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[115vh] min-w-[177.77vh] min-h-[56.25vw]">
             <iframe
               src="https://www.youtube.com/embed/5ZBRAddjwwU?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&autohide=1&modestbranding=1&playlist=5ZBRAddjwwU&rel=0&enablejsapi=1"
-              className="w-full h-full pointer-events-none opacity-30 grayscale contrast-125 scale-110"
+              className="w-full h-full pointer-events-none opacity-30 contrast-125 scale-110"
               allow="autoplay; encrypted-media"
               title="Lunes Background Video"
             />
@@ -989,7 +940,7 @@ export default function App() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-12">
-            {TESTIMONIALS.map((t, i) => (
+            {testimonials.map((t, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, filter: "blur(15px)" }}
@@ -1282,12 +1233,12 @@ export default function App() {
               </div>
 
               {/* Explore Tours Section */}
-              {selectedBrand.tours && (
+              {selectedBrand.id === 'explore' && dynamicTours.length > 0 && (
                 <div className="py-32 border-t border-blackout/5 bg-[#F9FAF9]">
                   <div className="max-w-7xl mx-auto px-8 md:px-16">
                      <h3 className="text-4xl md:text-5xl font-light italic mb-16 text-center">Experiências {selectedBrand.title}</h3>
                      <div className="grid lg:grid-cols-3 gap-8">
-                        {selectedBrand.tours.map((tour: any, idx: number) => (
+                        {dynamicTours.map((tour: any, idx: number) => (
                           <motion.div 
                             key={idx}
                             initial={{ opacity: 0, y: 30 }}
