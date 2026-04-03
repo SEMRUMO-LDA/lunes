@@ -1,10 +1,12 @@
 import { KibanClient } from '@kiban/client';
 
-// Initialize Kiban Client
-const kibanClient = new KibanClient({
-  url: import.meta.env.VITE_KIBAN_API_URL || 'http://localhost:5001',
-  apiKey: import.meta.env.VITE_KIBAN_API_KEY,
-});
+// Initialize Kiban Client — only if credentials are available
+const apiUrl = import.meta.env.VITE_KIBAN_API_URL;
+const apiKey = import.meta.env.VITE_KIBAN_API_KEY;
+
+const kibanClient = apiUrl && apiKey
+  ? new KibanClient({ url: apiUrl, apiKey })
+  : null;
 
 export default kibanClient;
 
@@ -24,6 +26,7 @@ const wrapWithTimeout = <T>(promise: Promise<T>, operationName: string): Promise
 export const kibanService = {
   // Get all published entries from a collection
   async getPublishedEntries(collectionSlug: string) {
+    if (!kibanClient) throw new Error('Kiban CMS not configured');
     try {
       return await wrapWithTimeout(
         kibanClient.getEntries(collectionSlug, { status: 'published' }),
@@ -37,6 +40,7 @@ export const kibanService = {
 
   // Get a single entry by slug
   async getEntryBySlug(collectionSlug: string, slug: string) {
+    if (!kibanClient) throw new Error('Kiban CMS not configured');
     try {
       const entries = await wrapWithTimeout(
         kibanClient.getEntries(collectionSlug, { slug }),
@@ -51,6 +55,7 @@ export const kibanService = {
 
   // Get entries with custom filters
   async getEntries(collectionSlug: string, filters?: Record<string, any>) {
+    if (!kibanClient) throw new Error('Kiban CMS not configured');
     try {
       return await wrapWithTimeout(
         kibanClient.getEntries(collectionSlug, filters),
@@ -64,21 +69,25 @@ export const kibanService = {
 
   // Create a new entry
   async createEntry(collectionSlug: string, data: Record<string, any>) {
+    if (!kibanClient) throw new Error('Kiban CMS not configured');
     return await kibanClient.createEntry(collectionSlug, data);
   },
 
   // Update an entry
   async updateEntry(collectionSlug: string, entryId: string, data: Record<string, any>) {
+    if (!kibanClient) throw new Error('Kiban CMS not configured');
     return await kibanClient.updateEntry(collectionSlug, entryId, data);
   },
 
   // Delete an entry
   async deleteEntry(collectionSlug: string, entryId: string) {
+    if (!kibanClient) throw new Error('Kiban CMS not configured');
     return await kibanClient.deleteEntry(collectionSlug, entryId);
   },
 
   // Upload media
   async uploadMedia(file: File) {
+    if (!kibanClient) throw new Error('Kiban CMS not configured');
     return await kibanClient.uploadMedia(file);
   },
 };
