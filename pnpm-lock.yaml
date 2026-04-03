@@ -12,8 +12,8 @@ importers:
         specifier: ^1.29.0
         version: 1.48.0
       '@kiban/client':
-        specifier: file:/Users/tiagopacheco/Desktop/KIBAN CMS/packages/kiban-client
-        version: file:../../../Desktop/KIBAN CMS/packages/kiban-client(react@19.2.4)
+        specifier: file:packages/kiban-client
+        version: file:packages/kiban-client(react@19.2.4)
       '@tailwindcss/vite':
         specifier: ^4.1.14
         version: 4.2.2(vite@6.4.1(@types/node@22.19.15)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0))
@@ -489,8 +489,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@kiban/client@file:../../../Desktop/KIBAN CMS/packages/kiban-client':
-    resolution: {directory: ../../../Desktop/KIBAN CMS/packages/kiban-client, type: directory}
+  '@kiban/client@file:packages/kiban-client':
+    resolution: {directory: packages/kiban-client, type: directory}
     peerDependencies:
       react: '>=17.0.0'
     peerDependenciesMeta:
@@ -1851,7 +1851,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@kiban/client@file:../../../Desktop/KIBAN CMS/packages/kiban-client(react@19.2.4)':
+  '@kiban/client@file:packages/kiban-client(react@19.2.4)':
     optionalDependencies:
       react: 19.2.4
 
