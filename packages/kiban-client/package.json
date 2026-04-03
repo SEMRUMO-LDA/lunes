@@ -4,17 +4,14 @@
   "description": "Official JavaScript/TypeScript client for KibanCMS",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/index.mjs"
     },
     "./react": {
       "require": "./dist/react.js",
-      "import": "./dist/react.mjs",
-      "types": "./dist/react.d.ts"
+      "import": "./dist/react.mjs"
     }
   },
   "files": [
