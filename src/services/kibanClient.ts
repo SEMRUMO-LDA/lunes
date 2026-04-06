@@ -1,8 +1,8 @@
 import { KibanClient } from '@kiban/client';
 
 // Initialize Kiban Client — only if credentials are available
-const apiUrl = import.meta.env.VITE_KIBAN_API_URL;
-const apiKey = import.meta.env.VITE_KIBAN_API_KEY;
+const apiUrl = process.env.NEXT_PUBLIC_KIBAN_API_URL;
+const apiKey = process.env.NEXT_PUBLIC_KIBAN_API_KEY;
 
 const kibanClient = apiUrl && apiKey
   ? new KibanClient({ url: apiUrl, apiKey })
@@ -45,7 +45,7 @@ export const kibanService = {
       const entries = await wrapWithTimeout(
         kibanClient.getEntries(collectionSlug, { slug }),
         `getEntryBySlug(${collectionSlug}, ${slug})`
-      );
+      ) as any[];
       return entries[0] || null;
     } catch (error) {
       console.warn(`[Kiban Service] Fallback triggered for ${collectionSlug}/${slug}:`, error);

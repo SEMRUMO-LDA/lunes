@@ -67,8 +67,8 @@ export function useTours() {
 
     async function fetchTours() {
       try {
-        const entries = await kibanService.getPublishedEntries('lunes-tours');
-        
+        const entries = await kibanService.getPublishedEntries('lunes-tours') as any[];
+
         if (cancelled || !entries || entries.length === 0) {
           setLoading(false);
           return;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Send, User, Mail, Phone, MessageSquare, Tag } from "lucide-react";
 
@@ -102,7 +103,7 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5 pointer-events-none">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
-            <img src="/LUNES padrão texto.png" alt="" className="absolute bottom-0 left-0 w-full translate-y-1/2 -rotate-12 invert" />
+            <Image src="/LUNES padrão texto.png" alt="" fill className="absolute bottom-0 left-0 w-full translate-y-1/2 -rotate-12 invert object-contain" sizes="100%" />
           </div>
         </div>
 

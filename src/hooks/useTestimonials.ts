@@ -49,8 +49,8 @@ export function useTestimonials() {
 
     async function fetchTestimonials() {
       try {
-        const entries = await kibanService.getPublishedEntries('testimonials');
-        
+        const entries = await kibanService.getPublishedEntries('testimonials') as any[];
+
         if (cancelled || !entries || entries.length === 0) {
           setLoading(false);
           return;
