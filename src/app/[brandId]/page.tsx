@@ -320,7 +320,10 @@ export default function BrandPage() {
                         )}
                       </div>
 
-                      <button className={`w-full py-4 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-bold hover:scale-[1.02] hover:shadow-lg transition-all duration-300`}>
+                      <button
+                        onClick={() => router.push(`/reservar?tour=${encodeURIComponent(tour.title)}`)}
+                        className={`w-full py-4 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-bold hover:scale-[1.02] hover:shadow-lg transition-all duration-300`}
+                      >
                         Reservar
                       </button>
                     </div>

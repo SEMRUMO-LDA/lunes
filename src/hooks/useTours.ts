@@ -54,7 +54,7 @@ const STATIC_TOURS: Tour[] = [
 /**
  * Hook para carregar tours do KibanCMS com fallback estático.
  * 
- * Coleção esperada no CMS: "lunes-tours"
+ * Coleção esperada no CMS: "tours"
  * Campos no content JSON: { title, description, duration, price, capacity, rating, image, order }
  */
 export function useTours() {
@@ -67,7 +67,7 @@ export function useTours() {
 
     async function fetchTours() {
       try {
-        const entries = await kibanService.getPublishedEntries('lunes-tours') as any[];
+        const entries = await kibanService.getPublishedEntries('tours') as any[];
 
         if (cancelled || !entries || entries.length === 0) {
           setLoading(false);
