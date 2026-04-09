@@ -23,11 +23,7 @@
 
 @layer base {
   body {
-    @apply bg-coconut text-blackout font-sans antialiased;
-  }
-
-  h1, h2, h3 {
-    @apply font-serif;
+    @apply bg-coconut text-blackout font-serif antialiased;
   }
 
   * {
