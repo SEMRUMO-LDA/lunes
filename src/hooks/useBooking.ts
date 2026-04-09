@@ -59,19 +59,29 @@ export interface BookingStatus {
 // ── Helper ─────────────────────────────────────────────────────────────
 
 async function bookingFetch(endpoint: string, options?: RequestInit) {
-  const res = await fetch(`${API_URL}/api/v1/bookings${endpoint}`, {
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${API_KEY}`,
-      ...options?.headers,
-    },
-  });
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({}));
-    throw new Error(body?.error?.message || 'Request failed');
+  if (!API_URL || !API_KEY) throw new Error('Booking API not configured');
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 3000);
+
+  try {
+    const res = await fetch(`${API_URL}/api/v1/bookings${endpoint}`, {
+      ...options,
+      signal: controller.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`,
+        ...options?.headers,
+      },
+    });
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      throw new Error(body?.error?.message || 'Request failed');
+    }
+    return res.json();
+  } finally {
+    clearTimeout(timeout);
   }
-  return res.json();
 }
 
 // ── API Functions ──────────────────────────────────────────────────────
@@ -91,9 +101,22 @@ export async function checkAvailability(
 export async function createBooking(
   data: CreateBookingPayload,
 ): Promise<CreateBookingResponse> {
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
   return bookingFetch('/create', {
     method: 'POST',
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      tour_slug: data.tour,
+      date: data.date,
+      time_slot: data.time,
+      adults: data.adults,
+      children: data.children,
+      customer_name: data.name,
+      customer_email: data.email,
+      customer_phone: data.phone,
+      notes: data.notes || '',
+      success_url: `${origin}/reservar/confirmacao/?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/reservar/?tour=${encodeURIComponent(data.tour)}`,
+    }),
   });
 }
 

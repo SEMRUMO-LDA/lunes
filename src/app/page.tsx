@@ -129,7 +129,7 @@ const ManifestoStack = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-blackout/60 via-transparent to-transparent" />
             <div className="absolute bottom-10 left-10">
-              <span className="text-[10px] uppercase tracking-[0.5em] text-coconut/80 font-bold">{card.title}</span>
+              <span className="text-[10px] uppercase tracking-[0.5em] font-sans text-coconut/80 font-bold">{card.title}</span>
             </div>
           </motion.div>
         ))}
@@ -137,7 +137,7 @@ const ManifestoStack = () => {
 
       {/* Interaction Hint */}
       <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-2 opacity-30 group-hover:opacity-60 transition-opacity">
-        <span className="text-[9px] uppercase tracking-widest">Clique para rodar</span>
+        <span className="text-[9px] uppercase tracking-widest font-sans">Clique para rodar</span>
         <ArrowRight className="w-3 h-3" />
       </div>
     </div>
@@ -272,7 +272,7 @@ export default function HomePage() {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-6 text-[10px] uppercase tracking-[0.5em] font-bold">
+        <div className="hidden md:flex items-center gap-6 text-[10px] uppercase tracking-[0.5em] font-sans font-bold">
           <button
             onClick={() => scrollToSection('about')}
             className="hover:text-blackout hover:bg-coconut hover:shadow-[0_0_20px_rgba(251,249,249,0.4)] transition-all duration-300 px-4 py-1.5 rounded-full flex items-center h-full"
@@ -314,7 +314,7 @@ export default function HomePage() {
         </div>
         <button
           onClick={() => setShowContactForm(true)}
-          className="hidden md:block border border-white/20 rounded-full px-8 py-2.5 text-[10px] uppercase tracking-[0.5em] font-bold hover:bg-white hover:text-blackout transition-all duration-300 bg-white/5 backdrop-blur-md hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+          className="hidden md:block border border-white/20 rounded-full px-8 py-2.5 text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:bg-white hover:text-blackout transition-all duration-300 bg-white/5 backdrop-blur-md hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
         >
           CONTACTO
         </button>
@@ -371,7 +371,7 @@ export default function HomePage() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-blackout border-l border-coconut/10 z-[60] md:hidden overflow-y-auto"
+              className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-blackout border-l border-coconut/10 z-[60] md:hidden overflow-y-auto font-sans"
             >
               <div className="flex flex-col h-full p-8 pt-24">
                 {/* Menu Items */}
@@ -387,7 +387,7 @@ export default function HomePage() {
                   </button>
 
                   <div className="space-y-4 py-3 border-b border-coconut/10">
-                    <p className="text-[10px] uppercase tracking-[0.5em] text-coconut/40 font-bold">Ecossistema</p>
+                    <p className="text-[10px] uppercase tracking-[0.5em] font-sans text-coconut/40 font-bold">Ecossistema</p>
                     <button
                       onClick={() => {
                         router.push('/move');
@@ -438,7 +438,7 @@ export default function HomePage() {
                       setShowContactForm(true);
                       setIsMobileMenuOpen(false);
                     }}
-                    className="w-full border border-coconut/20 rounded-full px-8 py-4 text-[10px] uppercase tracking-[0.5em] font-bold hover:bg-coconut hover:text-blackout transition-all duration-300 bg-coconut/5 backdrop-blur-md"
+                    className="w-full border border-coconut/20 rounded-full px-8 py-4 text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:bg-coconut hover:text-blackout transition-all duration-300 bg-coconut/5 backdrop-blur-md"
                   >
                     Contacto
                   </button>
@@ -574,7 +574,7 @@ export default function HomePage() {
                 Time to be You.
               </h1>
               <div className="flex items-center justify-center gap-4 opacity-100 mt-4">
-                <p className="text-[10px] uppercase tracking-[0.5em] font-medium text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+                <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-medium font-sans text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
                   O TEU MOMENTO. O TEU TEMPO.
                 </p>
               </div>
@@ -592,7 +592,7 @@ export default function HomePage() {
               className="group flex flex-col items-center gap-4 cursor-pointer pointer-events-auto"
             >
               <div className="w-[1.5px] h-24 bg-gradient-to-b from-coconut/0 via-coconut/100 to-coconut/0 shadow-[0_0_15px_rgba(251,249,249,0.6)] group-hover:shadow-[0_0_25px_rgba(251,249,249,0.8)] transition-all duration-300" />
-              <span className="text-[10px] uppercase tracking-[0.5em] opacity-40 group-hover:opacity-100 transition-all duration-300 group-hover:text-coconut group-hover:drop-shadow-[0_0_12px_rgba(251,249,249,0.8)]">Descobrir</span>
+              <span className="text-[10px] uppercase tracking-[0.5em] font-sans opacity-40 group-hover:opacity-100 transition-all duration-300 group-hover:text-coconut group-hover:drop-shadow-[0_0_12px_rgba(251,249,249,0.8)]">Descobrir</span>
             </motion.button>
           </div>
 
@@ -607,7 +607,7 @@ export default function HomePage() {
               <div className="flex flex-col md:flex-row justify-between items-end mb-16 relative">
                 <div className="space-y-4">
                   <h2 className="text-5xl md:text-8xl italic leading-none tracking-tighter">O Nosso Ecossistema</h2>
-                  <p className="text-blackout/40 max-w-md uppercase tracking-[0.5em] text-[10px] font-bold">Quatro pilares, uma unica essencia.</p>
+                  <p className="text-blackout/40 max-w-md uppercase tracking-[0.5em] text-[10px] font-bold font-sans">Quatro pilares, uma unica essencia.</p>
                 </div>
 
                 {/* Rotating Badge */}
@@ -671,7 +671,7 @@ export default function HomePage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1, duration: 0.8 }}
-                        className={`text-[10px] uppercase tracking-[0.5em] font-bold mb-2 transition-colors duration-500 ${brand.textColor} opacity-60 group-hover:!text-white/60 group-hover:opacity-100`}
+                        className={`text-[10px] uppercase tracking-[0.5em] font-sans font-bold mb-2 transition-colors duration-500 ${brand.textColor} opacity-60 group-hover:!text-white/60 group-hover:opacity-100`}
                       >
                         {brand.subtitle}
                       </motion.p>
@@ -686,7 +686,7 @@ export default function HomePage() {
                         className="flex items-center gap-4 pt-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0"
                       >
                         <div className={`h-[1px] w-8 transition-colors duration-500 ${brand.textColor} group-hover:bg-white`} />
-                        <span className={`text-[10px] uppercase tracking-[0.5em] transition-colors duration-500 ${brand.textColor} group-hover:!text-white/80`}>Descobrir</span>
+                        <span className={`text-[10px] uppercase tracking-[0.5em] font-sans transition-colors duration-500 ${brand.textColor} group-hover:!text-white/80`}>Descobrir</span>
                         <ArrowRight className={`w-3 h-3 -rotate-45 transition-colors duration-500 ${brand.textColor} group-hover:!text-white`} />
                       </motion.div>
                     </div>
@@ -751,7 +751,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-8">
             <div className="text-center mb-24 space-y-4">
               <h2 className="text-5xl md:text-7xl italic tracking-tight">Vozes da Comunidade</h2>
-              <p className="text-[10px] uppercase tracking-[0.5em] font-bold opacity-40">O que dizem sobre a experiencia LUNES</p>
+              <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-40">O que dizem sobre a experiencia LUNES</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-12">
@@ -774,7 +774,7 @@ export default function HomePage() {
                       />
                     </div>
                     <h3 className="text-xl font-serif italic">{t.name}</h3>
-                    <p className="text-[10px] uppercase tracking-[0.5em] font-bold opacity-40">{t.role}</p>
+                    <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-40">{t.role}</p>
                   </div>
                   <p className="text-lg leading-relaxed text-blackout/70 font-light italic">
                     &quot;{t.quote}&quot;
@@ -786,7 +786,7 @@ export default function HomePage() {
         </section>
 
         {/* Footer */}
-        <footer id="contact" className="bg-blackout text-coconut pt-32 pb-12 px-8 relative overflow-hidden">
+        <footer id="contact" className="bg-blackout text-coconut pt-32 pb-12 px-8 relative overflow-hidden font-sans">
           <div className="max-w-7xl mx-auto grid md:grid-cols-5 gap-16 mb-32 relative z-10">
             <div className="col-span-2 space-y-8">
               <Image src="/images/brand/LUNES horizontal branco.png" alt="LUNES" width={240} height={48} className="h-10 md:h-12 w-auto" />
@@ -807,7 +807,7 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-6">
-              <h4 className="text-[10px] uppercase tracking-[0.5em] font-bold">Links</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">Links</h4>
               <ul className="space-y-4 text-sm text-coconut/70">
                 <li>
                   <a href="https://www.livroreclamacoes.pt/inicio/" target="_blank" rel="noopener noreferrer" className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block">
@@ -846,7 +846,7 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-6">
-              <h4 className="text-[10px] uppercase tracking-[0.5em] font-bold">Contactos</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">Contactos</h4>
               <ul className="space-y-4 text-sm text-coconut/70">
                 <li className="flex items-center gap-3">
                   <Phone className="w-4 h-4 opacity-60" />
@@ -863,7 +863,7 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-6">
-              <h4 className="text-[10px] uppercase tracking-[0.5em] font-bold">Newsletter</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">Newsletter</h4>
               <p className="text-sm text-coconut/70">Receba inspiracao semanal para o seu bem-estar.</p>
               <div className="flex border-b border-coconut/20 py-2">
                 <input
@@ -876,7 +876,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="max-w-7xl mx-auto pt-12 border-t border-coconut/10 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] uppercase tracking-[0.5em] font-medium opacity-50 text-center md:text-left">
+          <div className="max-w-7xl mx-auto pt-12 border-t border-coconut/10 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] uppercase tracking-[0.5em] font-sans font-medium opacity-50 text-center md:text-left">
             <span>&copy; 2026 LUNES EXPERIENCE LDA</span>
             <a href="https://aorubro.pt" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity border-b border-coconut/20 pb-0.5">DESENVOLVIDO POR AORUBRO</a>
           </div>

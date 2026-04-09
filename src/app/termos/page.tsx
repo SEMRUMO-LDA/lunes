@@ -47,7 +47,7 @@ export default function TermosPage() {
 
         <button
           onClick={onClose}
-          className="mb-16 flex items-center gap-3 text-[10px] uppercase tracking-[0.5em] font-bold text-blackout/40 hover:text-blackout transition-colors group"
+          className="mb-16 flex items-center gap-3 text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40 hover:text-blackout transition-colors group"
         >
           <div
             onClick={(e) => {
@@ -64,10 +64,10 @@ export default function TermosPage() {
 
         <header className="mb-24">
           <h1 className="text-6xl md:text-8xl italic mb-8 tracking-tighter">Termos e Condicoes</h1>
-          <p className="text-[10px] uppercase tracking-[0.5em] font-bold text-blackout/40">Data da ultima atualizacao: Fevereiro de 2026</p>
+          <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40">Data da ultima atualizacao: Fevereiro de 2026</p>
         </header>
 
-        <div className="space-y-16 text-blackout/80 leading-relaxed font-light">
+        <div className="space-y-16 text-blackout/80 leading-relaxed font-light font-sans">
           <section className="space-y-6">
             <h2 className="text-3xl italic text-blackout">A Nossa Filosofia</h2>
             <p>
@@ -213,7 +213,7 @@ export default function TermosPage() {
 
           <footer className="pt-24 border-t border-blackout/10 flex flex-col items-center gap-8">
             <Image src="/images/brand/LUNES horizontal preto.png" alt="LUNES" width={160} height={32} className="h-8 w-auto opacity-20" />
-            <p className="text-[10px] uppercase tracking-[0.5em] font-bold text-blackout/40 text-center">
+            <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40 text-center">
               LUNES EXPERIENCE, LDA. &copy; 2026
             </p>
           </footer>

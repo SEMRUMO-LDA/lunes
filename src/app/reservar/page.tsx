@@ -220,20 +220,17 @@ function ReservarPage() {
     setSlots([]);
     setSelectedSlotIdx(null);
 
+    // Build fallback slots from tour data
+    const fallbackSlots = selectedTour.timeSlots?.length
+      ? selectedTour.timeSlots.map((t: string) => ({ time: t, available: 16 }))
+      : [{ time: "10:00", available: 16 }, { time: "14:00", available: 16 }];
+
     checkAvailability(slugify(selectedTour.title), formatDate(selectedDate))
       .then((data) => {
-        if (!cancelled) setSlots(data.slots || []);
+        if (!cancelled) setSlots(data.slots?.length ? data.slots : fallbackSlots);
       })
       .catch(() => {
-        // API unavailable — show placeholder slots
-        if (!cancelled) {
-          setSlots([
-            { time: "09:00", available: 12 },
-            { time: "11:30", available: 8 },
-            { time: "14:00", available: 15 },
-            { time: "16:30", available: 6 },
-          ]);
-        }
+        if (!cancelled) setSlots(fallbackSlots);
       })
       .finally(() => {
         if (!cancelled) setSlotsLoading(false);
@@ -581,7 +578,7 @@ function ReservarPage() {
 
                 {/* Time slots */}
                 <div className="bg-white rounded-[2rem] border border-blackout/5 p-6 md:p-8">
-                  <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-blackout/40 mb-6">
+                  <h3 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40 mb-6">
                     Horarios disponiveis
                   </h3>
 
@@ -659,7 +656,7 @@ function ReservarPage() {
               <div className="grid lg:grid-cols-2 gap-8">
                 {/* Passengers */}
                 <div className="bg-white rounded-[2rem] border border-blackout/5 p-6 md:p-8 space-y-8">
-                  <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-blackout/40">
+                  <h3 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40">
                     Passageiros
                   </h3>
 
@@ -668,7 +665,7 @@ function ReservarPage() {
                     <div>
                       <p className="text-lg font-light">Adultos</p>
                       {adultPrice > 0 && (
-                        <p className="text-xs text-blackout/40">{adultPrice}\u20AC / pessoa</p>
+                        <p className="text-xs text-blackout/40">{adultPrice}€ / pessoa</p>
                       )}
                     </div>
                     <div className="flex items-center gap-4">
@@ -696,7 +693,7 @@ function ReservarPage() {
                       <p className="text-lg font-light">Criancas</p>
                       {childPrice > 0 ? (
                         <p className="text-xs text-blackout/40">
-                          {childPrice}\u20AC / crianca
+                          {childPrice}€ / crianca
                           {selectedTour?.childAge && ` (${selectedTour.childAge})`}
                         </p>
                       ) : (
@@ -736,34 +733,34 @@ function ReservarPage() {
                       {adultPrice > 0 && (
                         <div className="flex justify-between">
                           <span>
-                            {adults} adulto{adults > 1 ? "s" : ""} x {adultPrice}\u20AC
+                            {adults} adulto{adults > 1 ? "s" : ""} x {adultPrice}€
                           </span>
                           <span className="font-medium text-blackout">
-                            {adults * adultPrice}\u20AC
+                            {adults * adultPrice}€
                           </span>
                         </div>
                       )}
                       {children > 0 && childPrice > 0 && (
                         <div className="flex justify-between">
                           <span>
-                            {children} crianca{children > 1 ? "s" : ""} x {childPrice}\u20AC
+                            {children} crianca{children > 1 ? "s" : ""} x {childPrice}€
                           </span>
                           <span className="font-medium text-blackout">
-                            {children * childPrice}\u20AC
+                            {children * childPrice}€
                           </span>
                         </div>
                       )}
                     </div>
                     <div className="flex justify-between mt-4 pt-4 border-t border-blackout/5 text-lg">
                       <span className="font-light">Total</span>
-                      <span className="font-bold">{totalPrice}\u20AC</span>
+                      <span className="font-bold">{totalPrice}€</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Contact form */}
                 <div className="bg-white rounded-[2rem] border border-blackout/5 p-6 md:p-8 space-y-6">
-                  <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-blackout/40">
+                  <h3 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40">
                     Dados de contacto
                   </h3>
 
@@ -906,22 +903,22 @@ function ReservarPage() {
                       {adultPrice > 0 && (
                         <div className="flex justify-between text-blackout/60">
                           <span>
-                            {adults} adulto{adults > 1 ? "s" : ""} x {adultPrice}\u20AC
+                            {adults} adulto{adults > 1 ? "s" : ""} x {adultPrice}€
                           </span>
-                          <span>{adults * adultPrice}\u20AC</span>
+                          <span>{adults * adultPrice}€</span>
                         </div>
                       )}
                       {children > 0 && childPrice > 0 && (
                         <div className="flex justify-between text-blackout/60">
                           <span>
-                            {children} crianca{children > 1 ? "s" : ""} x {childPrice}\u20AC
+                            {children} crianca{children > 1 ? "s" : ""} x {childPrice}€
                           </span>
-                          <span>{children * childPrice}\u20AC</span>
+                          <span>{children * childPrice}€</span>
                         </div>
                       )}
                       <div className="flex justify-between text-xl pt-4 border-t border-blackout/5">
                         <span className="font-light">Total</span>
-                        <span className="font-bold">{totalPrice}\u20AC</span>
+                        <span className="font-bold">{totalPrice}€</span>
                       </div>
                     </div>
 
@@ -1019,7 +1016,7 @@ function ReservarPage() {
                   A processar...
                 </>
               ) : (
-                `Pagar ${totalPrice}\u20AC`
+                `Pagar ${totalPrice}€`
               )}
             </button>
           )}

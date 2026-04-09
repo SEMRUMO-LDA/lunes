@@ -40,7 +40,7 @@ const FaqItem = ({ question, answer, brandColor, brandTextColor }: any) => {
         <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-sm ${brandColor} ${brandTextColor}`}>
           {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" strokeWidth={3} />}
         </div>
-        <span className="text-lg font-light text-blackout">{question}</span>
+        <span className="text-lg font-light text-blackout font-sans">{question}</span>
       </button>
       <AnimatePresence>
         {isOpen && (
@@ -49,7 +49,7 @@ const FaqItem = ({ question, answer, brandColor, brandTextColor }: any) => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="px-16 pb-8 text-base text-blackout/60 leading-relaxed font-light"
+            className="px-16 pb-8 text-base text-blackout/60 leading-relaxed font-light font-sans"
           >
             {answer}
           </motion.div>
@@ -122,7 +122,7 @@ export default function BrandPage() {
                 <div className={`p-4 rounded-2xl ${brand.color} ${brand.textColor}`}>
                   {brand.icon}
                 </div>
-                <p className="text-[10px] uppercase tracking-[0.5em] font-bold opacity-40">{brand.subtitle}</p>
+                <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-40">{brand.subtitle}</p>
               </div>
               <h2 className="text-6xl md:text-8xl italic leading-none">{brand.title}</h2>
             </motion.div>
@@ -165,7 +165,7 @@ export default function BrandPage() {
                     href={brand.reservationLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-block text-center w-full sm:w-auto px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
+                    className={`inline-block text-center w-full sm:w-auto px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
                   >
                     Reservar LUNES {brand.id === 'stay' ? 'STAY' : 'EXPLORE'}
                   </a>
@@ -175,7 +175,7 @@ export default function BrandPage() {
                       const toursSection = document.getElementById('tours-section');
                       if (toursSection) toursSection.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className={`w-full sm:w-auto px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
+                    className={`w-full sm:w-auto px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
                   >
                     Explorar Experiencias
                   </button>
@@ -240,7 +240,7 @@ export default function BrandPage() {
             })()}
 
             <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-2 opacity-30 group-hover:opacity-60 transition-opacity pointer-events-none">
-              <span className="text-[9px] uppercase tracking-widest font-bold">Clique para rodar</span>
+              <span className="text-[9px] uppercase tracking-widest font-sans font-bold">Clique para rodar</span>
               <ArrowRight className="w-3 h-3" />
             </div>
           </div>
@@ -269,14 +269,14 @@ export default function BrandPage() {
 
                       <div className="flex justify-between items-center mb-8 px-4">
                         <div className="text-center">
-                          <span className="text-[10px] uppercase tracking-[0.5em] block text-blackout/80 mb-2 font-bold">Duracao</span>
+                          <span className="text-[10px] uppercase tracking-[0.5em] font-sans block text-blackout/80 mb-2 font-bold">Duracao</span>
                           <div className="flex items-center gap-2 justify-center text-blackout/70">
                             <Clock className="w-4 h-4 text-explore-blue" />
                             <span className="text-sm font-medium">{tour.duration}</span>
                           </div>
                         </div>
                         <div className="text-center">
-                          <span className="text-[10px] uppercase tracking-[0.5em] block text-blackout/80 mb-2 font-bold">Rating</span>
+                          <span className="text-[10px] uppercase tracking-[0.5em] font-sans block text-blackout/80 mb-2 font-bold">Rating</span>
                           <div className="flex items-center gap-1 text-[#FFD700]">
                             <Star className="w-3 h-3 fill-current" />
                             <Star className="w-3 h-3 fill-current" />
@@ -291,7 +291,7 @@ export default function BrandPage() {
                       <div className="space-y-4 mb-12 flex-grow">
                         {tour.priceAdult && (
                           <div>
-                            <div className="flex items-center justify-between text-lg font-light text-blackout">
+                            <div className="flex items-center justify-between text-lg font-light text-blackout font-sans">
                               <span className="font-medium">Adulto</span>
                               <div className="flex-grow border-b border-dotted border-blackout/20 mx-4 relative top-1" />
                               <span className="font-bold">{tour.priceAdult}</span>
@@ -300,7 +300,7 @@ export default function BrandPage() {
                         )}
                         {tour.priceChild && (
                           <div>
-                            <div className="flex items-center justify-between text-lg font-light text-blackout">
+                            <div className="flex items-center justify-between text-lg font-light text-blackout font-sans">
                               <span className="font-medium">Crianca</span>
                               <div className="flex-grow border-b border-dotted border-blackout/20 mx-4 relative top-1" />
                               <span className="font-bold">{tour.priceChild}</span>
@@ -310,7 +310,7 @@ export default function BrandPage() {
                         )}
                         {tour.capacity && (
                           <div>
-                            <div className="flex items-center justify-between text-lg font-light text-blackout">
+                            <div className="flex items-center justify-between text-lg font-light text-blackout font-sans">
                               <span className="font-bold">{tour.capacity}</span>
                               <div className="flex-grow border-b border-dotted border-blackout/20 mx-4 relative top-1" />
                               <span className="font-bold">{tour.priceTotal}</span>
@@ -322,7 +322,7 @@ export default function BrandPage() {
 
                       <button
                         onClick={() => router.push(`/reservar?tour=${encodeURIComponent(tour.title)}`)}
-                        className={`w-full py-4 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-bold hover:scale-[1.02] hover:shadow-lg transition-all duration-300`}
+                        className={`w-full py-4 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-[1.02] hover:shadow-lg transition-all duration-300`}
                       >
                         Reservar
                       </button>
@@ -350,7 +350,7 @@ export default function BrandPage() {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                   <div className="space-y-6">
                     <h3 className="text-4xl md:text-5xl font-light italic">Passeios Privados</h3>
-                    <p className="text-lg text-blackout/60 font-light leading-relaxed">
+                    <p className="text-lg text-blackout/60 font-light leading-relaxed font-sans">
                       Uma experiência feita à sua medida, no seu ritmo. Navegue com quem escolhe, descubra a costa com calma e desfrute de uma bebida de boas-vindas a bordo.
                     </p>
                     <div className="flex items-baseline gap-4 pt-4">
@@ -374,23 +374,23 @@ export default function BrandPage() {
                 className="p-10 md:p-16 rounded-[2rem] bg-[#F9FAF9] border border-blackout/5"
               >
                 <h3 className="text-4xl md:text-5xl font-light italic mb-8 text-center">Experiência Taylor Made</h3>
-                <p className="text-lg text-blackout/60 font-light leading-relaxed text-center max-w-3xl mx-auto mb-12">
+                <p className="text-lg text-blackout/60 font-light leading-relaxed font-sans text-center max-w-3xl mx-auto mb-12">
                   Descubra a costa do Algarve de uma forma única e totalmente personalizada. Cada viagem é criada à sua medida, oferecendo momentos inesquecíveis no mar.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-8 mb-12">
                   <div className="p-8 rounded-2xl bg-white border border-blackout/5">
-                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-3">Meio Dia</h4>
-                    <p className="text-blackout/60 font-light">4 horas de passeio, ideal para descobrir praias escondidas, nadar em enseadas secretas e absorver a beleza da costa.</p>
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout mb-3">Meio Dia</h4>
+                    <p className="text-blackout/60 font-light font-sans">4 horas de passeio, ideal para descobrir praias escondidas, nadar em enseadas secretas e absorver a beleza da costa.</p>
                   </div>
                   <div className="p-8 rounded-2xl bg-white border border-blackout/5">
-                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-3">Dia Completo</h4>
-                    <p className="text-blackout/60 font-light">8 horas de aventura, combinando relaxamento, atividades a bordo e paragens especiais para snorkeling e piquenique com produtos locais.</p>
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout mb-3">Dia Completo</h4>
+                    <p className="text-blackout/60 font-light font-sans">8 horas de aventura, combinando relaxamento, atividades a bordo e paragens especiais para snorkeling e piquenique com produtos locais.</p>
                   </div>
                 </div>
 
                 <div className="mb-12">
-                  <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-6 text-center">O que incluímos</h4>
+                  <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout mb-6 text-center">O que incluímos</h4>
                   <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
                     {[
                       "Tripulação profissional e dedicada",
@@ -400,20 +400,20 @@ export default function BrandPage() {
                     ].map((item, i) => (
                       <div key={i} className="flex items-center gap-3 p-4 rounded-xl bg-white border border-blackout/5">
                         <span className={`w-2 h-2 rounded-full ${brand.color} flex-shrink-0`} />
-                        <span className="text-sm text-blackout/70">{item}</span>
+                        <span className="text-sm text-blackout/70 font-sans">{item}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <p className="text-center text-blackout/50 font-light mb-8">
+                <p className="text-center text-blackout/50 font-light font-sans mb-8">
                   Cada tour é único e desenhado segundo os seus desejos e ritmo. Quer queira uma experiência tranquila de contemplação, momentos de aventura ou celebrações especiais, estamos aqui para tornar cada instante inesquecível.
                 </p>
 
                 <div className="text-center">
                   <a
-                    href="mailto:geral@lfrgroup.pt?subject=Orçamento Taylor Made"
-                    className={`inline-block px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-bold hover:scale-105 transition-all duration-300 shadow-xl`}
+                    href="mailto:hello@be-lunes.pt?subject=Orçamento Taylor Made"
+                    className={`inline-block px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl`}
                   >
                     Pedir Orçamento Personalizado
                   </a>
@@ -425,7 +425,7 @@ export default function BrandPage() {
                   href="https://docs.google.com/document/d/1efiQYymUM_35Y3mtc6u1mCe0Fq7-1TBH/edit?usp=sharing&ouid=113977342339399434245&rtpof=true&sd=true"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block text-sm font-bold uppercase tracking-[0.3em] text-explore-blue underline underline-offset-4 hover:text-blackout transition-colors"
+                  className="inline-block text-sm font-bold uppercase tracking-[0.3em] text-explore-blue font-sans underline underline-offset-4 hover:text-blackout transition-colors"
                 >
                   Consultar Termos e Condições
                 </a>
@@ -448,10 +448,10 @@ export default function BrandPage() {
                 className="text-center mb-20"
               >
                 <h3 className="text-4xl md:text-6xl font-light italic mb-6">A sua casa no coração do Algarve</h3>
-                <p className="text-lg text-blackout/60 font-light">Bem-vindo à nossa casa.</p>
+                <p className="text-lg text-blackout/60 font-light font-sans">Bem-vindo à nossa casa.</p>
               </motion.div>
 
-              <div className="space-y-16 text-blackout/70 leading-relaxed font-light">
+              <div className="space-y-16 text-blackout/70 leading-relaxed font-light font-sans">
 
                 {/* Description */}
                 <motion.div
@@ -459,7 +459,7 @@ export default function BrandPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="space-y-6 text-lg"
+                  className="space-y-6 text-lg font-sans"
                 >
                   <p>Um apartamento moderno, amplo e luminoso com 200 m², onde o conforto, a simplicidade e a luz natural convivem em perfeita harmonia. Um espaço pensado para desacelerar, descansar e viver o Algarve com autenticidade.</p>
                   <p>Com três quartos espaçosos e cheios de luz — dois quartos com cama de casal e um com camas individuais — é ideal para famílias, amigos ou para quem procura uma estadia tranquila, confortável e memorável.</p>
@@ -474,20 +474,20 @@ export default function BrandPage() {
                   className="grid md:grid-cols-2 gap-8"
                 >
                   <div className="p-8 rounded-3xl bg-white border border-blackout/5">
-                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">Sala</h4>
-                    <p>A sala acolhedora convida a momentos de descanso, com um sofá confortável e televisão, perfeita para relaxar depois de um dia de praia.</p>
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout mb-4">Sala</h4>
+                    <p className="font-sans">A sala acolhedora convida a momentos de descanso, com um sofá confortável e televisão, perfeita para relaxar depois de um dia de praia.</p>
                   </div>
                   <div className="p-8 rounded-3xl bg-white border border-blackout/5">
-                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">Cozinha</h4>
-                    <p>Totalmente equipada: forno, micro-ondas, frigorífico, congelador, máquina de lavar loiça, placa elétrica, torradeira, chaleira e máquina de café Nespresso.</p>
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout mb-4">Cozinha</h4>
+                    <p className="font-sans">Totalmente equipada: forno, micro-ondas, frigorífico, congelador, máquina de lavar loiça, placa elétrica, torradeira, chaleira e máquina de café Nespresso.</p>
                   </div>
                   <div className="p-8 rounded-3xl bg-white border border-blackout/5">
-                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">Casa de Banho</h4>
-                    <p>Ambiente funcional e cuidado, com duche, champô, condicionador, gel de banho, lavatório, sanita, bidé e secador de cabelo.</p>
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout mb-4">Casa de Banho</h4>
+                    <p className="font-sans">Ambiente funcional e cuidado, com duche, champô, condicionador, gel de banho, lavatório, sanita, bidé e secador de cabelo.</p>
                   </div>
                   <div className="p-8 rounded-3xl bg-white border border-blackout/5">
-                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">Extras</h4>
-                    <p>Dispensa equipada com ferro e tábua de engomar, aspirador, kit de primeiros socorros e material de limpeza. Ar condicionado na sala e num dos quartos.</p>
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout mb-4">Extras</h4>
+                    <p className="font-sans">Dispensa equipada com ferro e tábua de engomar, aspirador, kit de primeiros socorros e material de limpeza. Ar condicionado na sala e num dos quartos.</p>
                   </div>
                 </motion.div>
 
@@ -499,7 +499,7 @@ export default function BrandPage() {
                   transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                   className="p-10 rounded-3xl bg-white border border-blackout/5"
                 >
-                  <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-6">Localização privilegiada</h4>
+                  <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout mb-6">Localização privilegiada</h4>
                   <p className="mb-6">Tudo à porta, sem complicações. Estacionamento gratuito.</p>
                   <ul className="space-y-3 text-base">
                     <li className="flex items-start gap-3"><span className={`w-2 h-2 rounded-full ${brand.color} mt-2 flex-shrink-0`} /><span>A menos de 5 minutos a pé da Praia da Rocha</span></li>
@@ -546,7 +546,7 @@ export default function BrandPage() {
                       href="https://docs.google.com/document/d/1ugClb7rslgDuJwjj6CAgprPwazXAV6qF/edit"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block text-sm font-bold uppercase tracking-[0.3em] text-stay-pink underline underline-offset-4 hover:text-blackout transition-colors"
+                      className="inline-block text-sm font-bold uppercase tracking-[0.3em] text-stay-pink font-sans underline underline-offset-4 hover:text-blackout transition-colors"
                     >
                       Consultar Termos e Condições do Alojamento
                     </a>

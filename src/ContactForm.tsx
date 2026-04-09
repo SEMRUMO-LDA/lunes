@@ -120,7 +120,7 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                 className="space-y-8"
               >
                 <div className="space-y-4">
-                  <span className="text-[10px] uppercase tracking-[0.5em] font-bold opacity-30">Selecione o Pilar</span>
+                  <span className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-30">Selecione o Pilar</span>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {AREAS.map((area) => (
                       <button
@@ -227,7 +227,7 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                     type="submit"
                     className="w-full bg-blackout text-white py-5 rounded-full flex items-center justify-center gap-4 group hover:shadow-2xl hover:scale-[1.02] active:scale-95 transition-all duration-300"
                   >
-                    <span className="text-[10px] uppercase tracking-[0.5em] font-bold">Enviar Pedido</span>
+                    <span className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">Enviar Pedido</span>
                     <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </button>
                 </div>

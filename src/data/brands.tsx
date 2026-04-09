@@ -101,10 +101,10 @@ export const SUB_BRANDS = [
     subtitle: "O Refúgio do Ser",
     description: "O nosso alojamento local é a materialização física desta identidade visual: espaços amplos, luz natural e uma calma regeneradora. Um lugar desenhado para 'estar', sem a urgência de 'fazer'.",
     details: [
-      "Design Minimalista e Funcional",
-      "Ambientes de Silêncio Curado",
-      "Integração com a Paisagem",
-      "Serviço de Concierge Personalizado"
+      "Sensação Imediata de Casa",
+      "Ambiente Tranquilo e Acolhedor",
+      "Comunicação Fácil",
+      "Limpeza Detalhada"
     ],
     color: "bg-stay-creame",
     textColor: "text-stay-pink",

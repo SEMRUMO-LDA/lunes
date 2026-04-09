@@ -26,7 +26,7 @@ export default function ParceirosPage() {
 
         <button
           onClick={goHome}
-          className="mb-16 flex items-center gap-3 text-[10px] uppercase tracking-[0.5em] font-bold text-blackout/40 hover:text-blackout transition-colors group"
+          className="mb-16 flex items-center gap-3 text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40 hover:text-blackout transition-colors group"
         >
           <div className="p-2 rounded-full border border-blackout/10 group-hover:border-blackout/30 group-hover:bg-blackout/5 transition-all">
             <ArrowLeft className="w-4 h-4" />
@@ -39,7 +39,7 @@ export default function ParceirosPage() {
           <div className="w-24 h-[2px] bg-blackout/20" />
         </div>
 
-        <div className="prose prose-lg max-w-none text-blackout/70 leading-relaxed">
+        <div className="prose prose-lg max-w-none text-blackout/70 leading-relaxed font-sans">
           <p className="text-xl font-light leading-relaxed mb-12">
             A LUNES acredita que as melhores experiencias nascem de colaboracoes autenticas. Trabalhamos com parceiros que partilham os nossos valores de qualidade, sustentabilidade e bem-estar.
           </p>
@@ -66,7 +66,7 @@ export default function ParceirosPage() {
           <div className="mt-16 p-12 rounded-3xl bg-blackout/5 text-center">
             <h3 className="text-2xl font-light italic mb-4">Quer ser nosso parceiro?</h3>
             <p className="text-sm text-blackout/60 mb-8">Entre em contacto connosco para explorar oportunidades de colaboracao.</p>
-            <a href="mailto:geral@lfrgroup.pt" className="inline-block px-8 py-4 rounded-full bg-blackout text-white text-[10px] uppercase tracking-[0.5em] font-bold hover:scale-105 transition-all duration-300">
+            <a href="mailto:geral@lfrgroup.pt" className="inline-block px-8 py-4 rounded-full bg-blackout text-white text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300">
               Contactar
             </a>
           </div>

@@ -39,7 +39,7 @@ export default function NotFound() {
 
         <button
           onClick={() => router.push("/")}
-          className="inline-flex items-center gap-3 mt-8 border border-coconut/20 rounded-full px-8 py-4 text-[10px] uppercase tracking-[0.5em] font-bold hover:bg-coconut hover:text-blackout transition-all duration-300 bg-coconut/5 backdrop-blur-md group"
+          className="inline-flex items-center gap-3 mt-8 border border-coconut/20 rounded-full px-8 py-4 text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:bg-coconut hover:text-blackout transition-all duration-300 bg-coconut/5 backdrop-blur-md group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Voltar ao Inicio

@@ -3,42 +3,62 @@ import { kibanService } from '../services/kibanClient';
 
 export interface Tour {
   title: string;
+  slug: string;
   description: string;
   duration: string;
   rating: number;
   capacity: string;
   priceTotal: string;
+  priceAdult: string;
+  priceChild: string;
+  childAge: string;
   image: string;
+  timeSlots: string[];
 }
 
 // Fallback estático — dados atuais do site
 const STATIC_TOURS: Tour[] = [
   {
     title: "Costa de Portimão à Sra. da Rocha",
+    slug: "costa-portimao",
     image: "/images/tours/tours-coast.jpg",
     duration: "2 horas",
     rating: 5,
     capacity: "Por passageiro",
     priceTotal: "40€",
-    description: "Navegamos entre grutas, falésias douradas e praias icónicas. Contamos histórias, exploramos recantos únicos e paramos para mergulho na inesquecível Praia da Marinha."
+    priceAdult: "40€",
+    priceChild: "20€",
+    childAge: "2-10 anos",
+    description: "Navegamos entre grutas, falésias douradas e praias icónicas. Contamos histórias, exploramos recantos únicos e paramos para mergulho na inesquecível Praia da Marinha.",
+    timeSlots: ["10:00", "14:00"]
   },
   {
     title: "Rio Arade",
+    slug: "rio-arade",
     image: "/images/tours/tours-river.jpg",
     duration: "2 horas",
     rating: 5,
     capacity: "Por passageiro",
     priceTotal: "40€",
-    description: "Um passeio calmo, perfeito para quem procura natureza, biodiversidade e silêncio. Aqui o tempo abranda e a ligação ao lugar acontece naturalmente."
+    priceAdult: "40€",
+    priceChild: "20€",
+    childAge: "2-10 anos",
+    description: "Um passeio calmo, perfeito para quem procura natureza, biodiversidade e silêncio. Aqui o tempo abranda e a ligação ao lugar acontece naturalmente.",
+    timeSlots: ["10:00", "15:00"]
   },
   {
     title: "Sunrise & Sunset",
+    slug: "sunrise-sunset",
     image: "/images/tours/tours-sunset.jpg",
     duration: "2 horas",
     rating: 5,
     capacity: "Por passageiro",
     priceTotal: "40€",
-    description: "Ao nascer ou ao pôr do sol, a luz transforma tudo. As cores, o mar e a atmosfera criam um momento íntimo e memorável, daqueles que se guardam."
+    priceAdult: "40€",
+    priceChild: "20€",
+    childAge: "2-10 anos",
+    description: "Ao nascer ou ao pôr do sol, a luz transforma tudo. As cores, o mar e a atmosfera criam um momento íntimo e memorável, daqueles que se guardam.",
+    timeSlots: ["06:30", "18:00"]
   }
 ];
 
@@ -74,12 +94,17 @@ export function useTours() {
 
         const mapped: Tour[] = sorted.map((entry: any) => ({
           title: entry.content?.title || entry.title || '',
+          slug: entry.slug || '',
           description: entry.content?.description || entry.excerpt || '',
           duration: entry.content?.duration || '',
           rating: entry.content?.rating || 5,
           capacity: entry.content?.capacity || '',
-          priceTotal: entry.content?.price || '',
+          priceTotal: entry.content?.price || entry.content?.price_adult ? `${entry.content.price_adult}€` : '',
+          priceAdult: entry.content?.price_adult ? `${entry.content.price_adult}€` : '',
+          priceChild: entry.content?.price_child ? `${entry.content.price_child}€` : '',
+          childAge: entry.content?.child_age_range || '2-10 anos',
           image: entry.content?.image || entry.featured_image || '',
+          timeSlots: entry.content?.time_slots || [],
         }));
 
         if (!cancelled && mapped.length > 0) {
