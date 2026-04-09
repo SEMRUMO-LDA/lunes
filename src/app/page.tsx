@@ -168,6 +168,7 @@ export default function HomePage() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
+  const [newsletterSent, setNewsletterSent] = useState(false);
 
 
 
@@ -864,15 +865,33 @@ export default function HomePage() {
 
             <div className="space-y-6">
               <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">Newsletter</h4>
-              <p className="text-sm text-coconut/70">Receba inspiracao semanal para o seu bem-estar.</p>
-              <div className="flex border-b border-coconut/20 py-2">
-                <input
-                  type="email"
-                  placeholder="O seu email"
-                  className="bg-transparent border-none outline-none text-sm w-full placeholder:text-coconut/40"
-                />
-                <ArrowRight className="w-4 h-4 opacity-80" />
-              </div>
+              <p className="text-sm text-coconut/70 font-sans">Receba inspiracao semanal para o seu bem-estar.</p>
+              {newsletterSent ? (
+                <p className="text-sm text-explore-cyan font-sans">Subscrito com sucesso!</p>
+              ) : (
+                <form onSubmit={async (e) => {
+                  e.preventDefault();
+                  const input = (e.target as HTMLFormElement).querySelector('input') as HTMLInputElement;
+                  const email = input?.value?.trim();
+                  if (!email) return;
+                  try {
+                    await fetch(`${process.env.NEXT_PUBLIC_KIBAN_API_URL}/api/v1/newsletter/subscribe`, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${process.env.NEXT_PUBLIC_KIBAN_API_KEY}` },
+                      body: JSON.stringify({ email }),
+                    });
+                    setNewsletterSent(true);
+                  } catch {}
+                }} className="flex border-b border-coconut/20 py-2">
+                  <input
+                    type="email"
+                    required
+                    placeholder="O seu email"
+                    className="bg-transparent border-none outline-none text-sm font-sans w-full placeholder:text-coconut/40"
+                  />
+                  <button type="submit"><ArrowRight className="w-4 h-4 opacity-80 hover:opacity-100 transition-opacity" /></button>
+                </form>
+              )}
             </div>
           </div>
 
