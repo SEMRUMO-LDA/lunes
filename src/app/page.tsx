@@ -90,6 +90,7 @@ const MANIFESTO_CARDS = [
 
 const ManifestoStack = () => {
   const [cards, setCards] = useState(MANIFESTO_CARDS);
+  const { t } = useTranslation();
 
   const rotateCards = () => {
     setCards((prev: typeof MANIFESTO_CARDS) => {
