@@ -30,10 +30,10 @@ export default function NotFound() {
 
         <div className="space-y-4">
           <h2 className="text-3xl md:text-5xl italic tracking-tight">
-            Pagina nao encontrada.
+            Página não encontrada.
           </h2>
           <p className="text-coconut/50 text-sm font-light max-w-sm mx-auto">
-            O caminho que procura nao existe. Talvez o mar o tenha levado. Volte ao inicio e redescubra o seu ritmo.
+            O caminho que procura não existe. Talvez o mar o tenha levado. Volte ao início e redescubra o seu ritmo.
           </p>
         </div>
 
@@ -42,7 +42,7 @@ export default function NotFound() {
           className="inline-flex items-center gap-3 mt-8 border border-coconut/20 rounded-full px-8 py-4 text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:bg-coconut hover:text-blackout transition-all duration-300 bg-coconut/5 backdrop-blur-md group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Voltar ao Inicio
+          Voltar ao Início
         </button>
       </div>
 

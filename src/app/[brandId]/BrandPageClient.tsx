@@ -177,7 +177,7 @@ export default function BrandPage() {
                     }}
                     className={`w-full sm:w-auto px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
                   >
-                    Explorar Experiencias
+                    Explorar Experiências
                   </button>
                 )
               ) : (
@@ -250,7 +250,7 @@ export default function BrandPage() {
         {brand.id === 'explore' && dynamicTours.length > 0 && (
           <div id="tours-section" className="py-32 border-t border-blackout/5 bg-[#F9FAF9]">
             <div className="max-w-7xl mx-auto px-8 md:px-16">
-              <h3 className="text-4xl md:text-5xl font-light italic mb-16 text-center">Experiencias {brand.title}</h3>
+              <h3 className="text-4xl md:text-5xl font-light italic mb-16 text-center">Experiências {brand.title}</h3>
               <div className="grid lg:grid-cols-3 gap-8">
                 {dynamicTours.map((tour: any, idx: number) => (
                   <motion.div
@@ -269,7 +269,7 @@ export default function BrandPage() {
 
                       <div className="flex justify-between items-center mb-8 px-4">
                         <div className="text-center">
-                          <span className="text-[10px] uppercase tracking-[0.5em] font-sans block text-blackout/80 mb-2 font-bold">Duracao</span>
+                          <span className="text-[10px] uppercase tracking-[0.5em] font-sans block text-blackout/80 mb-2 font-bold">Duração</span>
                           <div className="flex items-center gap-2 justify-center text-blackout/70">
                             <Clock className="w-4 h-4 text-explore-blue" />
                             <span className="text-sm font-medium">{tour.duration}</span>
@@ -301,7 +301,7 @@ export default function BrandPage() {
                         {tour.priceChild && (
                           <div>
                             <div className="flex items-center justify-between text-lg font-light text-blackout font-sans">
-                              <span className="font-medium">Crianca</span>
+                              <span className="font-medium">Criança</span>
                               <div className="flex-grow border-b border-dotted border-blackout/20 mx-4 relative top-1" />
                               <span className="font-bold">{tour.priceChild}</span>
                             </div>

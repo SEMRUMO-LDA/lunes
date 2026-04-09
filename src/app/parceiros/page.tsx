@@ -31,7 +31,7 @@ export default function ParceirosPage() {
           <div className="p-2 rounded-full border border-blackout/10 group-hover:border-blackout/30 group-hover:bg-blackout/5 transition-all">
             <ArrowLeft className="w-4 h-4" />
           </div>
-          <span>Voltar a Homepage</span>
+          <span>Voltar à Homepage</span>
         </button>
 
         <div className="space-y-6 mb-16">
@@ -41,7 +41,7 @@ export default function ParceirosPage() {
 
         <div className="prose prose-lg max-w-none text-blackout/70 leading-relaxed font-sans">
           <p className="text-xl font-light leading-relaxed mb-12">
-            A LUNES acredita que as melhores experiencias nascem de colaboracoes autenticas. Trabalhamos com parceiros que partilham os nossos valores de qualidade, sustentabilidade e bem-estar.
+            A LUNES acredita que as melhores experiências nascem de colaborações autênticas. Trabalhamos com parceiros que partilham os nossos valores de qualidade, sustentabilidade e bem-estar.
           </p>
 
           <div className="grid md:grid-cols-2 gap-8 mt-16">
@@ -50,11 +50,11 @@ export default function ParceirosPage() {
               <p className="text-sm text-blackout/50">Em breve...</p>
             </div>
             <div className="p-8 rounded-3xl border border-blackout/10 hover:border-blackout/20 transition-all">
-              <h3 className="text-lg font-bold mb-2">Parceria Nautica</h3>
+              <h3 className="text-lg font-bold mb-2">Parceria Náutica</h3>
               <p className="text-sm text-blackout/50">Em breve...</p>
             </div>
             <div className="p-8 rounded-3xl border border-blackout/10 hover:border-blackout/20 transition-all">
-              <h3 className="text-lg font-bold mb-2">Parceria Gastronomica</h3>
+              <h3 className="text-lg font-bold mb-2">Parceria Gastronómica</h3>
               <p className="text-sm text-blackout/50">Em breve...</p>
             </div>
             <div className="p-8 rounded-3xl border border-blackout/10 hover:border-blackout/20 transition-all">
@@ -65,7 +65,7 @@ export default function ParceirosPage() {
 
           <div className="mt-16 p-12 rounded-3xl bg-blackout/5 text-center">
             <h3 className="text-2xl font-light italic mb-4">Quer ser nosso parceiro?</h3>
-            <p className="text-sm text-blackout/60 mb-8">Entre em contacto connosco para explorar oportunidades de colaboracao.</p>
+            <p className="text-sm text-blackout/60 mb-8">Entre em contacto connosco para explorar oportunidades de colaboração.</p>
             <a href="mailto:geral@lfrgroup.pt" className="inline-block px-8 py-4 rounded-full bg-blackout text-white text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300">
               Contactar
             </a>

@@ -145,7 +145,7 @@ function ConfirmacaoPage() {
             transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
             className="text-blackout/50 text-base md:text-lg font-light leading-relaxed mb-10"
           >
-            Obrigado pela sua reserva. Recebera um email de confirmacao em breve.
+            Obrigado pela sua reserva. Receberá um email de confirmação em breve.
           </motion.p>
 
           {/* Booking details */}
@@ -182,7 +182,7 @@ function ConfirmacaoPage() {
                   <span className="text-sm font-medium">
                     {booking.adults} adulto{booking.adults > 1 ? "s" : ""}
                     {booking.children > 0 &&
-                      `, ${booking.children} crianca${booking.children > 1 ? "s" : ""}`}
+                      `, ${booking.children} criança${booking.children > 1 ? "s" : ""}`}
                   </span>
                 </div>
               </div>
@@ -217,14 +217,14 @@ function ConfirmacaoPage() {
               className="px-8 py-4 rounded-full border border-blackout/10 text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-blackout/5 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <ArrowRight className="w-4 h-4 rotate-180" />
-              Voltar a Homepage
+              Voltar à Homepage
             </button>
             <button
               onClick={() => router.push("/explore")}
               className="px-8 py-4 rounded-full bg-explore-cyan text-explore-blue text-[10px] uppercase tracking-[0.4em] font-bold hover:scale-[1.02] hover:shadow-lg shadow-explore-cyan/20 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <Compass className="w-4 h-4" />
-              Ver experiencias
+              Ver experiências
             </button>
           </motion.div>
         </div>

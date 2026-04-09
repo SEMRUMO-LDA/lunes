@@ -608,7 +608,7 @@ export default function HomePage() {
               <div className="flex flex-col md:flex-row justify-between items-end mb-16 relative">
                 <div className="space-y-4">
                   <h2 className="text-5xl md:text-8xl italic leading-none tracking-tighter">O Nosso Ecossistema</h2>
-                  <p className="text-blackout/40 max-w-md uppercase tracking-[0.5em] text-[10px] font-bold font-sans">Quatro pilares, uma unica essencia.</p>
+                  <p className="text-blackout/40 max-w-md uppercase tracking-[0.5em] text-[10px] font-bold font-sans">Quatro pilares, uma única essência.</p>
                 </div>
 
                 {/* Rotating Badge */}
@@ -715,29 +715,29 @@ export default function HomePage() {
               {/* Columns 2 & 3: Brand Story */}
               <div className="lg:col-span-2 space-y-12">
                 <div className="space-y-4">
-                  <p className="text-xl md:text-2xl font-serif italic text-blackout">Ola, somos a Luisa e o Francisco.</p>
+                  <p className="text-xl md:text-2xl font-serif italic text-blackout">Olá, somos a Luísa e o Francisco.</p>
 
                   <div className="grid md:grid-cols-2 gap-12 text-base md:text-lg text-blackout/70 leading-relaxed font-normal font-sans">
                     {/* Text Column 1 */}
                     <div className="space-y-6">
                       <p>
-                        A nossa historia comecou de forma inesperada: de cliente e treinador, transformamo-nos num casal unido por sonhos e cuidado mutuo. Crescemos, curamos e fortalecemo-nos juntos.
+                        A nossa história começou de forma inesperada: de cliente e treinador, transformámo-nos num casal unido por sonhos e cuidado mútuo. Crescemos, curamos e fortalecemo-nos juntos.
                       </p>
                       <p>
-                        E esta parceria de amor e confianca que da vida a Lunes -- um projeto que carrega a nossa identidade ate na fusao dos nossos apelidos, <span className="font-semibold uppercase tracking-widest text-[10px] text-blackout border-b border-blackout/20 pb-0.5">Luz e Nunes.</span> Mais do que a materializacao de um sonho, e a vontade de criar um espaco onde cada momento se torna inesquecivel.
+                        É esta parceria de amor e confiança que dá vida à Lunes -- um projeto que carrega a nossa identidade até na fusão dos nossos apelidos, <span className="font-semibold uppercase tracking-widest text-[10px] text-blackout border-b border-blackout/20 pb-0.5">Luz e Nunes.</span> Mais do que a materialização de um sonho, é a vontade de criar um espaço onde cada momento se torna inesquecível.
                       </p>
                     </div>
 
                     {/* Text Column 2 */}
                     <div className="space-y-6">
                       <p>
-                        Acreditamos que o tempo deixou de ser uma imposicao. Aqui, o tempo nao pressiona; ele acolhe. Convidamo-lo a viver ao seu proprio ritmo, no seu tempo -- finalmente seu.
+                        Acreditamos que o tempo deixou de ser uma imposição. Aqui, o tempo não pressiona; ele acolhe. Convidamo-lo a viver ao seu próprio ritmo, no seu tempo -- finalmente seu.
                       </p>
                       <p>
                         A Lunes divide-se em quatro pilares inspirados nos ciclos da natureza: <span className="italic font-medium text-blackout text-sm uppercase tracking-wider">Move, Explore, Feel e Stay</span>. Quatro formas de regressar ao essencial.
                       </p>
                       <p className="font-medium italic text-blackout leading-tight">
-                        Mais do que servicos, criamos viagens de fora para dentro.
+                        Mais do que serviços, criamos viagens de fora para dentro.
                       </p>
                     </div>
                   </div>
@@ -752,7 +752,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-8">
             <div className="text-center mb-24 space-y-4">
               <h2 className="text-5xl md:text-7xl italic tracking-tight">Vozes da Comunidade</h2>
-              <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-40">O que dizem sobre a experiencia LUNES</p>
+              <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-40">O que dizem sobre a experiência LUNES</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-12">
@@ -792,7 +792,7 @@ export default function HomePage() {
             <div className="col-span-2 space-y-8">
               <Image src="/images/brand/LUNES horizontal branco.png" alt="LUNES" width={240} height={48} className="h-10 md:h-12 w-auto" />
               <p className="text-coconut/80 max-w-md font-light">
-                LUNES nao vende tempo. LUNES devolve o tempo. Junte-se a nossa comunidade e redescubra o seu ritmo natural.
+                LUNES não vende tempo. LUNES devolve o tempo. Junte-se à nossa comunidade e redescubra o seu ritmo natural.
               </p>
               <div className="flex gap-6">
                 <InstagramIcon className="w-5 h-5 opacity-80 hover:opacity-100 cursor-pointer transition-opacity" />
@@ -812,7 +812,7 @@ export default function HomePage() {
               <ul className="space-y-4 text-sm text-coconut/70">
                 <li>
                   <a href="https://www.livroreclamacoes.pt/inicio/" target="_blank" rel="noopener noreferrer" className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block">
-                    Livro de Reclamacoes
+                    Livro de Reclamações
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
                   </a>
                 </li>
@@ -821,7 +821,7 @@ export default function HomePage() {
                     href="/privacidade"
                     className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block"
                   >
-                    Politica de Privacidade
+                    Política de Privacidade
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
                   </Link>
                 </li>
@@ -830,7 +830,7 @@ export default function HomePage() {
                     href="/termos"
                     className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block"
                   >
-                    Termos &amp; Condicoes
+                    Termos &amp; Condições
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
                   </Link>
                 </li>
@@ -865,7 +865,7 @@ export default function HomePage() {
 
             <div className="space-y-6">
               <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">Newsletter</h4>
-              <p className="text-sm text-coconut/70 font-sans">Receba inspiracao semanal para o seu bem-estar.</p>
+              <p className="text-sm text-coconut/70 font-sans">Receba inspiração semanal para o seu bem-estar.</p>
               {newsletterSent ? (
                 <p className="text-sm text-explore-cyan font-sans">Subscrito com sucesso!</p>
               ) : (

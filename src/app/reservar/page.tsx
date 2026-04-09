@@ -27,8 +27,8 @@ import {
 // ── Constants ──────────────────────────────────────────────────────────
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const STEP_LABELS = ["Experiencia", "Data & Hora", "Passageiros", "Resumo"];
-const WEEKDAYS = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"];
+const STEP_LABELS = ["Experiência", "Data & Hora", "Passageiros", "Resumo"];
+const WEEKDAYS = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
 
 // ── Logo ───────────────────────────────────────────────────────────────
 
@@ -425,7 +425,7 @@ function ReservarPage() {
               transition={{ duration: 0.5, ease: EASE }}
             >
               <h2 className="text-4xl md:text-5xl italic mb-2 text-center">
-                Escolha a experiencia
+                Escolha a experiência
               </h2>
               <p className="text-center text-blackout/50 text-sm mb-12">
                 Selecione o passeio que pretende reservar
@@ -504,7 +504,7 @@ function ReservarPage() {
               transition={{ duration: 0.5, ease: EASE }}
             >
               <h2 className="text-4xl md:text-5xl italic mb-2 text-center">
-                Data & Horario
+                Data & Horário
               </h2>
               <p className="text-center text-blackout/50 text-sm mb-12">
                 {selectedTour?.title}
@@ -579,7 +579,7 @@ function ReservarPage() {
                 {/* Time slots */}
                 <div className="bg-white rounded-[2rem] border border-blackout/5 p-6 md:p-8">
                   <h3 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40 mb-6">
-                    Horarios disponiveis
+                    Horários disponíveis
                   </h3>
 
                   {!selectedDate ? (
@@ -593,7 +593,7 @@ function ReservarPage() {
                     </div>
                   ) : slots.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-16 text-blackout/30">
-                      <p className="text-sm">Sem horarios para esta data</p>
+                      <p className="text-sm">Sem horários para esta data</p>
                     </div>
                   ) : (
                     <div className="space-y-3">
@@ -690,7 +690,7 @@ function ReservarPage() {
                   {/* Children */}
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-lg font-light">Criancas</p>
+                      <p className="text-lg font-light">Crianças</p>
                       {childPrice > 0 ? (
                         <p className="text-xs text-blackout/40">
                           {childPrice}€ / crianca
@@ -723,7 +723,7 @@ function ReservarPage() {
 
                   {adults + children > maxAvailable && (
                     <p className="text-red-500 text-xs font-medium">
-                      Maximo de {maxAvailable} lugares disponiveis neste horario.
+                      Máximo de {maxAvailable} lugares disponíveis neste horário.
                     </p>
                   )}
 
@@ -743,7 +743,7 @@ function ReservarPage() {
                       {children > 0 && childPrice > 0 && (
                         <div className="flex justify-between">
                           <span>
-                            {children} crianca{children > 1 ? "s" : ""} x {childPrice}€
+                            {children} criança{children > 1 ? "s" : ""} x {childPrice}€
                           </span>
                           <span className="font-medium text-blackout">
                             {children * childPrice}€
@@ -810,7 +810,7 @@ function ReservarPage() {
                     <textarea
                       value={formNotes}
                       onChange={(e) => setFormNotes(e.target.value)}
-                      placeholder="Alguma informacao adicional (opcional)"
+                      placeholder="Alguma informação adicional (opcional)"
                       rows={3}
                       className="w-full px-5 py-3.5 rounded-2xl border border-blackout/10 bg-coconut/50 text-sm focus:outline-none focus:border-explore-cyan focus:ring-2 focus:ring-explore-cyan/20 transition-all placeholder:text-blackout/20 resize-none"
                     />
@@ -911,7 +911,7 @@ function ReservarPage() {
                       {children > 0 && childPrice > 0 && (
                         <div className="flex justify-between text-blackout/60">
                           <span>
-                            {children} crianca{children > 1 ? "s" : ""} x {childPrice}€
+                            {children} criança{children > 1 ? "s" : ""} x {childPrice}€
                           </span>
                           <span>{children * childPrice}€</span>
                         </div>
@@ -947,7 +947,7 @@ function ReservarPage() {
                           className="underline hover:text-blackout transition-colors"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          Termos e Condicoes
+                          Termos e Condições
                         </a>{" "}
                         e a{" "}
                         <a
@@ -956,7 +956,7 @@ function ReservarPage() {
                           className="underline hover:text-blackout transition-colors"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          Politica de Privacidade
+                          Política de Privacidade
                         </a>
                         .
                       </span>
