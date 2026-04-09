@@ -259,43 +259,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen selection:bg-blackout selection:text-coconut" ref={containerRef}>
 
-      {/* Custom Cursor - Hidden on Mobile/Tablet */}
-      <motion.div
-        className="hidden lg:block fixed top-0 left-0 w-6 h-6 rounded-full pointer-events-none z-[9999] bg-white"
-        animate={{
-          x: cursorPosition.x - 12,
-          y: cursorPosition.y - 12,
-          scale: 1,
-        }}
-        transition={{
-          type: "spring",
-          damping: 20,
-          stiffness: 500,
-          mass: 0.4,
-        }}
-        style={{
-          boxShadow: '0 0 20px rgba(255, 255, 255, 0.4)',
-          mixBlendMode: 'difference'
-        }}
-      />
-
-      <motion.div
-        className="hidden lg:block fixed top-0 left-0 w-10 h-10 rounded-full pointer-events-none z-[9998] border-2 border-white/50"
-        animate={{
-          x: cursorPosition.x - 20,
-          y: cursorPosition.y - 20,
-          scale: 1,
-        }}
-        transition={{
-          type: "spring",
-          damping: 25,
-          stiffness: 400,
-          mass: 0.6,
-        }}
-        style={{
-          mixBlendMode: 'difference'
-        }}
-      />
+      {/* Custom cursor removed — using default browser cursor */}
 
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 w-full z-50 px-8 transition-all duration-500 flex justify-between items-center text-coconut ${

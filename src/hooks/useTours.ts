@@ -16,7 +16,7 @@ const STATIC_TOURS: Tour[] = [
   {
     title: "Costa de Portimão à Sra. da Rocha",
     image: "/images/tours/tours-coast.jpg",
-    duration: "150 Min",
+    duration: "2 horas",
     rating: 5,
     capacity: "Por passageiro",
     priceTotal: "40€",
@@ -25,7 +25,7 @@ const STATIC_TOURS: Tour[] = [
   {
     title: "Rio Arade",
     image: "/images/tours/tours-river.jpg",
-    duration: "120 Min",
+    duration: "2 horas",
     rating: 5,
     capacity: "Por passageiro",
     priceTotal: "40€",
@@ -34,20 +34,11 @@ const STATIC_TOURS: Tour[] = [
   {
     title: "Sunrise & Sunset",
     image: "/images/tours/tours-sunset.jpg",
-    duration: "120 Min",
+    duration: "2 horas",
     rating: 5,
     capacity: "Por passageiro",
     priceTotal: "40€",
     description: "Ao nascer ou ao pôr do sol, a luz transforma tudo. As cores, o mar e a atmosfera criam um momento íntimo e memorável, daqueles que se guardam."
-  },
-  {
-    title: "Passeios Privados",
-    image: "/images/tours/private-tour.jpg",
-    duration: "Flexível",
-    rating: 5,
-    capacity: "Até 17 pessoas",
-    priceTotal: "550€",
-    description: "Uma experiência feita à sua medida, no seu ritmo. Navegue com quem escolhe, descubra a costa com calma e desfrute de uma bebida de boas-vindas a bordo."
   }
 ];
 

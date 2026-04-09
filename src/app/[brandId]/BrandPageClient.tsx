@@ -334,6 +334,230 @@ export default function BrandPage() {
           </div>
         )}
 
+        {/* Explore — Private & Taylor Made Experiences */}
+        {brand.id === 'explore' && (
+          <div className="py-32 border-t border-blackout/5 bg-white">
+            <div className="max-w-5xl mx-auto px-8 md:px-16">
+
+              {/* Private Tours */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="mb-24"
+              >
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div className="space-y-6">
+                    <h3 className="text-4xl md:text-5xl font-light italic">Passeios Privados</h3>
+                    <p className="text-lg text-blackout/60 font-light leading-relaxed">
+                      Uma experiência feita à sua medida, no seu ritmo. Navegue com quem escolhe, descubra a costa com calma e desfrute de uma bebida de boas-vindas a bordo.
+                    </p>
+                    <div className="flex items-baseline gap-4 pt-4">
+                      <span className="text-3xl font-light text-blackout">550€</span>
+                      <span className="text-sm text-blackout/40">Até 17 pessoas</span>
+                    </div>
+                    <p className="text-sm text-blackout/50">Duração: 2 horas</p>
+                  </div>
+                  <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden">
+                    <Image src="/images/tours/private-tour.jpg" alt="Passeio Privado" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" unoptimized />
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Taylor Made */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="p-10 md:p-16 rounded-[2rem] bg-[#F9FAF9] border border-blackout/5"
+              >
+                <h3 className="text-4xl md:text-5xl font-light italic mb-8 text-center">Experiência Taylor Made</h3>
+                <p className="text-lg text-blackout/60 font-light leading-relaxed text-center max-w-3xl mx-auto mb-12">
+                  Descubra a costa do Algarve de uma forma única e totalmente personalizada. Cada viagem é criada à sua medida, oferecendo momentos inesquecíveis no mar.
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-8 mb-12">
+                  <div className="p-8 rounded-2xl bg-white border border-blackout/5">
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-3">Meio Dia</h4>
+                    <p className="text-blackout/60 font-light">4 horas de passeio, ideal para descobrir praias escondidas, nadar em enseadas secretas e absorver a beleza da costa.</p>
+                  </div>
+                  <div className="p-8 rounded-2xl bg-white border border-blackout/5">
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-3">Dia Completo</h4>
+                    <p className="text-blackout/60 font-light">8 horas de aventura, combinando relaxamento, atividades a bordo e paragens especiais para snorkeling e piquenique com produtos locais.</p>
+                  </div>
+                </div>
+
+                <div className="mb-12">
+                  <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-6 text-center">O que incluímos</h4>
+                  <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                    {[
+                      "Tripulação profissional e dedicada",
+                      "Equipamento de segurança a bordo",
+                      "Possibilidade de experiências extra",
+                      "Música, catering e bebidas à sua escolha",
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-3 p-4 rounded-xl bg-white border border-blackout/5">
+                        <span className={`w-2 h-2 rounded-full ${brand.color} flex-shrink-0`} />
+                        <span className="text-sm text-blackout/70">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <p className="text-center text-blackout/50 font-light mb-8">
+                  Cada tour é único e desenhado segundo os seus desejos e ritmo. Quer queira uma experiência tranquila de contemplação, momentos de aventura ou celebrações especiais, estamos aqui para tornar cada instante inesquecível.
+                </p>
+
+                <div className="text-center">
+                  <a
+                    href="mailto:geral@lfrgroup.pt?subject=Orçamento Taylor Made"
+                    className={`inline-block px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-bold hover:scale-105 transition-all duration-300 shadow-xl`}
+                  >
+                    Pedir Orçamento Personalizado
+                  </a>
+                </div>
+              </motion.div>
+
+              <div className="mt-12 text-center">
+                <a
+                  href="https://docs.google.com/document/d/1efiQYymUM_35Y3mtc6u1mCe0Fq7-1TBH/edit?usp=sharing&ouid=113977342339399434245&rtpof=true&sd=true"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-sm font-bold uppercase tracking-[0.3em] text-explore-blue underline underline-offset-4 hover:text-blackout transition-colors"
+                >
+                  Consultar Termos e Condições
+                </a>
+              </div>
+
+            </div>
+          </div>
+        )}
+
+        {/* Stay — Apartment Details */}
+        {brand.id === 'stay' && (
+          <div className="py-32 border-t border-blackout/5 bg-[#F9FAF9]">
+            <div className="max-w-4xl mx-auto px-8 md:px-16">
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="text-center mb-20"
+              >
+                <h3 className="text-4xl md:text-6xl font-light italic mb-6">A sua casa no coração do Algarve</h3>
+                <p className="text-lg text-blackout/60 font-light">Bem-vindo à nossa casa.</p>
+              </motion.div>
+
+              <div className="space-y-16 text-blackout/70 leading-relaxed font-light">
+
+                {/* Description */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-6 text-lg"
+                >
+                  <p>Um apartamento moderno, amplo e luminoso com 200 m², onde o conforto, a simplicidade e a luz natural convivem em perfeita harmonia. Um espaço pensado para desacelerar, descansar e viver o Algarve com autenticidade.</p>
+                  <p>Com três quartos espaçosos e cheios de luz — dois quartos com cama de casal e um com camas individuais — é ideal para famílias, amigos ou para quem procura uma estadia tranquila, confortável e memorável.</p>
+                </motion.div>
+
+                {/* Spaces */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="grid md:grid-cols-2 gap-8"
+                >
+                  <div className="p-8 rounded-3xl bg-white border border-blackout/5">
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">Sala</h4>
+                    <p>A sala acolhedora convida a momentos de descanso, com um sofá confortável e televisão, perfeita para relaxar depois de um dia de praia.</p>
+                  </div>
+                  <div className="p-8 rounded-3xl bg-white border border-blackout/5">
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">Cozinha</h4>
+                    <p>Totalmente equipada: forno, micro-ondas, frigorífico, congelador, máquina de lavar loiça, placa elétrica, torradeira, chaleira e máquina de café Nespresso.</p>
+                  </div>
+                  <div className="p-8 rounded-3xl bg-white border border-blackout/5">
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">Casa de Banho</h4>
+                    <p>Ambiente funcional e cuidado, com duche, champô, condicionador, gel de banho, lavatório, sanita, bidé e secador de cabelo.</p>
+                  </div>
+                  <div className="p-8 rounded-3xl bg-white border border-blackout/5">
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">Extras</h4>
+                    <p>Dispensa equipada com ferro e tábua de engomar, aspirador, kit de primeiros socorros e material de limpeza. Ar condicionado na sala e num dos quartos.</p>
+                  </div>
+                </motion.div>
+
+                {/* Location */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="p-10 rounded-3xl bg-white border border-blackout/5"
+                >
+                  <h4 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-6">Localização privilegiada</h4>
+                  <p className="mb-6">Tudo à porta, sem complicações. Estacionamento gratuito.</p>
+                  <ul className="space-y-3 text-base">
+                    <li className="flex items-start gap-3"><span className={`w-2 h-2 rounded-full ${brand.color} mt-2 flex-shrink-0`} /><span>A menos de 5 minutos a pé da Praia da Rocha</span></li>
+                    <li className="flex items-start gap-3"><span className={`w-2 h-2 rounded-full ${brand.color} mt-2 flex-shrink-0`} /><span>A 2 minutos de supermercados, cafés e comércio local</span></li>
+                    <li className="flex items-start gap-3"><span className={`w-2 h-2 rounded-full ${brand.color} mt-2 flex-shrink-0`} /><span>Localização central, ideal para explorar o Algarve a pé</span></li>
+                  </ul>
+                  <p className="mt-6 text-sm text-blackout/50">Acesso total ao apartamento, para que se sinta verdadeiramente em casa desde o primeiro momento.</p>
+                </motion.div>
+
+                {/* Essential Info */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <h4 className="text-2xl font-light italic text-blackout mb-8 text-center">Informações essenciais</h4>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="p-6 rounded-2xl bg-white border border-blackout/5 space-y-3 text-sm">
+                      <p><span className="font-bold text-blackout">Check-in</span> a partir das 15:00</p>
+                      <p className="text-blackout/40 text-xs">Check-in após as 22:00 sujeito a taxa extra de 25€</p>
+                      <p><span className="font-bold text-blackout">Check-out</span> até às 10:00</p>
+                    </div>
+                    <div className="p-6 rounded-2xl bg-white border border-blackout/5 space-y-3 text-sm">
+                      <p>Wi-Fi disponível</p>
+                      <p>Roupa de cama e toalhas incluídas</p>
+                      <p className="text-blackout/40 text-xs">Para estadias superiores a 7 noites, conjunto adicional sem custo</p>
+                    </div>
+                    <div className="p-6 rounded-2xl bg-white border border-blackout/5 space-y-3 text-sm">
+                      <p>Limpeza incluída no check-out</p>
+                      <p className="text-blackout/40 text-xs">Limpezas extra disponíveis com 24h de antecedência (taxa adicional)</p>
+                      <p className="text-blackout/40 text-xs">Berço e cadeira de bebé disponíveis mediante pedido (sujeitos a taxa)</p>
+                    </div>
+                    <div className="p-6 rounded-2xl bg-white border border-blackout/5 space-y-3 text-sm">
+                      <p className="font-bold text-blackout">Imposto municipal</p>
+                      <p>1€/noite por adulto — época baixa (Nov-Mar)</p>
+                      <p>2€/noite por adulto — época alta (Abr-Out)</p>
+                      <p className="text-blackout/40 text-xs">Pagamento no check-in por transferência bancária</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 text-center">
+                    <a
+                      href="https://docs.google.com/document/d/1ugClb7rslgDuJwjj6CAgprPwazXAV6qF/edit"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-sm font-bold uppercase tracking-[0.3em] text-stay-pink underline underline-offset-4 hover:text-blackout transition-colors"
+                    >
+                      Consultar Termos e Condições do Alojamento
+                    </a>
+                  </div>
+                </motion.div>
+
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* FAQs Section */}
         {brand.faqs && (
           <div className="py-24 bg-[#F9FAF9]">
