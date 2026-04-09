@@ -80,7 +80,7 @@ const LunesLogo = ({ className = "" }: { className?: string }) => (
 );
 
 const MANIFESTO_CARDS = [
-  { id: 1, title: "Manifesto", image: "/manifesto.png" },
+  { id: 1, title: "Manifesto", image: "/images/misc/manifesto.png" },
   { id: 2, title: "MOVE", image: "https://picsum.photos/seed/lunes-move/800/1000" },
   { id: 3, title: "EXPLORE", image: "https://picsum.photos/seed/lunes-explore/800/1000" },
   { id: 4, title: "STAY", image: "https://picsum.photos/seed/lunes-stay/800/1000" },
@@ -654,7 +654,7 @@ export default function HomePage() {
                     className="w-38 h-38 md:w-64 md:h-64 opacity-20 md:opacity-10"
                   >
                     <img
-                      src="/LUNES badge preto.png"
+                      src="/images/brand/LUNES badge preto.png"
                       alt="LUNES Badge"
                       className="w-full h-full object-contain"
                     />
@@ -825,7 +825,7 @@ export default function HomePage() {
         <footer id="contact" className="bg-blackout text-coconut pt-32 pb-12 px-8 relative overflow-hidden">
           <div className="max-w-7xl mx-auto grid md:grid-cols-5 gap-16 mb-32 relative z-10">
             <div className="col-span-2 space-y-8">
-              <Image src="/LUNES horizontal branco.png" alt="LUNES" width={240} height={48} className="h-10 md:h-12 w-auto" />
+              <Image src="/images/brand/LUNES horizontal branco.png" alt="LUNES" width={240} height={48} className="h-10 md:h-12 w-auto" />
               <p className="text-coconut/80 max-w-md font-light">
                 LUNES nao vende tempo. LUNES devolve o tempo. Junte-se a nossa comunidade e redescubra o seu ritmo natural.
               </p>

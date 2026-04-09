@@ -212,7 +212,7 @@ export default function TermosPage() {
           </section>
 
           <footer className="pt-24 border-t border-blackout/10 flex flex-col items-center gap-8">
-            <Image src="/LUNES horizontal preto.png" alt="LUNES" width={160} height={32} className="h-8 w-auto opacity-20" />
+            <Image src="/images/brand/LUNES horizontal preto.png" alt="LUNES" width={160} height={32} className="h-8 w-auto opacity-20" />
             <p className="text-[10px] uppercase tracking-[0.5em] font-bold text-blackout/40 text-center">
               LUNES EXPERIENCE, LDA. &copy; 2026
             </p>

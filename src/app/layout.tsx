@@ -19,7 +19,7 @@ const kantumruyPro = Kantumruy_Pro({
 export const metadata: Metadata = {
   title: "LUNES — Time to be You",
   description: "Move. Explore. Feel. Stay. Uma experiência de bem-estar no Algarve.",
-  icons: "/LUNES icon preto.png",
+  icons: "/favicon.png",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

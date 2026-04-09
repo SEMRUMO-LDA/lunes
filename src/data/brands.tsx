@@ -18,9 +18,9 @@ export const SUB_BRANDS = [
     accentShadow: "shadow-move-citrus/20",
     icon: <Activity className="w-6 h-6" />,
     gradient: "lunes-gradient-move",
-    image: "/move-featured.jpg",
+    image: "/images/misc/move-featured.jpg",
     gallery: [
-      "/move-featured.jpg",
+      "/images/misc/move-featured.jpg",
       "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop"
@@ -53,9 +53,9 @@ export const SUB_BRANDS = [
     accentShadow: "shadow-explore-cyan/20",
     icon: <Compass className="w-6 h-6" />,
     gradient: "lunes-gradient-explore",
-    image: "/explore-featured.jpg",
+    image: "/images/tours/explore-featured.jpg",
     gallery: [
-      "/explore-featured.jpg",
+      "/images/tours/explore-featured.jpg",
       "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1516939884455-1445c8652f83?q=80&w=800&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1464947644273-914a94b3f034?q=80&w=800&auto=format&fit=crop"
@@ -103,12 +103,12 @@ export const SUB_BRANDS = [
     icon: <Home className="w-6 h-6" />,
     gradient: "lunes-gradient-stay",
     reservationLink: "https://www.airbnb.com.br/rooms/1578259404923411103?source_impression_id=p3_1774870114_P3oQM9EdXo4Gup30",
-    image: "/stay-featured.jpg",
+    image: "/images/stay/stay-featured.jpg",
     gallery: [
-      "/stay-1.png",
-      "/stay-2.png",
-      "/stay-3.png",
-      "/stay-4.png"
+      "/images/stay/stay-1.png",
+      "/images/stay/stay-2.png",
+      "/images/stay/stay-3.png",
+      "/images/stay/stay-4.png"
     ]
   }
 ];

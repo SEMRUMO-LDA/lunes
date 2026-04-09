@@ -15,7 +15,7 @@ export interface Tour {
 const STATIC_TOURS: Tour[] = [
   {
     title: "Costa de Portimão à Sra. da Rocha",
-    image: "/tours-coast.jpg",
+    image: "/images/tours/tours-coast.jpg",
     duration: "150 Min",
     rating: 5,
     capacity: "Por passageiro",
@@ -24,7 +24,7 @@ const STATIC_TOURS: Tour[] = [
   },
   {
     title: "Rio Arade",
-    image: "/tours-river.jpg",
+    image: "/images/tours/tours-river.jpg",
     duration: "120 Min",
     rating: 5,
     capacity: "Por passageiro",
@@ -33,7 +33,7 @@ const STATIC_TOURS: Tour[] = [
   },
   {
     title: "Sunrise & Sunset",
-    image: "/tours-sunset.jpg",
+    image: "/images/tours/tours-sunset.jpg",
     duration: "120 Min",
     rating: 5,
     capacity: "Por passageiro",
@@ -42,7 +42,7 @@ const STATIC_TOURS: Tour[] = [
   },
   {
     title: "Passeios Privados",
-    image: "/private-tour.jpg",
+    image: "/images/tours/private-tour.jpg",
     duration: "Flexível",
     rating: 5,
     capacity: "Até 17 pessoas",

@@ -24,7 +24,6 @@
 @layer base {
   body {
     @apply bg-coconut text-blackout font-sans antialiased;
-    cursor: none;
   }
 
   h1, h2, h3 {
@@ -33,15 +32,10 @@
 
   * {
     transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: none;
   }
 
   html {
     scroll-behavior: smooth;
-  }
-
-  a, button, input, textarea, select {
-    cursor: none;
   }
 }
 
