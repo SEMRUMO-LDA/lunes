@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ContactForm from "@/src/ContactForm";
 import { useTestimonials } from "@/src/hooks/useTestimonials";
+import { useTranslation } from "@/src/hooks/useTranslation";
 import { SUB_BRANDS } from "@/src/data/brands";
 
 // Custom Social Icons
@@ -137,7 +138,7 @@ const ManifestoStack = () => {
 
       {/* Interaction Hint */}
       <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-2 opacity-30 group-hover:opacity-60 transition-opacity">
-        <span className="text-[9px] uppercase tracking-widest font-sans">Clique para rodar</span>
+        <span className="text-[9px] uppercase tracking-widest font-sans">{t('gallery.hint', 'Clique para rodar')}</span>
         <ArrowRight className="w-3 h-3" />
       </div>
     </div>
@@ -163,6 +164,7 @@ export default function HomePage() {
   const activeEffectBrand = hoveredBrand;
   const [isScrolled, setIsScrolled] = useState(false);
   const { testimonials } = useTestimonials();
+  const { t } = useTranslation();
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [currentSection, setCurrentSection] = useState<string>('hero');
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -278,7 +280,7 @@ export default function HomePage() {
             onClick={() => scrollToSection('about')}
             className="hover:text-blackout hover:bg-coconut hover:shadow-[0_0_20px_rgba(251,249,249,0.4)] transition-all duration-300 px-4 py-1.5 rounded-full flex items-center h-full"
           >
-            SOBRE
+            {t('nav.about', 'SOBRE')}
           </button>
           <button
             onClick={() => router.push('/move')}
@@ -317,7 +319,7 @@ export default function HomePage() {
           onClick={() => setShowContactForm(true)}
           className="hidden md:block border border-white/20 rounded-full px-8 py-2.5 text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:bg-white hover:text-blackout transition-all duration-300 bg-white/5 backdrop-blur-md hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
         >
-          CONTACTO
+          {t('nav.contact', 'CONTACTO')}
         </button>
 
         {/* Mobile Hamburger Menu */}
@@ -384,11 +386,11 @@ export default function HomePage() {
                     }}
                     className="text-left text-2xl text-coconut font-light hover:text-coconut/60 transition-all duration-300 py-3 border-b border-coconut/10"
                   >
-                    Sobre
+                    {t('nav.about', 'Sobre')}
                   </button>
 
                   <div className="space-y-4 py-3 border-b border-coconut/10">
-                    <p className="text-[10px] uppercase tracking-[0.5em] font-sans text-coconut/40 font-bold">Ecossistema</p>
+                    <p className="text-[10px] uppercase tracking-[0.5em] font-sans text-coconut/40 font-bold">{t('nav.ecosystem', 'Ecossistema')}</p>
                     <button
                       onClick={() => {
                         router.push('/move');
@@ -441,7 +443,7 @@ export default function HomePage() {
                     }}
                     className="w-full border border-coconut/20 rounded-full px-8 py-4 text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:bg-coconut hover:text-blackout transition-all duration-300 bg-coconut/5 backdrop-blur-md"
                   >
-                    Contacto
+                    {t('nav.contact', 'Contacto')}
                   </button>
                 </div>
 
@@ -576,7 +578,7 @@ export default function HomePage() {
               </h1>
               <div className="flex items-center justify-center gap-4 opacity-100 mt-4">
                 <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-medium font-sans text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
-                  O TEU MOMENTO. O TEU TEMPO.
+                  {t('hero.tagline', 'O TEU MOMENTO. O TEU TEMPO.')}
                 </p>
               </div>
             </motion.div>
@@ -593,7 +595,7 @@ export default function HomePage() {
               className="group flex flex-col items-center gap-4 cursor-pointer pointer-events-auto"
             >
               <div className="w-[1.5px] h-24 bg-gradient-to-b from-coconut/0 via-coconut/100 to-coconut/0 shadow-[0_0_15px_rgba(251,249,249,0.6)] group-hover:shadow-[0_0_25px_rgba(251,249,249,0.8)] transition-all duration-300" />
-              <span className="text-[10px] uppercase tracking-[0.5em] font-sans opacity-40 group-hover:opacity-100 transition-all duration-300 group-hover:text-coconut group-hover:drop-shadow-[0_0_12px_rgba(251,249,249,0.8)]">Descobrir</span>
+              <span className="text-[10px] uppercase tracking-[0.5em] font-sans opacity-40 group-hover:opacity-100 transition-all duration-300 group-hover:text-coconut group-hover:drop-shadow-[0_0_12px_rgba(251,249,249,0.8)]">{t('hero.discover', 'Descobrir')}</span>
             </motion.button>
           </div>
 
@@ -607,8 +609,8 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto">
               <div className="flex flex-col md:flex-row justify-between items-end mb-16 relative">
                 <div className="space-y-4">
-                  <h2 className="text-5xl md:text-8xl italic leading-none tracking-tighter">O Nosso Ecossistema</h2>
-                  <p className="text-blackout/40 max-w-md uppercase tracking-[0.5em] text-[10px] font-bold font-sans">Quatro pilares, uma única essência.</p>
+                  <h2 className="text-5xl md:text-8xl italic leading-none tracking-tighter">{t('ecosystem.title', 'O Nosso Ecossistema')}</h2>
+                  <p className="text-blackout/40 max-w-md uppercase tracking-[0.5em] text-[10px] font-bold font-sans">{t('ecosystem.subtitle', 'Quatro pilares, uma única essência.')}</p>
                 </div>
 
                 {/* Rotating Badge */}
@@ -687,7 +689,7 @@ export default function HomePage() {
                         className="flex items-center gap-4 pt-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0"
                       >
                         <div className={`h-[1px] w-8 transition-colors duration-500 ${brand.textColor} group-hover:bg-white`} />
-                        <span className={`text-[10px] uppercase tracking-[0.5em] font-sans transition-colors duration-500 ${brand.textColor} group-hover:!text-white/80`}>Descobrir</span>
+                        <span className={`text-[10px] uppercase tracking-[0.5em] font-sans transition-colors duration-500 ${brand.textColor} group-hover:!text-white/80`}>{t('ecosystem.discover', 'Descobrir')}</span>
                         <ArrowRight className={`w-3 h-3 -rotate-45 transition-colors duration-500 ${brand.textColor} group-hover:!text-white`} />
                       </motion.div>
                     </div>
@@ -702,7 +704,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto space-y-24">
             {/* Main Header */}
             <h2 className="text-5xl md:text-8xl leading-[0.9] tracking-tighter italic">
-              A luz que traz clareza ao caos.
+              {t('about.title', 'A luz que traz clareza ao caos.')}
             </h2>
 
             {/* 3-Column Grid */}
@@ -715,29 +717,29 @@ export default function HomePage() {
               {/* Columns 2 & 3: Brand Story */}
               <div className="lg:col-span-2 space-y-12">
                 <div className="space-y-4">
-                  <p className="text-xl md:text-2xl font-serif italic text-blackout">Olá, somos a Luísa e o Francisco.</p>
+                  <p className="text-xl md:text-2xl font-serif italic text-blackout">{t('about.greeting', 'Olá, somos a Luísa e o Francisco.')}</p>
 
                   <div className="grid md:grid-cols-2 gap-12 text-base md:text-lg text-blackout/70 leading-relaxed font-normal font-sans">
                     {/* Text Column 1 */}
                     <div className="space-y-6">
                       <p>
-                        A nossa história começou de forma inesperada: de cliente e treinador, transformámo-nos num casal unido por sonhos e cuidado mútuo. Crescemos, curamos e fortalecemo-nos juntos.
+                        {t('about.text1', 'A nossa história começou de forma inesperada: de cliente e treinador, transformámo-nos num casal unido por sonhos e cuidado mútuo. Crescemos, curamos e fortalecemo-nos juntos.')}
                       </p>
                       <p>
-                        É esta parceria de amor e confiança que dá vida à Lunes -- um projeto que carrega a nossa identidade até na fusão dos nossos apelidos, <span className="font-semibold uppercase tracking-widest text-[10px] text-blackout border-b border-blackout/20 pb-0.5">Luz e Nunes.</span> Mais do que a materialização de um sonho, é a vontade de criar um espaço onde cada momento se torna inesquecível.
+                        {t('about.text2', 'É esta parceria de amor e confiança que dá vida à Lunes -- um projeto que carrega a nossa identidade até na fusão dos nossos apelidos,')} <span className="font-semibold uppercase tracking-widest text-[10px] text-blackout border-b border-blackout/20 pb-0.5">Luz e Nunes.</span> {t('about.text2b', 'Mais do que a materialização de um sonho, é a vontade de criar um espaço onde cada momento se torna inesquecível.')}
                       </p>
                     </div>
 
                     {/* Text Column 2 */}
                     <div className="space-y-6">
                       <p>
-                        Acreditamos que o tempo deixou de ser uma imposição. Aqui, o tempo não pressiona; ele acolhe. Convidamo-lo a viver ao seu próprio ritmo, no seu tempo -- finalmente seu.
+                        {t('about.text3', 'Acreditamos que o tempo deixou de ser uma imposição. Aqui, o tempo não pressiona; ele acolhe. Convidamo-lo a viver ao seu próprio ritmo, no seu tempo -- finalmente seu.')}
                       </p>
                       <p>
-                        A Lunes divide-se em quatro pilares inspirados nos ciclos da natureza: <span className="italic font-medium text-blackout text-sm uppercase tracking-wider">Move, Explore, Feel e Stay</span>. Quatro formas de regressar ao essencial.
+                        {t('about.text4', 'A Lunes divide-se em quatro pilares inspirados nos ciclos da natureza:')} <span className="italic font-medium text-blackout text-sm uppercase tracking-wider">Move, Explore, Feel e Stay</span>. {t('about.text4b', 'Quatro formas de regressar ao essencial.')}
                       </p>
                       <p className="font-medium italic text-blackout leading-tight">
-                        Mais do que serviços, criamos viagens de fora para dentro.
+                        {t('about.text5', 'Mais do que serviços, criamos viagens de fora para dentro.')}
                       </p>
                     </div>
                   </div>
@@ -751,12 +753,12 @@ export default function HomePage() {
         <section id="testimonials" className="py-32 bg-blackout/5">
           <div className="max-w-7xl mx-auto px-8">
             <div className="text-center mb-24 space-y-4">
-              <h2 className="text-5xl md:text-7xl italic tracking-tight">Vozes da Comunidade</h2>
-              <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-40">O que dizem sobre a experiência LUNES</p>
+              <h2 className="text-5xl md:text-7xl italic tracking-tight">{t('testimonials.title', 'Vozes da Comunidade')}</h2>
+              <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-40">{t('testimonials.subtitle', 'O que dizem sobre a experiência LUNES')}</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-12">
-              {testimonials.map((t, i) => (
+              {testimonials.map((tm, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, filter: "blur(15px)" }}
@@ -768,17 +770,17 @@ export default function HomePage() {
                   <div className="mb-8">
                     <div className="w-16 h-16 rounded-full overflow-hidden mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
                       <img
-                        src={t.image}
-                        alt={t.name}
+                        src={tm.image}
+                        alt={tm.name}
                         className="w-full h-full object-cover"
                         referrerPolicy="no-referrer"
                       />
                     </div>
-                    <h3 className="text-xl font-serif italic">{t.name}</h3>
-                    <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-40">{t.role}</p>
+                    <h3 className="text-xl font-serif italic">{tm.name}</h3>
+                    <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-40">{tm.role}</p>
                   </div>
                   <p className="text-lg leading-relaxed text-blackout/70 font-light italic">
-                    &quot;{t.quote}&quot;
+                    &quot;{tm.quote}&quot;
                   </p>
                 </motion.div>
               ))}
@@ -792,7 +794,7 @@ export default function HomePage() {
             <div className="col-span-2 space-y-8">
               <Image src="/images/brand/LUNES horizontal branco.png" alt="LUNES" width={240} height={48} className="h-10 md:h-12 w-auto" />
               <p className="text-coconut/80 max-w-md font-light">
-                LUNES não vende tempo. LUNES devolve o tempo. Junte-se à nossa comunidade e redescubra o seu ritmo natural.
+                {t('footer.description', 'LUNES não vende tempo. LUNES devolve o tempo. Junte-se à nossa comunidade e redescubra o seu ritmo natural.')}
               </p>
               <div className="flex gap-6">
                 <InstagramIcon className="w-5 h-5 opacity-80 hover:opacity-100 cursor-pointer transition-opacity" />
@@ -808,11 +810,11 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-6">
-              <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">Links</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">{t('footer.links', 'Links')}</h4>
               <ul className="space-y-4 text-sm text-coconut/70">
                 <li>
                   <a href="https://www.livroreclamacoes.pt/inicio/" target="_blank" rel="noopener noreferrer" className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block">
-                    Livro de Reclamações
+                    {t('footer.complaints', 'Livro de Reclamações')}
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
                   </a>
                 </li>
@@ -821,7 +823,7 @@ export default function HomePage() {
                     href="/privacidade"
                     className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block"
                   >
-                    Política de Privacidade
+                    {t('footer.privacy', 'Política de Privacidade')}
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
                   </Link>
                 </li>
@@ -830,7 +832,7 @@ export default function HomePage() {
                     href="/termos"
                     className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block"
                   >
-                    Termos &amp; Condições
+                    {t('footer.terms', 'Termos & Condições')}
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
                   </Link>
                 </li>
@@ -839,7 +841,7 @@ export default function HomePage() {
                     href="/parceiros"
                     className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block"
                   >
-                    Parceiros
+                    {t('footer.partners', 'Parceiros')}
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
                   </Link>
                 </li>
@@ -847,7 +849,7 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-6">
-              <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">Contactos</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">{t('footer.contacts', 'Contactos')}</h4>
               <ul className="space-y-4 text-sm text-coconut/70">
                 <li className="flex items-center gap-3">
                   <Phone className="w-4 h-4 opacity-60" />
@@ -864,10 +866,10 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-6">
-              <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">Newsletter</h4>
-              <p className="text-sm text-coconut/70 font-sans">Receba inspiração semanal para o seu bem-estar.</p>
+              <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">{t('footer.newsletter', 'Newsletter')}</h4>
+              <p className="text-sm text-coconut/70 font-sans">{t('footer.newsletter.desc', 'Receba inspiração semanal para o seu bem-estar.')}</p>
               {newsletterSent ? (
-                <p className="text-sm text-explore-cyan font-sans">Subscrito com sucesso!</p>
+                <p className="text-sm text-explore-cyan font-sans">{t('footer.newsletter.success', 'Subscrito com sucesso!')}</p>
               ) : (
                 <form onSubmit={async (e) => {
                   e.preventDefault();
@@ -886,7 +888,7 @@ export default function HomePage() {
                   <input
                     type="email"
                     required
-                    placeholder="O seu email"
+                    placeholder={t('footer.newsletter.placeholder', 'O seu email')}
                     className="bg-transparent border-none outline-none text-sm font-sans w-full placeholder:text-coconut/40"
                   />
                   <button type="submit"><ArrowRight className="w-4 h-4 opacity-80 hover:opacity-100 transition-opacity" /></button>

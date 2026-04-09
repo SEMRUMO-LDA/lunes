@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Send, User, Mail, Phone, MessageSquare, Tag } from "lucide-react";
+import { useTranslation } from "@/src/hooks/useTranslation";
 
 interface ContactFormProps {
   onClose: () => void;
@@ -24,6 +25,7 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
     message: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { t } = useTranslation();
 
   // LunesLogo Component locally or imported? It's defined in App.tsx. 
   // For now I'll just use a text version or the SVG since I don't have it exported.
@@ -86,10 +88,10 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
               </svg>
             </div>
             <h2 className="text-4xl italic leading-tight tracking-tighter">
-              A sua viagem <br />começa aqui.
+              {t('contact.title', 'A sua viagem começa aqui.')}
             </h2>
             <p className="text-sm opacity-60 font-light leading-relaxed">
-              Diga-nos o que procura e a nossa equipa entrará em contacto para criar o seu momento LUNES.
+              {t('contact.subtitle', 'Diga-nos o que procura e a nossa equipa entrará em contacto para criar o seu momento LUNES.')}
             </p>
           </div>
           
@@ -120,7 +122,7 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                 className="space-y-8"
               >
                 <div className="space-y-4">
-                  <span className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-30">Selecione o Pilar</span>
+                  <span className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-30">{t('contact.pillar', 'Selecione o Pilar')}</span>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {AREAS.map((area) => (
                       <button
@@ -144,13 +146,13 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                   <div className="space-y-2 group">
                     <label className="flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold opacity-30 group-focus-within:opacity-100 transition-opacity">
                       <User className="w-3 h-3" />
-                      <span>Nome</span>
+                      <span>{t('contact.name', 'Nome')}</span>
                     </label>
                     <input
                       required
                       type="text"
                       className="w-full bg-blackout/5 border-none rounded-2xl px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm"
-                      placeholder="O seu nome completo"
+                      placeholder={t('contact.name.placeholder', 'O seu nome completo')}
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                     />
@@ -178,7 +180,7 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                   <div className="space-y-2 group">
                     <label className="flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold opacity-30 group-focus-within:opacity-100 transition-opacity">
                       <Phone className="w-3 h-3" />
-                      <span>Telemóvel</span>
+                      <span>{t('contact.phone', 'Telemóvel')}</span>
                     </label>
                     <input
                       type="tel"
@@ -193,13 +195,13 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                   <div className="space-y-2 group">
                     <label className="flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold opacity-30 group-focus-within:opacity-100 transition-opacity">
                       <Tag className="w-3 h-3" />
-                      <span>Assunto</span>
+                      <span>{t('contact.subject', 'Assunto')}</span>
                     </label>
                     <input
                       required
                       type="text"
                       className="w-full bg-blackout/5 border-none rounded-2xl px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm"
-                      placeholder="Como podemos ajudar?"
+                      placeholder={t('contact.subject.placeholder', 'Como podemos ajudar?')}
                       value={formState.subject}
                       onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
                     />
@@ -210,13 +212,13 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                 <div className="space-y-2 group">
                   <label className="flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold opacity-30 group-focus-within:opacity-100 transition-opacity">
                     <MessageSquare className="w-3 h-3" />
-                    <span>Mensagem</span>
+                    <span>{t('contact.message', 'Mensagem')}</span>
                   </label>
                   <textarea
                     required
                     rows={4}
                     className="w-full bg-blackout/5 border-none rounded-[2rem] px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm resize-none"
-                    placeholder="Escreva aqui a sua mensagem..."
+                    placeholder={t('contact.message.placeholder', 'Escreva aqui a sua mensagem...')}
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                   />
@@ -227,7 +229,7 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                     type="submit"
                     className="w-full bg-blackout text-white py-5 rounded-full flex items-center justify-center gap-4 group hover:shadow-2xl hover:scale-[1.02] active:scale-95 transition-all duration-300"
                   >
-                    <span className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">Enviar Pedido</span>
+                    <span className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">{t('contact.submit', 'Enviar Pedido')}</span>
                     <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </button>
                 </div>
@@ -249,8 +251,8 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                   </motion.div>
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-3xl italic">Mensagem enviada.</h3>
-                  <p className="text-blackout/40 text-sm">Entraremos em contacto brevemente.</p>
+                  <h3 className="text-3xl italic">{t('contact.success.title', 'Mensagem enviada.')}</h3>
+                  <p className="text-blackout/40 text-sm">{t('contact.success.subtitle', 'Entraremos em contacto brevemente.')}</p>
                 </div>
               </motion.div>
             )}
