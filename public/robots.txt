@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /privacidade/
+Disallow: /termos/
+
+Sitemap: https://www.be-lunes.pt/sitemap.xml

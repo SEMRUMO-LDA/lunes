@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useParams, useRouter, notFound } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { X, ArrowRight, Star, Clock, Plus, Minus } from "lucide-react";
+import { X, ArrowRight, Star, Clock, Plus, Minus, User, Users, Building2 } from "lucide-react";
 import { getBrandById, SUB_BRANDS } from "@/src/data/brands";
 import { useTours } from "@/src/hooks/useTours";
 
@@ -110,7 +110,7 @@ export default function BrandPage() {
           </button>
         </div>
 
-        <div className="flex-grow max-w-7xl mx-auto px-8 md:px-16 py-12 grid lg:grid-cols-2 gap-20 items-start">
+        <div className="flex-grow max-w-7xl mx-auto px-8 md:px-16 py-12 grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
           <div className="space-y-12">
             <motion.div
               initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
@@ -159,7 +159,7 @@ export default function BrandPage() {
               transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="pt-12"
             >
-              {brand.id === 'explore' || brand.id === 'stay' ? (
+              {brand.id === 'explore' || brand.id === 'stay' || brand.id === 'move' ? (
                 brand.reservationLink ? (
                   <a
                     href={brand.reservationLink}
@@ -172,14 +172,21 @@ export default function BrandPage() {
                 ) : (
                   <button
                     onClick={() => {
-                      const toursSection = document.getElementById('tours-section');
-                      if (toursSection) toursSection.scrollIntoView({ behavior: 'smooth' });
+                      const target = document.getElementById(brand.id === 'move' ? 'move-packages' : 'tours-section');
+                      if (target) target.scrollIntoView({ behavior: 'smooth' });
                     }}
                     className={`w-full sm:w-auto px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
                   >
-                    Explorar Experiências
+                    {brand.id === 'move' ? 'Descobrir Treinos' : 'Explorar Experiências'}
                   </button>
                 )
+              ) : brand.id === 'feel' ? (
+                <a
+                  href="/filosofia"
+                  className={`inline-block text-center w-full sm:w-auto px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
+                >
+                  Descubra a Nossa Filosofia
+                </a>
               ) : (
                 <div className="flex flex-col items-center sm:items-start gap-4">
                   <div className={`px-8 py-4 rounded-full bg-blackout/5 border border-blackout/10 ${brand.textColor} text-[10px] uppercase tracking-[0.6em] font-bold opacity-60`}>
@@ -192,7 +199,7 @@ export default function BrandPage() {
 
           {/* Gallery */}
           <div
-            className="relative h-[60vh] lg:h-[80vh] flex items-center justify-center mt-12 lg:mt-0 sticky top-12 px-4 md:px-12 w-full max-w-2xl mx-auto cursor-pointer"
+            className="relative h-[50vh] md:h-[60vh] lg:h-[80vh] flex items-center justify-center mt-12 lg:mt-0 lg:sticky lg:top-12 px-4 md:px-12 w-full max-w-2xl mx-auto cursor-pointer"
             onClick={handleGalleryClick}
           >
             {(() => {
@@ -330,6 +337,173 @@ export default function BrandPage() {
                   </motion.div>
                 ))}
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Move — Training Packages */}
+        {brand.id === 'move' && (
+          <div id="move-packages" className="py-32 border-t border-blackout/5 bg-white">
+            <div className="max-w-5xl mx-auto px-8 md:px-16">
+
+              {/* Section Header */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="text-center mb-20"
+              >
+                <h3 className="text-4xl md:text-6xl font-light italic mb-6">Especialidades</h3>
+                <p className="text-lg text-blackout/60 font-light font-sans max-w-2xl mx-auto">Treino funcional, desportivo, ao ar livre, prescrição de exercício para saúde e doença, e acompanhamento em articulação com fisioterapia.</p>
+              </motion.div>
+
+              {/* 3 Training Package Cards */}
+              <div className="grid md:grid-cols-3 gap-8 mb-24">
+
+                {/* Card 1 — Treino Personalizado */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="rounded-[2rem] border border-blackout/5 overflow-hidden bg-[#F9FAF9] flex flex-col"
+                >
+                  <div className="relative aspect-[4/3]">
+                    <Image src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop" alt="Treino Personalizado" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" unoptimized />
+                  </div>
+                  <div className="p-8 flex flex-col flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <User className="w-5 h-5 text-move-leaf" />
+                      <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout">Treino Personalizado</h4>
+                    </div>
+                    <p className="text-sm text-blackout/60 font-sans font-light leading-relaxed mb-6 flex-1">
+                      Treinos totalmente personalizados, seguros e baseados em ciência. Cada sessão é desenhada para si, para os seus objetivos e para o seu estilo de vida. Presencial ou online.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-3 py-1 rounded-full bg-move-citrus/30 text-move-leaf text-[10px] uppercase tracking-[0.2em] font-bold font-sans">Presencial</span>
+                      <span className="px-3 py-1 rounded-full bg-move-citrus/30 text-move-leaf text-[10px] uppercase tracking-[0.2em] font-bold font-sans">Online</span>
+                      <span className="px-3 py-1 rounded-full bg-move-citrus/30 text-move-leaf text-[10px] uppercase tracking-[0.2em] font-bold font-sans">Domicílio</span>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Card 2 — Pequenos Grupos */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="rounded-[2rem] border border-blackout/5 overflow-hidden bg-[#F9FAF9] flex flex-col"
+                >
+                  <div className="relative aspect-[4/3]">
+                    <Image src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop" alt="Treino em Pequenos Grupos" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" unoptimized />
+                  </div>
+                  <div className="p-8 flex flex-col flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Users className="w-5 h-5 text-move-leaf" />
+                      <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout">Pequenos Grupos</h4>
+                    </div>
+                    <p className="text-sm text-blackout/60 font-sans font-light leading-relaxed mb-6 flex-1">
+                      Atenção personalizada com a energia do grupo. Acompanhamento próximo, motivação natural e treinos ajustados ao nível de cada pessoa. O grupo puxa por si, sem pressão.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-3 py-1 rounded-full bg-move-citrus/30 text-move-leaf text-[10px] uppercase tracking-[0.2em] font-bold font-sans">Grupos Reduzidos</span>
+                      <span className="px-3 py-1 rounded-full bg-move-citrus/30 text-move-leaf text-[10px] uppercase tracking-[0.2em] font-bold font-sans">Todos os Níveis</span>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Card 3 — Empresas */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="rounded-[2rem] border border-blackout/5 overflow-hidden bg-[#F9FAF9] flex flex-col"
+                >
+                  <div className="relative aspect-[4/3]">
+                    <Image src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop" alt="Treino para Empresas" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" unoptimized />
+                  </div>
+                  <div className="p-8 flex flex-col flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Building2 className="w-5 h-5 text-move-leaf" />
+                      <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout">Empresas</h4>
+                    </div>
+                    <p className="text-sm text-blackout/60 font-sans font-light leading-relaxed mb-6 flex-1">
+                      Treinos personalizados no local de trabalho. Mais produtividade, menos stress, espírito de equipa e colaboradores mais saudáveis e motivados.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-3 py-1 rounded-full bg-move-citrus/30 text-move-leaf text-[10px] uppercase tracking-[0.2em] font-bold font-sans">No Local</span>
+                      <span className="px-3 py-1 rounded-full bg-move-citrus/30 text-move-leaf text-[10px] uppercase tracking-[0.2em] font-bold font-sans">Dedutível IRC</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Benefícios */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="mb-24"
+              >
+                <h3 className="text-4xl md:text-5xl font-light italic mb-12 text-center">Benefícios que vai sentir</h3>
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {[
+                    "Melhorar a condição física e saúde",
+                    "Aumentar massa muscular e força",
+                    "Perder massa gorda com resultados visíveis",
+                    "Tonificar o corpo com equilíbrio",
+                    "Recuperar de lesões com segurança",
+                    "Mais energia e vitalidade no dia a dia",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-4 p-6 rounded-2xl bg-[#F9FAF9] border border-blackout/5">
+                      <div className="w-2 h-2 rounded-full bg-move-citrus flex-shrink-0" />
+                      <span className="text-sm text-blackout/70 font-sans">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Como Começar */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="p-10 md:p-16 rounded-[2rem] bg-[#F9FAF9] border border-blackout/5 mb-12"
+              >
+                <h3 className="text-4xl md:text-5xl font-light italic mb-4 text-center">Como começar</h3>
+                <p className="text-center text-blackout/50 font-light font-sans mb-12 max-w-xl mx-auto">Vimos demasiadas pessoas desistirem por falta de orientação ou resultados. Com o nosso acompanhamento, isso não acontece consigo.</p>
+                <div className="grid md:grid-cols-3 gap-8 mb-12">
+                  <div className="text-center space-y-4">
+                    <div className="w-12 h-12 rounded-full bg-move-citrus text-move-leaf flex items-center justify-center mx-auto text-lg font-bold font-sans">1</div>
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout">Contacte-nos</h4>
+                    <p className="text-sm text-blackout/60 font-sans font-light">Conte-nos a sua situação — ouvimos com toda a atenção.</p>
+                  </div>
+                  <div className="text-center space-y-4">
+                    <div className="w-12 h-12 rounded-full bg-move-citrus text-move-leaf flex items-center justify-center mx-auto text-lg font-bold font-sans">2</div>
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout">Avaliação</h4>
+                    <p className="text-sm text-blackout/60 font-sans font-light">Definimos objetivos claros e traçamos juntos o caminho para os resultados.</p>
+                  </div>
+                  <div className="text-center space-y-4">
+                    <div className="w-12 h-12 rounded-full bg-move-citrus text-move-leaf flex items-center justify-center mx-auto text-lg font-bold font-sans">3</div>
+                    <h4 className="text-sm uppercase tracking-[0.3em] font-bold font-sans text-blackout">Treinar</h4>
+                    <p className="text-sm text-blackout/60 font-sans font-light">No estúdio, em casa, ao domicílio, online ou ao ar livre — sempre adaptado a si.</p>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <a
+                    href="mailto:hello@be-lunes.pt?subject=Treino Personalizado LUNES MOVE"
+                    className={`inline-block px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
+                  >
+                    Marcar Treino Experimental
+                  </a>
+                </div>
+              </motion.div>
+
             </div>
           </div>
         )}
@@ -541,6 +715,17 @@ export default function BrandPage() {
                     </div>
                   </div>
 
+                  <div className="mt-12 text-center">
+                    <a
+                      href={brand.reservationLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-block px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
+                    >
+                      Reservar LUNES STAY
+                    </a>
+                  </div>
+
                   <div className="mt-8 text-center">
                     <a
                       href="https://docs.google.com/document/d/1ugClb7rslgDuJwjj6CAgprPwazXAV6qF/edit"
@@ -563,7 +748,7 @@ export default function BrandPage() {
           <div className="py-24 bg-[#F9FAF9]">
             <div className="max-w-3xl mx-auto px-8 md:px-16">
               <div className="space-y-4">
-                <h2 className="text-4xl font-light italic mb-12 text-center text-blackout">FAQ&apos;s</h2>
+                <h2 className="text-4xl font-light italic mb-12 text-center text-blackout">Questões Frequentes</h2>
                 {brand.faqs.map((faq: any, idx: number) => (
                   <FaqItem key={idx} question={faq.q} answer={faq.a} brandColor={brand.color} brandTextColor={brand.textColor} />
                 ))}

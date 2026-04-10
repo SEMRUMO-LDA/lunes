@@ -6,7 +6,8 @@ import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import ContactForm from "@/src/ContactForm";
+import dynamic from "next/dynamic";
+const ContactForm = dynamic(() => import("@/src/ContactForm"), { ssr: false });
 import { useTestimonials } from "@/src/hooks/useTestimonials";
 import { useTranslation } from "@/src/hooks/useTranslation";
 import { SUB_BRANDS } from "@/src/data/brands";
@@ -126,6 +127,7 @@ const ManifestoStack = () => {
             <img
               src={card.image}
               alt={card.title}
+              loading="lazy"
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
               referrerPolicy="no-referrer"
             />
@@ -327,7 +329,8 @@ export default function HomePage() {
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="md:hidden flex flex-col gap-1.5 p-2 group z-[60]"
-          aria-label="Toggle menu"
+          aria-label="Abrir menu"
+          aria-expanded={isMobileMenuOpen}
         >
           <motion.span
             animate={{
@@ -442,14 +445,30 @@ export default function HomePage() {
                       setShowContactForm(true);
                       setIsMobileMenuOpen(false);
                     }}
-                    className="w-full border border-coconut/20 rounded-full px-8 py-4 text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:bg-coconut hover:text-blackout transition-all duration-300 bg-coconut/5 backdrop-blur-md"
+                    className="w-full border border-coconut/30 rounded-full px-8 py-4 text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-coconut hover:bg-coconut hover:text-blackout transition-all duration-300 bg-coconut/10"
                   >
                     {t('nav.contact', 'Contacto')}
                   </button>
                 </div>
 
+                {/* Footer Links */}
+                <div className="mt-6 pt-6 border-t border-coconut/10 space-y-3">
+                  <a href="/termos" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm text-coconut/40 hover:text-coconut transition-colors">
+                    {t('footer.terms', 'Termos & Condições')}
+                  </a>
+                  <a href="/privacidade" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm text-coconut/40 hover:text-coconut transition-colors">
+                    {t('footer.privacy', 'Política de Privacidade')}
+                  </a>
+                  <a href="/parceiros" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm text-coconut/40 hover:text-coconut transition-colors">
+                    {t('footer.partners', 'Parceiros')}
+                  </a>
+                  <a href="mailto:hello@be-lunes.pt" className="block text-sm text-coconut/40 hover:text-coconut transition-colors">
+                    hello@be-lunes.pt
+                  </a>
+                </div>
+
                 {/* Social Links */}
-                <div className="flex gap-6 justify-center mt-8 pt-8 border-t border-coconut/10">
+                <div className="flex gap-6 justify-center mt-6 pt-6 border-t border-coconut/10">
                   <InstagramIcon className="w-5 h-5 text-coconut/60 hover:text-coconut cursor-pointer transition-all duration-300" />
                   <FacebookIcon className="w-5 h-5 text-coconut/60 hover:text-coconut cursor-pointer transition-all duration-300" />
                   <div
@@ -486,7 +505,7 @@ export default function HomePage() {
           </div>
 
           {/* Grainy Cinematic Overlay */}
-          <div className="absolute inset-0 z-[1] opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] will-change-opacity" />
+          <div className="absolute inset-0 z-[1] opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22300%22%20height%3D%22300%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%22.65%22%20numOctaves%3D%223%22/%3E%3C/filter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23n)%22/%3E%3C/svg%3E')] will-change-opacity" />
 
           {/* 2026 Atmospheric Background: Liquid Aura & Micro-moments */}
           <div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden">
@@ -606,7 +625,7 @@ export default function HomePage() {
           />
         </section>
 
-        <section id="ecosystem" className="py-40 px-8 overflow-hidden" style={{ backgroundColor: '#FBF9F9' }}>
+        <section id="ecosystem" className="py-32 px-8 overflow-hidden" style={{ backgroundColor: '#FBF9F9' }}>
           <div className="max-w-7xl mx-auto">
               <div className="flex flex-col md:flex-row justify-between items-end mb-16 relative">
                 <div className="space-y-4">
@@ -623,7 +642,8 @@ export default function HomePage() {
                   >
                     <img
                       src="/images/brand/LUNES badge preto.png"
-                      alt="LUNES Badge"
+                      alt=""
+                      loading="lazy"
                       className="w-full h-full object-contain"
                     />
                   </motion.div>
@@ -637,7 +657,7 @@ export default function HomePage() {
                   whileHover="hover"
                   initial="initial"
                   onClick={() => router.push(`/${brand.id}`)}
-                  className={`group relative h-[650px] rounded-[2rem] overflow-hidden cursor-pointer transition-colors duration-1000 ${brand.color}`}
+                  className={`group relative h-[500px] md:h-[600px] lg:h-[650px] rounded-[2rem] overflow-hidden cursor-pointer transition-colors duration-1000 ${brand.color}`}
                   transition={cardTransition}
                 >
                   {/* Background Image */}
@@ -701,11 +721,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="about" className="bg-white py-48 px-8">
-          <div className="max-w-7xl mx-auto space-y-24">
+        <section id="about" className="bg-white py-32 px-8">
+          <div className="max-w-7xl mx-auto space-y-16">
             {/* Main Header */}
-            <h2 className="text-5xl md:text-8xl leading-[0.9] tracking-tighter italic">
-              {t('about.title', 'A luz que traz clareza ao caos.')}
+            <h2 className="text-5xl md:text-7xl leading-[0.9] tracking-tighter italic">
+              {t('about.title', 'A luz que abranda o tempo e devolve clareza.')}
             </h2>
 
             {/* 3-Column Grid */}
@@ -772,7 +792,8 @@ export default function HomePage() {
                     <div className="w-16 h-16 rounded-full overflow-hidden mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
                       <img
                         src={tm.image}
-                        alt={tm.name}
+                        alt={`Testemunho de ${tm.name}`}
+                        loading="lazy"
                         className="w-full h-full object-cover"
                         referrerPolicy="no-referrer"
                       />
@@ -899,15 +920,19 @@ export default function HomePage() {
           </div>
 
           <div className="max-w-7xl mx-auto pt-12 border-t border-coconut/10 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] uppercase tracking-[0.5em] font-sans font-medium opacity-50 text-center md:text-left">
-            <span>&copy; 2026 LUNES EXPERIENCE LDA</span>
+            <div className="flex flex-col items-center md:items-start gap-1">
+              <span>&copy; 2026 LUNES EXPERIENCE LDA</span>
+              <span className="text-[8px] tracking-[0.3em] opacity-30 normal-case">RNAAT n.o 1071/2025</span>
+            </div>
             <a href="https://aorubro.pt" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity border-b border-coconut/20 pb-0.5">DESENVOLVIDO POR AORUBRO</a>
           </div>
 
           {/* Large Background Signature Logo */}
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[120%] opacity-[0.04] pointer-events-none select-none">
             <img
-              src="/LUNES padrao texto.png"
+              src="/images/brand/LUNES padrão texto.png"
               alt=""
+              loading="lazy"
               className="w-full h-auto brightness-0 invert object-contain"
             />
           </div>

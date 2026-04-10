@@ -45,22 +45,18 @@ export default function PrivacidadePage() {
           <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-[0.3em] whitespace-nowrap pointer-events-none text-blackout font-bold">Fechar</span>
         </button>
 
-        <button
-          onClick={onClose}
-          className="mb-16 flex items-center gap-3 text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40 hover:text-blackout transition-colors group"
-        >
-          <div
-            onClick={(e) => {
-              e.stopPropagation();
-              onClose();
-            }}
-            className="cursor-pointer hover:opacity-60 transition-opacity mb-8 block -ml-2"
-          >
+        <div className="mb-16 space-y-6">
+          <a href="/" className="block hover:opacity-60 transition-opacity">
             <LunesLogo className="h-5 w-auto text-blackout" />
-          </div>
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Voltar para a Home
-        </button>
+          </a>
+          <button
+            onClick={onClose}
+            className="flex items-center gap-3 text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40 hover:text-blackout transition-colors group"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Voltar para a Home
+          </button>
+        </div>
 
         <header className="mb-24">
           <h1 className="text-6xl md:text-8xl italic mb-8 tracking-tighter">Politica de Privacidade</h1>

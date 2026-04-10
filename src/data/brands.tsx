@@ -5,12 +5,12 @@ export const SUB_BRANDS = [
     id: "move",
     title: "TIME TO MOVE",
     subtitle: "Movimento com Alma",
-    description: "Mais do que um treino funcional, o nosso espaço Boutique é um ponto de encontro familiar. Onde o corpo é desafiado através da técnica e da comunidade. É o movimento que liberta a mente e fortalece o espírito.",
+    description: "Os nossos treinos são totalmente personalizados, seguros e baseados em ciência, desenhados para si, para os seus objetivos e para o seu estilo de vida. Aqui, cada sessão é uma oportunidade de sentir-se melhor, mais forte e mais confiante.",
     details: [
-      "Treino Personalizado e Funcional",
-      "Comunidade e Networking",
-      "Equipamentos de Alta Performance",
-      "Eventos de Bem-Estar Mensais"
+      "Treino 100% Personalizado",
+      "Presencial ou Online",
+      "Baseado em Ciência",
+      "Recuperação e Reabilitação"
     ],
     color: "bg-move-citrus",
     textColor: "text-move-leaf",
@@ -75,12 +75,12 @@ export const SUB_BRANDS = [
     id: "feel",
     title: "TIME TO FEEL",
     subtitle: "A Raiz e a Nutrição",
-    description: "A verdadeira sofisticação reside no orgânico. No nosso espaço de campo e agricultura bio, o FEEL traduz-se no toque da terra e no sabor do produto honesto. Um regresso aos sentidos.",
+    description: "Na nossa horta, o tempo abranda. Time to feel é sentir o sabor real do alimento, a energia do cultivo feito com respeito e a tranquilidade de saber a sua origem. Guiados pelos princípios da permacultura, não lutamos contra a natureza, observamos. Criamos sistemas vivos e regenerativos onde a terra, as plantas e os animais vivem em equilíbrio, devolvendo-nos alimento de verdade.",
     details: [
-      "Agricultura Biológica Certificada",
-      "Experiências Farm-to-Table",
-      "Workshops de Culinária Consciente",
-      "Turismo Rural de Luxo"
+      "Princípios de Permacultura",
+      "Cultivo em Solo Vivo",
+      "Respeito pelos Ciclos Naturais",
+      "Animais em Liberdade"
     ],
     color: "bg-feel-athletics",
     textColor: "text-feel-sage",

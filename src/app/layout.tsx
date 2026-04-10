@@ -19,22 +19,73 @@ const kantumruyPro = Kantumruy_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "LUNES — Time to be You",
-  description: "Move. Explore. Feel. Stay. Uma experiência de bem-estar no Algarve.",
+  metadataBase: new URL("https://www.be-lunes.pt"),
+  title: {
+    default: "LUNES — Time to be You",
+    template: "%s | LUNES",
+  },
+  description: "Move. Explore. Feel. Stay. Experiências de bem-estar no Algarve — treino personalizado, passeios de barco, permacultura e alojamento.",
   icons: "/favicon.png",
+  openGraph: {
+    type: "website",
+    locale: "pt_PT",
+    url: "https://www.be-lunes.pt",
+    siteName: "LUNES Experience",
+    title: "LUNES — Time to be You",
+    description: "Move. Explore. Feel. Stay. Experiências de bem-estar no Algarve.",
+    images: [{ url: "/images/brand/LUNES horizontal preto.png", width: 1200, height: 630, alt: "LUNES Experience" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "LUNES — Time to be You",
+    description: "Move. Explore. Feel. Stay. Experiências de bem-estar no Algarve.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt" className={`${instrumentSerif.variable} ${kantumruyPro.variable}`}>
+    <html lang="pt-PT" className={`${instrumentSerif.variable} ${kantumruyPro.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "LUNES Experience",
+              url: "https://www.be-lunes.pt",
+              logo: "https://www.be-lunes.pt/images/brand/LUNES horizontal preto.png",
+              description: "Experiências de bem-estar no Algarve — treino personalizado, passeios de barco, permacultura e alojamento.",
+              email: "hello@be-lunes.pt",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Estrada Municipal 529-1",
+                addressLocality: "Porches",
+                addressRegion: "Algarve",
+                postalCode: "8400-492",
+                addressCountry: "PT",
+              },
+              sameAs: [
+                "https://www.instagram.com/be.lunes",
+                "https://www.facebook.com/be.lunes",
+              ],
+            }),
+          }}
+        />
         <TranslationProvider>
           {children}
         </TranslationProvider>
         <Script
           src="https://kiban.pt/api/v1/i18n/widget.js"
           data-api-key="kiban_live_kExDoEu9ch0gqUdweNil9ddbKl3wqFK"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </body>
     </html>

@@ -31,13 +31,46 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
   // For now I'll just use a text version or the SVG since I don't have it exported.
   // Actually, I can just use the SVG code or assume the user wants it at the top.
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate submission
-    setIsSubmitted(true);
-    setTimeout(() => {
-      onClose();
-    }, 3000);
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_KIBAN_API_URL}/api/v1/forms/submit`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_KIBAN_API_KEY}`,
+        },
+        body: JSON.stringify({
+          form_name: 'contacto',
+          name: formState.name,
+          email: formState.email,
+          phone: formState.phone,
+          subject: formState.subject,
+          message: formState.message,
+          source_url: window.location.href,
+          extra: { pilar: selectedArea },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao enviar');
+      }
+
+      setIsSubmitted(true);
+      setTimeout(() => {
+        onClose();
+      }, 3000);
+    } catch {
+      setSubmitError("Não foi possível enviar. Tente novamente.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -52,7 +85,7 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 20 }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="relative w-full max-w-4xl bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh]"
+        className="relative w-full max-w-4xl bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh] font-sans"
       >
         {/* Close Button */}
         <button
@@ -104,13 +137,13 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
 
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5 pointer-events-none">
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22300%22%20height%3D%22300%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%22.65%22%20numOctaves%3D%223%22/%3E%3C/filter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23n)%22/%3E%3C/svg%3E')] opacity-20" />
             <Image src="/LUNES padrão texto.png" alt="" fill className="absolute bottom-0 left-0 w-full translate-y-1/2 -rotate-12 invert object-contain" sizes="100%" />
           </div>
         </div>
 
         {/* Right Side: Form */}
-        <div className="flex-1 p-8 md:p-16 overflow-y-auto custom-scrollbar bg-white/80">
+        <div className="flex-1 p-8 md:p-16 overflow-y-auto custom-scrollbar bg-white/80 font-sans">
           <AnimatePresence mode="wait">
             {!isSubmitted ? (
               <motion.form
@@ -151,7 +184,7 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                     <input
                       required
                       type="text"
-                      className="w-full bg-blackout/5 border-none rounded-2xl px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm"
+                      className="w-full bg-blackout/5 border-none rounded-2xl px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm font-sans"
                       placeholder={t('contact.name.placeholder', 'O seu nome completo')}
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
@@ -167,7 +200,7 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                     <input
                       required
                       type="email"
-                      className="w-full bg-blackout/5 border-none rounded-2xl px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm"
+                      className="w-full bg-blackout/5 border-none rounded-2xl px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm font-sans"
                       placeholder="exemplo@email.com"
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
@@ -184,7 +217,7 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                     </label>
                     <input
                       type="tel"
-                      className="w-full bg-blackout/5 border-none rounded-2xl px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm"
+                      className="w-full bg-blackout/5 border-none rounded-2xl px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm font-sans"
                       placeholder="+351 000 000 000"
                       value={formState.phone}
                       onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
@@ -200,7 +233,7 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                     <input
                       required
                       type="text"
-                      className="w-full bg-blackout/5 border-none rounded-2xl px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm"
+                      className="w-full bg-blackout/5 border-none rounded-2xl px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm font-sans"
                       placeholder={t('contact.subject.placeholder', 'Como podemos ajudar?')}
                       value={formState.subject}
                       onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
@@ -217,20 +250,25 @@ const ContactForm = ({ onClose }: ContactFormProps) => {
                   <textarea
                     required
                     rows={4}
-                    className="w-full bg-blackout/5 border-none rounded-[2rem] px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm resize-none"
+                    className="w-full bg-blackout/5 border-none rounded-[2rem] px-6 py-4 outline-none focus:bg-white focus:ring-1 focus:ring-blackout/10 transition-all text-sm font-sans resize-none"
                     placeholder={t('contact.message.placeholder', 'Escreva aqui a sua mensagem...')}
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                   />
                 </div>
 
+                {submitError && (
+                  <p className="text-sm text-red-500 font-sans text-center">{submitError}</p>
+                )}
+
                 <div className="pt-4">
                   <button
                     type="submit"
-                    className="w-full bg-blackout text-white py-5 rounded-full flex items-center justify-center gap-4 group hover:shadow-2xl hover:scale-[1.02] active:scale-95 transition-all duration-300"
+                    disabled={isSubmitting}
+                    className="w-full bg-blackout text-white py-5 rounded-full flex items-center justify-center gap-4 group hover:shadow-2xl hover:scale-[1.02] active:scale-95 transition-all duration-300 disabled:opacity-50 disabled:pointer-events-none"
                   >
-                    <span className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">{t('contact.submit', 'Enviar Pedido')}</span>
-                    <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <span className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">{isSubmitting ? 'A enviar...' : t('contact.submit', 'Enviar Pedido')}</span>
+                    {!isSubmitting && <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
                   </button>
                 </div>
               </motion.form>
