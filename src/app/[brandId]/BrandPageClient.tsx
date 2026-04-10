@@ -106,17 +106,31 @@ export default function BrandPage() {
 
   return (
     <>
-      {/* Header — outside motion container for reliable touch */}
-      <nav className="fixed top-0 left-0 right-0 z-[9999] bg-[#F8F6F4] border-b border-blackout/5">
-        <div className="max-w-7xl mx-auto w-full px-8 md:px-12 py-5 flex justify-between items-center">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-[9999] bg-[#F8F6F4] border-b border-blackout/5 px-8">
+        <div className="max-w-7xl mx-auto w-full flex justify-between items-center py-4">
           <a href="/" className="hover:opacity-60 transition-opacity">
-            <LunesLogo className={`h-7 w-auto ${brand.textColor}`} />
+            <LunesLogo className={`h-6 md:h-7 w-auto ${brand.textColor}`} />
           </a>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-6 text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/60">
+            <a href="/" className="hover:text-blackout transition-colors px-4 py-1.5 rounded-full">SOBRE</a>
+            <a href="/move" className="hover:text-move-leaf hover:bg-move-citrus hover:shadow-[0_0_25px_rgba(195,234,79,0.5)] transition-all duration-300 px-4 py-1.5 rounded-full">MOVE</a>
+            <a href="/explore" className="hover:text-explore-blue hover:bg-explore-cyan hover:shadow-[0_0_25px_rgba(208,239,239,0.5)] transition-all duration-300 px-4 py-1.5 rounded-full">EXPLORE</a>
+            <a href="/feel" className="hover:text-feel-sage hover:bg-feel-athletics hover:shadow-[0_0_25px_rgba(234,234,203,0.5)] transition-all duration-300 px-4 py-1.5 rounded-full">FEEL</a>
+            <a href="/stay" className="hover:text-stay-pink hover:bg-stay-creame hover:shadow-[0_0_25px_rgba(247,234,223,0.5)] transition-all duration-300 px-4 py-1.5 rounded-full">STAY</a>
+          </div>
+          <a href="mailto:hello@be-lunes.pt" className="hidden md:block border border-blackout/20 rounded-full px-8 py-2.5 text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/60 hover:bg-blackout hover:text-white transition-all duration-300">
+            CONTACTO
+          </a>
+
+          {/* Mobile: X button */}
           <a
             href="/"
-            className={`p-4 rounded-full transition-all duration-300 ${brand.textColor} -mr-4 min-w-[48px] min-h-[48px] flex items-center justify-center active:scale-90`}
+            className={`md:hidden p-3 rounded-full transition-all duration-300 ${brand.textColor} min-w-[44px] min-h-[44px] flex items-center justify-center active:scale-90`}
           >
-            <X className="w-8 h-8" />
+            <X className="w-7 h-7" />
           </a>
         </div>
       </nav>
