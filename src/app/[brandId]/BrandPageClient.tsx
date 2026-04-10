@@ -105,28 +105,29 @@ export default function BrandPage() {
     : Array.from({ length: brand.gallery.length }, (_, i) => i);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="min-h-screen bg-[#F8F6F4] text-blackout"
-    >
-      <div className="min-h-screen flex flex-col">
-        {/* Header */}
-        <div className="fixed top-0 left-0 right-0 z-[100] bg-[#F8F6F4]/95 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto w-full px-8 md:px-12 py-6 flex justify-between items-center">
-            <div onClick={goHome} className="cursor-pointer hover:opacity-60 transition-opacity">
-              <LunesLogo className={`h-7 w-auto ${brand.textColor}`} />
-            </div>
-            <button
-              onClick={goHome}
-              className={`p-4 hover:bg-blackout/5 rounded-full transition-all duration-300 group ${brand.textColor} -mr-4 min-w-[48px] min-h-[48px] flex items-center justify-center`}
-            >
-              <X className="w-8 h-8 group-hover:rotate-90 transition-transform duration-300" />
-            </button>
-          </div>
+    <>
+      {/* Header — outside motion container for reliable touch */}
+      <nav className="fixed top-0 left-0 right-0 z-[9999] bg-[#F8F6F4] border-b border-blackout/5">
+        <div className="max-w-7xl mx-auto w-full px-8 md:px-12 py-5 flex justify-between items-center">
+          <a href="/" className="hover:opacity-60 transition-opacity">
+            <LunesLogo className={`h-7 w-auto ${brand.textColor}`} />
+          </a>
+          <a
+            href="/"
+            className={`p-4 rounded-full transition-all duration-300 ${brand.textColor} -mr-4 min-w-[48px] min-h-[48px] flex items-center justify-center active:scale-90`}
+          >
+            <X className="w-8 h-8" />
+          </a>
         </div>
-        <div className="h-20" />
+      </nav>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="min-h-screen bg-[#F8F6F4] text-blackout pt-20"
+      >
+        <div className="min-h-screen flex flex-col">
 
         <div className="flex-grow max-w-7xl mx-auto px-8 md:px-16 py-12 grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
           <div className="space-y-12">
@@ -952,5 +953,6 @@ export default function BrandPage() {
         )}
       </AnimatePresence>
     </motion.div>
+    </>
   );
 }

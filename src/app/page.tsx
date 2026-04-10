@@ -531,17 +531,9 @@ export default function HomePage() {
           {/* Content Container */}
           <div className="relative z-30 flex flex-col items-center gap-16">
             <motion.div
-              initial={{ opacity: 0, filter: "blur(20px)" }}
-              animate={{
-                opacity: 1,
-                filter: "blur(0px)",
-                y: 0
-              }}
-              transition={{
-                opacity: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
-                filter: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
-                y: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
-              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-center pointer-events-none"
             >
               <h1 className="text-[12vw] md:text-[10vw] leading-none mb-6 italic tracking-tighter font-serif drop-shadow-2xl">
@@ -555,13 +547,9 @@ export default function HomePage() {
             </motion.div>
 
             <motion.button
-              initial={{ opacity: 0, filter: "blur(10px)" }}
-              animate={{
-                opacity: 1,
-                filter: "blur(0px)",
-                y: 0
-              }}
-              transition={{ delay: 0.5, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
               onClick={() => scrollToSection('ecosystem')}
               className="group flex flex-col items-center gap-4 cursor-pointer pointer-events-auto"
             >
