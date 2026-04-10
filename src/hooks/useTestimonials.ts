@@ -14,19 +14,19 @@ const STATIC_TESTIMONIALS: Testimonial[] = [
     name: "Sofia Martins",
     role: "LUNES MOVE Member",
     quote: "A LUNES não é apenas um ginásio, é onde encontro o meu equilíbrio semanal. O ambiente é acolhedor e os treinos são desafiantes mas respeitam o meu ritmo.",
-    image: "https://i.pravatar.cc/150?u=sofia"
+    image: ""
   },
   {
     name: "Ricardo Silva",
     role: "LUNES EXPLORE Guest",
     quote: "A expedição náutica foi transformadora. Estar em alto mar, com o silêncio curado da LUNES, permitiu-me reconectar com o que realmente importa.",
-    image: "https://i.pravatar.cc/150?u=ricardo"
+    image: ""
   },
   {
     name: "Ana Oliveira",
     role: "LUNES STAY Resident",
     quote: "Ficar no alojamento da LUNES foi como respirar pela primeira vez em meses. O design minimalista e a luz natural criam uma paz indescritível.",
-    image: "https://i.pravatar.cc/150?u=ana"
+    image: ""
   }
 ];
 
@@ -68,7 +68,7 @@ export function useTestimonials() {
             name: c.name || fieldValues[0] || entry.title || '',
             role: c.role || fieldValues[1] || entry.excerpt || '',
             quote: c.quote || fieldValues[3] || fieldValues[2] || '',
-            image: c.image || entry.featured_image || 'https://i.pravatar.cc/150',
+            image: c.image || entry.featured_image || '',
           };
         });
 

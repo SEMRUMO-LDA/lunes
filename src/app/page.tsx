@@ -261,7 +261,7 @@ export default function HomePage() {
         {/* Mobile Hamburger Menu */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2 group z-[60]"
+          className="md:hidden flex flex-col gap-1.5 p-2 group z-[70]"
           aria-label="Abrir menu"
           aria-expanded={isMobileMenuOpen}
         >
@@ -430,6 +430,7 @@ export default function HomePage() {
                 src="https://www.youtube.com/embed/5ZBRAddjwwU?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&autohide=1&modestbranding=1&playlist=5ZBRAddjwwU&rel=0&enablejsapi=1"
                 className="w-full h-full pointer-events-none opacity-30 contrast-125 scale-110"
                 allow="autoplay; encrypted-media"
+                loading="lazy"
                 title="Lunes Background Video"
               />
             </div>
@@ -736,13 +737,22 @@ export default function HomePage() {
                 >
                   <div className="mb-8">
                     <div className="w-16 h-16 rounded-full overflow-hidden mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
-                      <img
-                        src={tm.image}
-                        alt={`Testemunho de ${tm.name}`}
-                        loading="lazy"
-                        className="w-full h-full object-cover"
-                        referrerPolicy="no-referrer"
-                      />
+                      {tm.image ? (
+                        <img
+                          src={tm.image}
+                          alt={`Testemunho de ${tm.name}`}
+                          loading="lazy"
+                          className="w-full h-full object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-blackout/10 flex items-center justify-center">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 text-blackout/30">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                          </svg>
+                        </div>
+                      )}
                     </div>
                     <h3 className="text-xl font-serif italic">{tm.name}</h3>
                     <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-40">{tm.role}</p>

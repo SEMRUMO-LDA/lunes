@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useParams, useRouter, notFound } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { X, ArrowRight, Star, Clock, Plus, Minus, User, Users, Building2, Leaf, Heart, RefreshCw, Bird } from "lucide-react";
+import { X, ArrowRight, ArrowUp, Star, Clock, Plus, Minus, User, Users, Building2, Leaf, Heart, RefreshCw, Bird } from "lucide-react";
 import { getBrandById, SUB_BRANDS } from "@/src/data/brands";
 import { useTours } from "@/src/hooks/useTours";
 
@@ -67,6 +67,13 @@ export default function BrandPage() {
   const { tours: dynamicTours } = useTours();
 
   const [galleryOrder, setGalleryOrder] = useState<number[]>([]);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 400);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   if (!brand) {
     notFound();
@@ -98,13 +105,13 @@ export default function BrandPage() {
     >
       <div className="min-h-screen flex flex-col">
         {/* Header */}
-        <div className="max-w-7xl mx-auto w-full px-8 md:px-12 py-8 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto w-full px-8 md:px-12 py-8 flex justify-between items-center relative z-50">
           <div onClick={goHome} className="cursor-pointer hover:opacity-60 transition-opacity">
             <LunesLogo className={`h-7 w-auto ${brand.textColor}`} />
           </div>
           <button
             onClick={goHome}
-            className={`p-4 hover:bg-blackout/5 rounded-full transition-all duration-300 group ${brand.textColor} -mr-4`}
+            className={`p-4 hover:bg-blackout/5 rounded-full transition-all duration-300 group ${brand.textColor} -mr-4 min-w-[48px] min-h-[48px] flex items-center justify-center`}
           >
             <X className="w-8 h-8 group-hover:rotate-90 transition-transform duration-300" />
           </button>
@@ -916,6 +923,23 @@ export default function BrandPage() {
           </div>
         )}
       </div>
+
+      {/* Scroll to Top */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed bottom-8 right-8 z-[110] p-4 rounded-full shadow-2xl border backdrop-blur-md bg-blackout text-coconut border-coconut/10 hover:shadow-[0_0_30px_rgba(251,249,249,0.3)] transition-all duration-500 group"
+          >
+            <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
