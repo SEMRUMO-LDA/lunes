@@ -103,10 +103,17 @@ export default function HomePage() {
   const { t } = useTranslation();
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [currentSection, setCurrentSection] = useState<string>('hero');
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
   const [newsletterSent, setNewsletterSent] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
 
 
@@ -156,8 +163,9 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Mouse tracking for parallax effects and custom cursor
+  // Mouse tracking for parallax effects (desktop only)
   useEffect(() => {
+    if (isMobile) return;
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -165,12 +173,11 @@ export default function HomePage() {
       cursorY.set(e.clientY);
       outerX.set(e.clientX);
       outerY.set(e.clientY);
-      setCursorPosition({ x: e.clientX, y: e.clientY });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY, cursorX, cursorY, outerX, outerY]);
+  }, [isMobile, mouseX, mouseY, cursorX, cursorY, outerX, outerY]);
 
   useEffect(() => {
     if (showContactForm) {
@@ -183,9 +190,9 @@ export default function HomePage() {
     };
   }, [showContactForm]);
 
-  // Auto-rotation effect
+  // Auto-rotation effect (desktop only)
   useAnimationFrame((time) => {
-    rotationValue.set(time * 0.01);
+    if (!isMobile) rotationValue.set(time * 0.01);
   });
 
   const scrollToSection = (id: string) => {
@@ -425,93 +432,77 @@ export default function HomePage() {
       <div>
         {/* Hero Section */}
         <section className="relative h-screen flex flex-col items-center justify-center bg-blackout text-coconut overflow-hidden select-none">
-          {/* YouTube Background Video */}
-          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[115vh] min-w-[177.77vh] min-h-[56.25vw]">
-              <iframe
-                src="https://www.youtube.com/embed/5ZBRAddjwwU?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&autohide=1&modestbranding=1&playlist=5ZBRAddjwwU&rel=0&enablejsapi=1"
-                className="w-full h-full pointer-events-none opacity-30 contrast-125 scale-110"
-                allow="autoplay; encrypted-media"
-                loading="lazy"
-                title="Lunes Background Video"
-              />
+          {/* YouTube Background Video (desktop only) */}
+          {!isMobile && (
+            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[115vh] min-w-[177.77vh] min-h-[56.25vw]">
+                <iframe
+                  src="https://www.youtube.com/embed/5ZBRAddjwwU?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&autohide=1&modestbranding=1&playlist=5ZBRAddjwwU&rel=0&enablejsapi=1"
+                  className="w-full h-full pointer-events-none opacity-30 contrast-125 scale-110"
+                  allow="autoplay; encrypted-media"
+                  loading="lazy"
+                  title="Lunes Background Video"
+                />
+              </div>
+              <div className="absolute inset-0 bg-blackout/40" />
             </div>
-            {/* Dark Overlay for Readability */}
-            <div className="absolute inset-0 bg-blackout/40" />
-          </div>
+          )}
 
-          {/* Grainy Cinematic Overlay */}
-          <div className="absolute inset-0 z-[1] opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22300%22%20height%3D%22300%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%22.65%22%20numOctaves%3D%223%22/%3E%3C/filter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23n)%22/%3E%3C/svg%3E')] will-change-opacity" />
+          {/* Grainy Cinematic Overlay (desktop only) */}
+          {!isMobile && (
+            <div className="absolute inset-0 z-[1] opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22300%22%20height%3D%22300%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%22.65%22%20numOctaves%3D%223%22/%3E%3C/filter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23n)%22/%3E%3C/svg%3E')]" />
+          )}
 
-          {/* 2026 Atmospheric Background: Liquid Aura & Micro-moments */}
-          <div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden">
-            {/* Generative Aura */}
-            <motion.div
-              style={{
-                x: useTransform(smoothMouseX, (v) => v * -1.5),
-                y: useTransform(smoothMouseY, (v) => v * -1.5),
-              }}
-              animate={{
-                scale: [1, 1.15, 1],
-                rotate: [0, 90, 180, 270, 360],
-                opacity: activeEffectBrand ? 0.4 : 0.15,
-              }}
-              transition={{
-                scale: { duration: 20, repeat: Infinity, ease: "linear" },
-                rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-              }}
-              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110vw] h-[110vw] rounded-full blur-[100px] transition-colors duration-1000 will-change-transform ${activeEffectBrand ? activeEffectBrand.color : 'bg-coconut/10'}`}
-            />
-
-            {/* Secondary Aura for Depth */}
-            <motion.div
-              style={{
-                x: useTransform(smoothMouseX, (v) => v * 0.8),
-                y: useTransform(smoothMouseY, (v) => v * 0.8),
-              }}
-              animate={{
-                scale: [1.2, 1, 1.2],
-                rotate: [360, 270, 180, 90, 0],
-                opacity: 0.05,
-              }}
-              transition={{
-                scale: { duration: 30, repeat: Infinity, ease: "linear" },
-                rotate: { duration: 30, repeat: Infinity, ease: "linear" },
-              }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] rounded-full blur-[120px] bg-coconut/5 will-change-transform"
-            />
-
-            {/* Micro-moments (Particles) */}
-            {PARTICLES.map((p, i) => (
+          {/* Atmospheric Background (desktop only) */}
+          {!isMobile && (
+            <div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden">
               <motion.div
-                key={i}
-                initial={{
-                  x: p.x + "vw",
-                  y: p.y + "vh",
-                  opacity: 0
-                }}
                 style={{
-                  width: p.size + "px",
-                  height: p.size + "px",
-                  filter: p.size > 1.5 ? 'blur(0.5px)' : 'none'
+                  x: useTransform(smoothMouseX, (v) => v * -1.5),
+                  y: useTransform(smoothMouseY, (v) => v * -1.5),
                 }}
                 animate={{
-                  y: [null, -300],
-                  opacity: [0, 0.6, 0.2, 0.6, 0],
+                  scale: [1, 1.15, 1],
+                  rotate: [0, 90, 180, 270, 360],
+                  opacity: activeEffectBrand ? 0.4 : 0.15,
                 }}
                 transition={{
-                  y: { duration: p.speed, repeat: Infinity, ease: "linear", delay: p.delay },
-                  opacity: {
-                    duration: p.twinkle,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    times: [0, 0.2, 0.5, 0.8, 1]
-                  },
+                  scale: { duration: 20, repeat: Infinity, ease: "linear" },
+                  rotate: { duration: 25, repeat: Infinity, ease: "linear" },
                 }}
-                className={`absolute rounded-full shadow-[0_0_8px_rgba(251,249,249,0.4)] will-change-transform transition-colors duration-1000 ${activeEffectBrand ? activeEffectBrand.color + ' ' + activeEffectBrand.accentShadow : 'bg-coconut'}`}
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110vw] h-[110vw] rounded-full blur-[100px] transition-colors duration-1000 will-change-transform ${activeEffectBrand ? activeEffectBrand.color : 'bg-coconut/10'}`}
               />
-            ))}
-          </div>
+              <motion.div
+                style={{
+                  x: useTransform(smoothMouseX, (v) => v * 0.8),
+                  y: useTransform(smoothMouseY, (v) => v * 0.8),
+                }}
+                animate={{
+                  scale: [1.2, 1, 1.2],
+                  rotate: [360, 270, 180, 90, 0],
+                  opacity: 0.05,
+                }}
+                transition={{
+                  scale: { duration: 30, repeat: Infinity, ease: "linear" },
+                  rotate: { duration: 30, repeat: Infinity, ease: "linear" },
+                }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] rounded-full blur-[120px] bg-coconut/5 will-change-transform"
+              />
+              {PARTICLES.map((p, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ x: p.x + "vw", y: p.y + "vh", opacity: 0 }}
+                  style={{ width: p.size + "px", height: p.size + "px", filter: p.size > 1.5 ? 'blur(0.5px)' : 'none' }}
+                  animate={{ y: [null, -300], opacity: [0, 0.6, 0.2, 0.6, 0] }}
+                  transition={{
+                    y: { duration: p.speed, repeat: Infinity, ease: "linear", delay: p.delay },
+                    opacity: { duration: p.twinkle, repeat: Infinity, ease: "easeInOut", times: [0, 0.2, 0.5, 0.8, 1] },
+                  }}
+                  className={`absolute rounded-full shadow-[0_0_8px_rgba(251,249,249,0.4)] will-change-transform transition-colors duration-1000 ${activeEffectBrand ? activeEffectBrand.color + ' ' + activeEffectBrand.accentShadow : 'bg-coconut'}`}
+                />
+              ))}
+            </div>
+          )}
 
           {/* Content Container */}
           <div className="relative z-30 flex flex-col items-center gap-16">
