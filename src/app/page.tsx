@@ -432,6 +432,18 @@ export default function HomePage() {
       <div>
         {/* Hero Section */}
         <section className="relative h-screen flex flex-col items-center justify-center bg-blackout text-coconut overflow-hidden select-none">
+          {/* Mobile Background Image */}
+          {isMobile && (
+            <div className="absolute inset-0 z-0">
+              <img
+                src="/images/tours/explore-services-3.webp"
+                alt=""
+                className="w-full h-full object-cover opacity-40"
+              />
+              <div className="absolute inset-0 bg-blackout/50" />
+            </div>
+          )}
+
           {/* YouTube Background Video (desktop only) */}
           {!isMobile && (
             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
