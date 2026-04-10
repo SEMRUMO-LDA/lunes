@@ -105,16 +105,18 @@ export default function BrandPage() {
     >
       <div className="min-h-screen flex flex-col">
         {/* Header */}
-        <div className="max-w-7xl mx-auto w-full px-8 md:px-12 py-8 flex justify-between items-center relative z-50">
-          <div onClick={goHome} className="cursor-pointer hover:opacity-60 transition-opacity">
-            <LunesLogo className={`h-7 w-auto ${brand.textColor}`} />
+        <div className="sticky top-0 z-50 bg-coconut/95 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto w-full px-8 md:px-12 py-6 flex justify-between items-center">
+            <div onClick={goHome} className="cursor-pointer hover:opacity-60 transition-opacity">
+              <LunesLogo className={`h-7 w-auto ${brand.textColor}`} />
+            </div>
+            <button
+              onClick={goHome}
+              className={`p-4 hover:bg-blackout/5 rounded-full transition-all duration-300 group ${brand.textColor} -mr-4 min-w-[48px] min-h-[48px] flex items-center justify-center`}
+            >
+              <X className="w-8 h-8 group-hover:rotate-90 transition-transform duration-300" />
+            </button>
           </div>
-          <button
-            onClick={goHome}
-            className={`p-4 hover:bg-blackout/5 rounded-full transition-all duration-300 group ${brand.textColor} -mr-4 min-w-[48px] min-h-[48px] flex items-center justify-center`}
-          >
-            <X className="w-8 h-8 group-hover:rotate-90 transition-transform duration-300" />
-          </button>
         </div>
 
         <div className="flex-grow max-w-7xl mx-auto px-8 md:px-16 py-12 grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">

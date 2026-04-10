@@ -201,7 +201,9 @@ export default function HomePage() {
       {/* Custom cursor removed — using default browser cursor */}
 
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 w-full z-50 px-8 transition-all duration-500 flex justify-between items-center text-coconut ${
+      <nav className={`fixed top-0 left-0 w-full px-8 transition-all duration-500 flex justify-between items-center text-coconut ${
+        isMobileMenuOpen ? "z-[70]" : "z-50"
+      } ${
         isScrolled
           ? "bg-blackout/90 backdrop-blur-lg py-4 border-b border-coconut/10 shadow-2xl"
           : "py-6 mix-blend-difference"
