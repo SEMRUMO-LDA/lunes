@@ -21,7 +21,7 @@ const STATIC_TOURS: Tour[] = [
   {
     title: "Costa de Portimão à Sra. da Rocha",
     slug: "costa-portimao",
-    image: "/images/tours/tours-coast.jpg",
+    image: "/images/tours/explore-services-1.webp",
     duration: "2 horas",
     rating: 5,
     capacity: "Por passageiro",
@@ -35,7 +35,7 @@ const STATIC_TOURS: Tour[] = [
   {
     title: "Rio Arade",
     slug: "rio-arade",
-    image: "/images/tours/tours-river.jpg",
+    image: "/images/tours/explore-services-2.webp",
     duration: "2 horas",
     rating: 5,
     capacity: "Por passageiro",
@@ -49,7 +49,7 @@ const STATIC_TOURS: Tour[] = [
   {
     title: "Sunrise & Sunset",
     slug: "sunrise-sunset",
-    image: "/images/tours/tours-sunset.jpg",
+    image: "/images/tours/explore-services-3.webp",
     duration: "2 horas",
     rating: 5,
     capacity: "Por passageiro",
@@ -59,6 +59,20 @@ const STATIC_TOURS: Tour[] = [
     childAge: "2-10 anos",
     description: "Ao nascer ou ao pôr do sol, a luz transforma tudo. As cores, o mar e a atmosfera criam um momento íntimo e memorável, daqueles que se guardam.",
     timeSlots: ["06:30", "18:00"]
+  },
+  {
+    title: "Passeios Privados",
+    slug: "passeios-privados",
+    image: "/images/tours/explore-services-4.webp",
+    duration: "2 horas",
+    rating: 5,
+    capacity: "Até 17 pessoas",
+    priceTotal: "550€",
+    priceAdult: "",
+    priceChild: "",
+    childAge: "",
+    description: "Uma experiência feita à sua medida, no seu ritmo. Navegue com quem escolhe, descubra a costa com calma e desfrute de uma bebida de boas-vindas a bordo.",
+    timeSlots: ["10:00", "14:00", "18:00"]
   }
 ];
 
@@ -92,7 +106,14 @@ export function useTours() {
           return orderA - orderB;
         });
 
-        const mapped: Tour[] = sorted.map((entry: any) => ({
+        const fallbackImages = [
+          '/images/tours/explore-services-1.webp',
+          '/images/tours/explore-services-2.webp',
+          '/images/tours/explore-services-3.webp',
+          '/images/tours/explore-services-4.webp',
+        ];
+
+        const mapped: Tour[] = sorted.map((entry: any, idx: number) => ({
           title: entry.content?.title || entry.title || '',
           slug: entry.slug || '',
           description: entry.content?.description || entry.excerpt || '',
@@ -103,7 +124,7 @@ export function useTours() {
           priceAdult: entry.content?.price_adult ? `${entry.content.price_adult}€` : '',
           priceChild: entry.content?.price_child ? `${entry.content.price_child}€` : '',
           childAge: entry.content?.child_age_range || '2-10 anos',
-          image: entry.content?.image || entry.featured_image || '',
+          image: fallbackImages[idx] || fallbackImages[0],
           timeSlots: entry.content?.time_slots || [],
         }));
 

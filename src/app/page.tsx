@@ -81,73 +81,6 @@ const LunesLogo = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
-const MANIFESTO_CARDS = [
-  { id: 1, title: "Manifesto", image: "/images/misc/manifesto.png" },
-  { id: 2, title: "MOVE", image: "https://picsum.photos/seed/lunes-move/800/1000" },
-  { id: 3, title: "EXPLORE", image: "https://picsum.photos/seed/lunes-explore/800/1000" },
-  { id: 4, title: "STAY", image: "https://picsum.photos/seed/lunes-stay/800/1000" },
-  { id: 5, title: "EAT", image: "https://picsum.photos/seed/lunes-eat/800/1000" },
-];
-
-const ManifestoStack = () => {
-  const [cards, setCards] = useState(MANIFESTO_CARDS);
-  const { t } = useTranslation();
-
-  const rotateCards = () => {
-    setCards((prev: typeof MANIFESTO_CARDS) => {
-      const newCards = [...prev];
-      const first = newCards.shift();
-      if (first) newCards.push(first);
-      return newCards;
-    });
-  };
-
-  return (
-    <div
-      className="relative w-full aspect-[4/5] cursor-pointer group"
-      onClick={rotateCards}
-    >
-      <AnimatePresence mode="popLayout">
-        {cards.map((card: { id: number; title: string; image: string }, index: number) => (
-          <motion.div
-            key={card.id}
-            layout
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{
-              scale: 1 - index * 0.05,
-              opacity: 1 - index * 0.2,
-              y: index * 15,
-              zIndex: MANIFESTO_CARDS.length - index,
-              rotate: index % 2 === 0 ? index * 1.5 : -index * 1.5
-            }}
-            exit={{ x: 400, opacity: 0, rotate: 25, transition: { duration: 0.4 } }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="absolute inset-0 rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10 bg-blackout"
-          >
-            <img
-              src={card.image}
-              alt={card.title}
-              loading="lazy"
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-blackout/60 via-transparent to-transparent" />
-            <div className="absolute bottom-10 left-10">
-              <span className="text-[10px] uppercase tracking-[0.5em] font-sans text-coconut/80 font-bold">{card.title}</span>
-            </div>
-          </motion.div>
-        ))}
-      </AnimatePresence>
-
-      {/* Interaction Hint */}
-      <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-2 opacity-30 group-hover:opacity-60 transition-opacity">
-        <span className="text-[9px] uppercase tracking-widest font-sans">{t('gallery.hint', 'Clique para rodar')}</span>
-        <ArrowRight className="w-3 h-3" />
-      </div>
-    </div>
-  );
-};
-
 export default function HomePage() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll();
@@ -730,9 +663,22 @@ export default function HomePage() {
 
             {/* 3-Column Grid */}
             <div className="grid lg:grid-cols-3 gap-16 md:gap-20 items-start">
-              {/* Column 1: Gallery */}
+              {/* Column 1: Photo */}
               <div className="relative px-8 md:px-0">
-                <ManifestoStack />
+                <motion.div
+                  initial={{ opacity: 0, filter: "blur(15px)" }}
+                  whileInView={{ opacity: 1, filter: "blur(0px)" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative w-full aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl"
+                >
+                  <img
+                    src="/images/misc/lunes-home-about-1.webp"
+                    alt="Manifesto LUNES"
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
               </div>
 
               {/* Columns 2 & 3: Brand Story */}

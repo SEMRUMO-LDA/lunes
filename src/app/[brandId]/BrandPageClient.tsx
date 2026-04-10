@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useParams, useRouter, notFound } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { X, ArrowRight, Star, Clock, Plus, Minus, User, Users, Building2 } from "lucide-react";
+import { X, ArrowRight, Star, Clock, Plus, Minus, User, Users, Building2, Leaf, Heart, RefreshCw, Bird } from "lucide-react";
 import { getBrandById, SUB_BRANDS } from "@/src/data/brands";
 import { useTours } from "@/src/hooks/useTours";
 
@@ -161,32 +161,54 @@ export default function BrandPage() {
             >
               {brand.id === 'explore' || brand.id === 'stay' || brand.id === 'move' ? (
                 brand.reservationLink ? (
-                  <a
-                    href={brand.reservationLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`inline-block text-center w-full sm:w-auto px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
-                  >
-                    Reservar LUNES {brand.id === 'stay' ? 'STAY' : 'EXPLORE'}
-                  </a>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <a
+                      href={brand.reservationLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-block text-center w-full sm:w-auto px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
+                    >
+                      Reservar LUNES {brand.id === 'stay' ? 'STAY' : 'EXPLORE'}
+                    </a>
+                    {brand.id === 'stay' && (
+                      <div className={`inline-block text-center w-full sm:w-auto px-10 py-5 rounded-full border border-stay-pink/20 text-stay-pink/50 text-[10px] uppercase tracking-[0.5em] font-sans font-bold cursor-default`}>
+                        Reservar Transfer <span className="opacity-50">— Brevemente</span>
+                      </div>
+                    )}
+                  </div>
                 ) : (
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <button
+                      onClick={() => {
+                        const target = document.getElementById(brand.id === 'move' ? 'move-packages' : 'tours-section');
+                        if (target) target.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className={`w-full sm:w-auto px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
+                    >
+                      {brand.id === 'move' ? 'Descobrir Treinos' : 'Explorar Experiências'}
+                    </button>
+                    {brand.id === 'move' && (
+                      <div className={`inline-block text-center w-full sm:w-auto px-10 py-5 rounded-full border border-move-leaf/20 text-move-leaf/50 text-[10px] uppercase tracking-[0.5em] font-sans font-bold cursor-default`}>
+                        Plataforma LUNES MOVE <span className="opacity-50">— Brevemente</span>
+                      </div>
+                    )}
+                  </div>
+                )
+              ) : brand.id === 'feel' ? (
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                   <button
                     onClick={() => {
-                      const target = document.getElementById(brand.id === 'move' ? 'move-packages' : 'tours-section');
+                      const target = document.getElementById('filosofia-section');
                       if (target) target.scrollIntoView({ behavior: 'smooth' });
                     }}
                     className={`w-full sm:w-auto px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
                   >
-                    {brand.id === 'move' ? 'Descobrir Treinos' : 'Explorar Experiências'}
+                    A Nossa Filosofia
                   </button>
-                )
-              ) : brand.id === 'feel' ? (
-                <a
-                  href="/filosofia"
-                  className={`inline-block text-center w-full sm:w-auto px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl ${brand.accentShadow}`}
-                >
-                  Descubra a Nossa Filosofia
-                </a>
+                  <div className={`inline-block text-center w-full sm:w-auto px-10 py-5 rounded-full border border-feel-sage/20 text-feel-sage/50 text-[10px] uppercase tracking-[0.5em] font-sans font-bold cursor-default`}>
+                    LUNES FEEL SHOP <span className="opacity-50">— Brevemente</span>
+                  </div>
+                </div>
               ) : (
                 <div className="flex flex-col items-center sm:items-start gap-4">
                   <div className={`px-8 py-4 rounded-full bg-blackout/5 border border-blackout/10 ${brand.textColor} text-[10px] uppercase tracking-[0.6em] font-bold opacity-60`}>
@@ -199,17 +221,17 @@ export default function BrandPage() {
 
           {/* Gallery */}
           <div
-            className="relative h-[50vh] md:h-[60vh] lg:h-[80vh] flex items-center justify-center mt-12 lg:mt-0 lg:sticky lg:top-12 px-4 md:px-12 w-full max-w-2xl mx-auto cursor-pointer"
+            className="relative h-[50vh] md:h-[60vh] lg:h-[80vh] flex items-center justify-center mt-12 lg:mt-0 lg:sticky lg:top-12 px-4 md:px-12 w-full max-w-2xl mx-auto cursor-pointer group"
             onClick={handleGalleryClick}
           >
             {(() => {
-              const galleryImages = brand.gallery.slice(0, 4);
-              const rotations = [-10, 6, -4, 8];
-              const offsetsX = [-50, 0, 50, 100];
-              const offsetsY = [20, -10, 30, 0];
+              const visibleCount = 3;
+              const rotations = [-6, 4, -3];
+              const offsetsX = [-30, 10, 50];
+              const offsetsY = [0, -10, 15];
 
-              return currentGalleryOrder.map((originalIdx: number, displayIdx: number) => {
-                const img = galleryImages[originalIdx];
+              return currentGalleryOrder.slice(0, visibleCount).map((originalIdx: number, displayIdx: number) => {
+                const img = brand.gallery[originalIdx];
                 if (!img) return null;
 
                 return (
@@ -218,17 +240,17 @@ export default function BrandPage() {
                     layout
                     initial={{ opacity: 0, y: 150, x: 0, rotate: 0 }}
                     animate={{
-                      opacity: 1 - displayIdx * 0.15,
+                      opacity: 1 - displayIdx * 0.2,
                       y: offsetsY[displayIdx],
                       x: offsetsX[displayIdx],
                       rotate: rotations[displayIdx],
-                      scale: 1 - displayIdx * 0.03
+                      scale: 1 - displayIdx * 0.04
                     }}
-                    whileHover={{
+                    whileHover={displayIdx === 0 ? {
                       scale: 1.05,
                       rotate: 0,
-                      y: offsetsY[displayIdx] - 20
-                    }}
+                      y: -20
+                    } : undefined}
                     transition={{
                       layout: { duration: 0.5, type: "spring", bounce: 0.2 },
                       delay: displayIdx * 0.05,
@@ -237,14 +259,19 @@ export default function BrandPage() {
                       bounce: 0.3
                     }}
                     className="absolute w-[220px] md:w-[320px] lg:w-[360px] aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl border-[4px] md:border-[6px] border-white bg-white origin-bottom pointer-events-none"
-                    style={{ zIndex: galleryImages.length - displayIdx }}
+                    style={{ zIndex: visibleCount - displayIdx }}
                   >
-                    <Image src={img} alt={`Gallery ${originalIdx}`} fill className="object-cover" sizes="(max-width: 768px) 220px, (max-width: 1024px) 320px, 360px" unoptimized />
+                    <Image src={img} alt={`Gallery ${originalIdx + 1}`} fill className="object-cover" sizes="(max-width: 768px) 220px, (max-width: 1024px) 320px, 360px" unoptimized />
                     <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] pointer-events-none rounded-xl" />
                   </motion.div>
                 );
               });
             })()}
+
+            {/* Counter */}
+            <div className="absolute -bottom-4 right-1/2 translate-x-1/2 md:right-0 md:translate-x-0 flex items-center gap-1.5 opacity-30">
+              <span className="text-[9px] font-mono tracking-widest">{(currentGalleryOrder[0] ?? 0) + 1}/{brand.gallery.length}</span>
+            </div>
 
             <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-2 opacity-30 group-hover:opacity-60 transition-opacity pointer-events-none">
               <span className="text-[9px] uppercase tracking-widest font-sans font-bold">Clique para rodar</span>
@@ -367,10 +394,10 @@ export default function BrandPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="rounded-[2rem] border border-blackout/5 overflow-hidden bg-[#F9FAF9] flex flex-col"
+                  className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-blackout/5 flex flex-col group"
                 >
-                  <div className="relative aspect-[4/3]">
-                    <Image src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop" alt="Treino Personalizado" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" unoptimized />
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image src="/images/move/move-services-1.webp" alt="Treino Personalizado" fill className="object-cover group-hover:scale-110 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 33vw" unoptimized />
                   </div>
                   <div className="p-8 flex flex-col flex-1">
                     <div className="flex items-center gap-3 mb-4">
@@ -394,10 +421,10 @@ export default function BrandPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="rounded-[2rem] border border-blackout/5 overflow-hidden bg-[#F9FAF9] flex flex-col"
+                  className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-blackout/5 flex flex-col group"
                 >
-                  <div className="relative aspect-[4/3]">
-                    <Image src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop" alt="Treino em Pequenos Grupos" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" unoptimized />
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image src="/images/move/move-services-2.webp" alt="Treino em Pequenos Grupos" fill className="object-cover group-hover:scale-110 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 33vw" unoptimized />
                   </div>
                   <div className="p-8 flex flex-col flex-1">
                     <div className="flex items-center gap-3 mb-4">
@@ -420,10 +447,10 @@ export default function BrandPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="rounded-[2rem] border border-blackout/5 overflow-hidden bg-[#F9FAF9] flex flex-col"
+                  className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-blackout/5 flex flex-col group"
                 >
-                  <div className="relative aspect-[4/3]">
-                    <Image src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop" alt="Treino para Empresas" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" unoptimized />
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image src="/images/move/move-services-3.webp" alt="Treino para Empresas" fill className="object-cover group-hover:scale-110 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 33vw" unoptimized />
                   </div>
                   <div className="p-8 flex flex-col flex-1">
                     <div className="flex items-center gap-3 mb-4">
@@ -504,6 +531,7 @@ export default function BrandPage() {
                 </div>
               </motion.div>
 
+
             </div>
           </div>
         )}
@@ -534,7 +562,7 @@ export default function BrandPage() {
                     <p className="text-sm text-blackout/50">Duração: 2 horas</p>
                   </div>
                   <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden">
-                    <Image src="/images/tours/private-tour.jpg" alt="Passeio Privado" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" unoptimized />
+                    <Image src="/images/tours/explore-services-4.webp" alt="Passeio Privado" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" unoptimized />
                   </div>
                 </div>
               </motion.div>
@@ -605,6 +633,137 @@ export default function BrandPage() {
                 </a>
               </div>
 
+            </div>
+          </div>
+        )}
+
+        {/* Feel — Filosofia inline */}
+        {brand.id === 'feel' && (
+          <div id="filosofia-section" className="py-32 border-t border-blackout/5 bg-white">
+            <div className="max-w-4xl mx-auto px-8 md:px-16">
+
+              {/* Header */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="mb-20"
+              >
+                <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-feel-sage mb-6">A Raiz e a Nutrição</p>
+                <h3 className="text-4xl md:text-6xl font-light italic mb-8 tracking-tighter">A Nossa Filosofia</h3>
+                <p className="text-xl md:text-2xl text-blackout/50 font-light italic max-w-2xl">
+                  Basicamente é voltar às raízes, é uma forma de pensar, desenhar e viver que respeita os ritmos da natureza, reduz dependências externas e cria abundância real com menos esforço.
+                </p>
+              </motion.div>
+
+              <div className="space-y-24 text-blackout/80 leading-relaxed font-light font-sans">
+
+                {/* Section 1 — TIME TO FEEL */}
+                <motion.section
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-8"
+                >
+                  <p className="text-lg">
+                    Aqui, acreditamos que a verdadeira conexão começa no sentir. Não se trata apenas de agricultura, mas sim de:
+                  </p>
+                  <div className="space-y-4 pl-6 border-l-2 border-feel-sage/40">
+                    <p className="text-lg">Sentir o <span className="font-medium text-blackout">sabor real</span> dos alimentos.</p>
+                    <p className="text-lg">Sentir a <span className="font-medium text-blackout">energia</span> de algo cultivado com profundo respeito.</p>
+                    <p className="text-lg">Sentir a <span className="font-medium text-blackout">tranquilidade</span> de saber exatamente de onde vem o que comemos.</p>
+                  </div>
+                  <p className="text-lg">
+                    Na nossa horta, o que se sente primeiro é a calma. Depois vem o foco, a presença total no agora. Esse estado não é um acaso; é a consequência direta da forma como escolhemos cuidar da terra.
+                  </p>
+                </motion.section>
+
+                {/* Section 2 — Princípios */}
+                <motion.section
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-8"
+                >
+                  <h2 className="text-3xl md:text-4xl italic text-blackout">A Nossa Essência: Princípios da Permacultura</h2>
+                  <p className="text-lg">
+                    Guiamo-nos por uma ética simples mas profunda, baseada na permacultura:
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="p-8 rounded-2xl bg-feel-athletics/30 border border-feel-sage/10 space-y-4">
+                      <Leaf className="w-6 h-6 text-feel-sage" />
+                      <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout">Cuidar da Terra</h3>
+                      <p className="text-sm text-blackout/70">Preservar solos, água, florestas e todos os sistemas vivos.</p>
+                    </div>
+                    <div className="p-8 rounded-2xl bg-feel-athletics/30 border border-feel-sage/10 space-y-4">
+                      <Heart className="w-6 h-6 text-feel-sage" />
+                      <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout">Cuidar das Pessoas</h3>
+                      <p className="text-sm text-blackout/70">Garantir que todos têm acesso ao que precisam para viver com dignidade.</p>
+                    </div>
+                    <div className="p-8 rounded-2xl bg-feel-athletics/30 border border-feel-sage/10 space-y-4">
+                      <RefreshCw className="w-6 h-6 text-feel-sage" />
+                      <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout">Partilha Justa</h3>
+                      <p className="text-sm text-blackout/70">Distribuir excedentes, limitar o consumo e devolver à Terra o que ela nos dá.</p>
+                    </div>
+                  </div>
+                </motion.section>
+
+                {/* Section 3 — Observar */}
+                <motion.section
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-8"
+                >
+                  <h2 className="text-3xl md:text-4xl italic text-blackout">Observar em vez de Impor</h2>
+                  <p className="text-lg">
+                    A nossa forma de viver e produzir baseia-se numa ideia simples: a natureza já sabe o que está a fazer.
+                  </p>
+                  <p className="text-lg">
+                    Em vez de lutar contra ela, observamos. Em vez de impor soluções rápidas, criamos sistemas que se equilibram sozinhos com o tempo. A natureza ensina-nos que quando respeitamos os ciclos naturais, tudo se torna mais simples, mais eficiente e mais saudável.
+                  </p>
+                  <div className="p-8 rounded-2xl bg-blackout/[0.02] border border-blackout/5">
+                    <p className="text-lg italic text-blackout/60">
+                      O crescimento pode ser mais lento, mas é real. O alimento pode parecer menos abundante, mas é completo.
+                    </p>
+                  </div>
+                </motion.section>
+
+                {/* Section 4 — Ecossistema */}
+                <motion.section
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-8"
+                >
+                  <h2 className="text-3xl md:text-4xl italic text-blackout">Um Ecossistema Vivo e Conectado</h2>
+                  <p className="text-lg">
+                    Aqui, cada elemento tem uma função e nada existe isolado: o solo alimenta as plantas, as plantas protegem o solo, as galinhas fertilizam a terra, e a terra, regenerada, devolve alimento de verdade.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="p-8 rounded-2xl bg-feel-athletics/30 border border-feel-sage/10 space-y-4">
+                      <Leaf className="w-6 h-6 text-feel-sage" />
+                      <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout">O Solo Vivo</h3>
+                      <p className="text-sm text-blackout/70">
+                        Os nossos legumes crescem numa terra rica e viva, cheia de microvida, alimentada apenas com sol, água e tempo.
+                      </p>
+                    </div>
+                    <div className="p-8 rounded-2xl bg-feel-athletics/30 border border-feel-sage/10 space-y-4">
+                      <Bird className="w-6 h-6 text-feel-sage" />
+                      <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout">Animais em Liberdade</h3>
+                      <p className="text-sm text-blackout/70">
+                        As nossas galinhas vivem livres, num ambiente natural, onde desfrutam do ar puro, do sol e da generosidade da terra. Cuidamos para que tenham uma pastagem rica e variada, repleta de leguminosas e outros alimentos naturais, garantindo-lhes não só nutrição, mas verdadeiro bem-estar.
+                      </p>
+                    </div>
+                  </div>
+                </motion.section>
+
+              </div>
             </div>
           </div>
         )}

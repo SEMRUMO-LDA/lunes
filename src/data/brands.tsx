@@ -18,12 +18,13 @@ export const SUB_BRANDS = [
     accentShadow: "shadow-move-citrus/20",
     icon: <Activity className="w-6 h-6" />,
     gradient: "lunes-gradient-move",
-    image: "/images/misc/move-featured.jpg",
+    image: "/images/move/move-featured.webp",
     gallery: [
-      "/images/misc/move-featured.jpg",
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop"
+      "/images/move/move-featured.webp",
+      "/images/move/move-2.webp",
+      "/images/move/move-3.webp",
+      "/images/move/move-4.webp",
+      "/images/move/move-5.webp"
     ]
   },
   {
@@ -63,12 +64,13 @@ export const SUB_BRANDS = [
     accentShadow: "shadow-explore-cyan/20",
     icon: <Compass className="w-6 h-6" />,
     gradient: "lunes-gradient-explore",
-    image: "/images/tours/explore-featured.jpg",
+    image: "/images/tours/explore-5.webp",
     gallery: [
-      "/images/tours/explore-featured.jpg",
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1516939884455-1445c8652f83?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1464947644273-914a94b3f034?q=80&w=800&auto=format&fit=crop"
+      "/images/tours/explore-1.webp",
+      "/images/tours/explore-2.webp",
+      "/images/tours/explore-3.webp",
+      "/images/tours/explore-4.webp",
+      "/images/tours/explore-5.webp"
     ]
   },
   {
@@ -88,11 +90,16 @@ export const SUB_BRANDS = [
     accentShadow: "shadow-feel-athletics/20",
     icon: <Leaf className="w-6 h-6" />,
     gradient: "lunes-gradient-feel",
-    image: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1200&auto=format&fit=crop",
+    image: "/images/feel/feel-1.webp",
     gallery: [
-      "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1523348830342-d01f9fc9d55e?q=80&w=800&auto=format&fit=crop"
+      "/images/feel/feel-1.webp",
+      "/images/feel/feel-2.webp",
+      "/images/feel/feel-3.webp",
+      "/images/feel/feel-4.webp",
+      "/images/feel/feel-5.webp",
+      "/images/feel/feel-6.webp",
+      "/images/feel/feel-7.webp",
+      "/images/feel/feel-8.webp"
     ]
   },
   {
@@ -113,12 +120,16 @@ export const SUB_BRANDS = [
     icon: <Home className="w-6 h-6" />,
     gradient: "lunes-gradient-stay",
     reservationLink: "https://www.airbnb.com.br/rooms/1578259404923411103?source_impression_id=p3_1774870114_P3oQM9EdXo4Gup30",
-    image: "/images/stay/stay-featured.jpg",
+    image: "/images/stay/stay-destaque.webp",
     gallery: [
-      "/images/stay/stay-1.png",
-      "/images/stay/stay-2.png",
-      "/images/stay/stay-3.png",
-      "/images/stay/stay-4.png"
+      "/images/stay/stay-1.webp",
+      "/images/stay/stay-2.webp",
+      "/images/stay/stay-3.webp",
+      "/images/stay/stay-4.webp",
+      "/images/stay/stay-5.webp",
+      "/images/stay/stay-6.webp",
+      "/images/stay/stay-7.webp",
+      "/images/stay/stay-8.webp"
     ]
   }
 ];
