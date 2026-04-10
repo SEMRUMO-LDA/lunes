@@ -945,9 +945,9 @@ export default function BrandPage() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-8 right-8 z-[110] p-4 rounded-full shadow-2xl border backdrop-blur-md bg-blackout text-coconut border-coconut/10 hover:shadow-[0_0_30px_rgba(251,249,249,0.3)] transition-all duration-500 group"
+            className="fixed bottom-6 right-6 z-[110] w-10 h-10 flex items-center justify-center rounded-full shadow-lg bg-blackout text-coconut border border-coconut/10 transition-all duration-300 group"
           >
-            <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
+            <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform duration-300" />
           </motion.button>
         )}
       </AnimatePresence>

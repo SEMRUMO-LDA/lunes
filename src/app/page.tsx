@@ -578,7 +578,7 @@ export default function HomePage() {
                   <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                    className="w-38 h-38 md:w-64 md:h-64 opacity-20 md:opacity-10"
+                    className="w-52 h-52 md:w-64 md:h-64 opacity-15 md:opacity-10"
                   >
                     <img
                       src="/images/brand/LUNES badge preto.png"
@@ -601,18 +601,16 @@ export default function HomePage() {
                   transition={cardTransition}
                 >
                   {/* Background Image */}
-                  <motion.img
+                  <img
                     src={brand.image}
                     alt={brand.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 grayscale-[0.3] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[2000ms] ease-out"
-                    referrerPolicy="no-referrer"
-                    transition={cardTransition}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover opacity-100 md:opacity-0 md:group-hover:opacity-100 grayscale-[0.3] md:group-hover:grayscale-0 md:group-hover:scale-110 transition-all duration-[2000ms] ease-out"
                   />
 
-                  {/* Minimalist Editorial Overlay */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-blackout/100 via-blackout/40 to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-1000"
-                    transition={cardTransition}
+                  {/* Overlay */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-blackout/80 via-blackout/30 to-transparent md:opacity-0 md:group-hover:opacity-80 transition-opacity duration-1000"
                   />
 
                   {/* Content Overlay */}
@@ -635,11 +633,11 @@ export default function HomePage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1, duration: 0.8 }}
-                        className={`text-[10px] uppercase tracking-[0.5em] font-sans font-bold mb-2 transition-colors duration-500 ${brand.textColor} opacity-60 group-hover:!text-white/60 group-hover:opacity-100`}
+                        className={`text-[10px] uppercase tracking-[0.5em] font-sans font-bold mb-2 transition-colors duration-500 text-white/60 md:${brand.textColor} md:opacity-60 md:group-hover:!text-white/60 md:group-hover:opacity-100`}
                       >
                         {brand.subtitle}
                       </motion.p>
-                      <h3 className={`text-5xl md:text-6xl italic leading-[0.8] font-serif tracking-tighter transition-colors duration-500 ${brand.textColor} group-hover:!text-white`}>
+                      <h3 className={`text-5xl md:text-6xl italic leading-[0.8] font-serif tracking-tighter transition-colors duration-500 text-white md:${brand.textColor} md:group-hover:!text-white`}>
                         {brand.title}
                       </h3>
                       <motion.div
@@ -647,11 +645,11 @@ export default function HomePage() {
                         whileInView={{ opacity: 1, width: "100%" }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.3, duration: 1 }}
-                        className="flex items-center gap-4 pt-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0"
+                        className="flex items-center gap-4 pt-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-500 md:translate-y-4 md:group-hover:translate-y-0"
                       >
-                        <div className={`h-[1px] w-8 transition-colors duration-500 ${brand.textColor} group-hover:bg-white`} />
-                        <span className={`text-[10px] uppercase tracking-[0.5em] font-sans transition-colors duration-500 ${brand.textColor} group-hover:!text-white/80`}>{t('ecosystem.discover', 'Descobrir')}</span>
-                        <ArrowRight className={`w-3 h-3 -rotate-45 transition-colors duration-500 ${brand.textColor} group-hover:!text-white`} />
+                        <div className={`h-[1px] w-8 transition-colors duration-500 bg-white md:${brand.textColor} md:group-hover:bg-white`} />
+                        <span className={`text-[10px] uppercase tracking-[0.5em] font-sans transition-colors duration-500 text-white/80 md:${brand.textColor} md:group-hover:!text-white/80`}>{t('ecosystem.discover', 'Descobrir')}</span>
+                        <ArrowRight className={`w-3 h-3 -rotate-45 transition-colors duration-500 text-white md:${brand.textColor} md:group-hover:!text-white`} />
                       </motion.div>
                     </div>
                   </div>
@@ -724,14 +722,14 @@ export default function HomePage() {
         </section>
 
         {/* Testimonials Section */}
-        <section id="testimonials" className="py-32 bg-blackout/5">
+        <section id="testimonials" className="py-16 md:py-32 bg-blackout/5">
           <div className="max-w-7xl mx-auto px-8">
-            <div className="text-center mb-24 space-y-4">
-              <h2 className="text-5xl md:text-7xl italic tracking-tight">{t('testimonials.title', 'Vozes da Comunidade')}</h2>
+            <div className="text-center mb-12 md:mb-24 space-y-4">
+              <h2 className="text-4xl md:text-7xl italic tracking-tight">{t('testimonials.title', 'Vozes da Comunidade')}</h2>
               <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-40">{t('testimonials.subtitle', 'O que dizem sobre a experiência LUNES')}</p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-12">
+            <div className="grid md:grid-cols-3 gap-6 md:gap-12">
               {testimonials.map((tm, i) => (
                 <motion.div
                   key={i}
@@ -913,15 +911,9 @@ export default function HomePage() {
             onClick={() => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`fixed bottom-8 right-8 z-[110] p-4 rounded-full shadow-2xl border backdrop-blur-md transition-all duration-500 group ${
-              currentSection === 'about' || currentSection === 'ecosystem' || currentSection === 'testimonials'
-              ? 'bg-blackout text-coconut border-coconut/10 hover:shadow-[0_0_30px_rgba(251,249,249,0.3)]'
-              : currentSection === 'contact'
-              ? 'bg-coconut text-blackout border-blackout/10 hover:shadow-[0_0_30px_rgba(30,30,30,0.3)]'
-              : 'bg-blackout text-coconut border-coconut/10 hover:shadow-[0_0_30px_rgba(251,249,249,0.3)]'
-            }`}
+            className="fixed bottom-6 right-6 z-[110] w-10 h-10 flex items-center justify-center rounded-full shadow-lg bg-blackout text-coconut border border-coconut/10 transition-all duration-300 group"
           >
-            <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
+            <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform duration-300" />
           </motion.button>
         )}
       </AnimatePresence>
