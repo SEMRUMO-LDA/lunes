@@ -70,8 +70,16 @@ export default function BrandPage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setShowScrollTop(window.scrollY > 400);
-    window.addEventListener("scroll", handleScroll);
+    let ticking = false;
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setShowScrollTop(window.scrollY > 400);
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -101,11 +109,11 @@ export default function BrandPage() {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="min-h-screen bg-coconut/95 backdrop-blur-3xl text-blackout overflow-y-auto"
+      className="min-h-screen bg-[#F8F6F4] text-blackout"
     >
       <div className="min-h-screen flex flex-col">
         {/* Header */}
-        <div className="sticky top-0 z-50 bg-coconut/95 backdrop-blur-md">
+        <div className="fixed top-0 left-0 right-0 z-[100] bg-[#F8F6F4]/95 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto w-full px-8 md:px-12 py-6 flex justify-between items-center">
             <div onClick={goHome} className="cursor-pointer hover:opacity-60 transition-opacity">
               <LunesLogo className={`h-7 w-auto ${brand.textColor}`} />
@@ -118,6 +126,7 @@ export default function BrandPage() {
             </button>
           </div>
         </div>
+        <div className="h-20" />
 
         <div className="flex-grow max-w-7xl mx-auto px-8 md:px-16 py-12 grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
           <div className="space-y-12">

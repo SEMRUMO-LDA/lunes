@@ -135,39 +135,45 @@ export default function HomePage() {
   const outerX = useSpring(0, { stiffness: 350, damping: 25 });
   const outerY = useSpring(0, { stiffness: 350, damping: 25 });
 
-  // Scroll tracking for header and scroll-to-top button
+  // Scroll tracking for header and scroll-to-top button (throttled)
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      setShowScrollTop(window.scrollY > 500);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const sy = window.scrollY;
+        setIsScrolled(sy > 50);
+        setShowScrollTop(sy > 500);
 
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
-      const sections = [
-        { id: 'hero', element: document.querySelector('section:nth-of-type(1)') },
-        { id: 'ecosystem', element: document.querySelector('section:nth-of-type(2)') },
-        { id: 'about', element: document.getElementById('about') },
-        { id: 'testimonials', element: document.querySelector('section:nth-of-type(4)') },
-        { id: 'contact', element: document.getElementById('contact') }
-      ];
-
-      for (const section of sections) {
-        if (section.element) {
-          const rect = section.element.getBoundingClientRect();
-          const elementTop = rect.top + window.scrollY;
-          const elementBottom = elementTop + rect.height;
-
-          if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
-            setCurrentSection(section.id);
-            break;
+        if (!isMobile) {
+          const scrollPosition = sy + window.innerHeight / 2;
+          const sections = [
+            { id: 'hero', element: document.querySelector('section:nth-of-type(1)') },
+            { id: 'ecosystem', element: document.querySelector('section:nth-of-type(2)') },
+            { id: 'about', element: document.getElementById('about') },
+            { id: 'testimonials', element: document.querySelector('section:nth-of-type(4)') },
+            { id: 'contact', element: document.getElementById('contact') }
+          ];
+          for (const section of sections) {
+            if (section.element) {
+              const rect = section.element.getBoundingClientRect();
+              const elementTop = rect.top + sy;
+              if (scrollPosition >= elementTop && scrollPosition < elementTop + rect.height) {
+                setCurrentSection(section.id);
+                break;
+              }
+            }
           }
         }
-      }
+        ticking = false;
+      });
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMobile]);
 
   // Mouse tracking for parallax effects (desktop only)
   useEffect(() => {
@@ -218,7 +224,7 @@ export default function HomePage() {
         isMobileMenuOpen ? "z-[70]" : "z-50"
       } ${
         isScrolled
-          ? "bg-blackout/90 backdrop-blur-lg py-4 border-b border-coconut/10 shadow-2xl"
+          ? "bg-blackout/95 backdrop-blur-sm py-4 border-b border-coconut/10 shadow-lg"
           : "py-6 mix-blend-difference"
       }`}>
         <div className="flex items-center cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
@@ -317,7 +323,7 @@ export default function HomePage() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-blackout/95 backdrop-blur-xl z-[55] md:hidden"
+              className="fixed inset-0 bg-blackout/98 z-[55] md:hidden"
             />
 
             {/* Menu Content */}
