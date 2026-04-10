@@ -240,7 +240,7 @@ export default function BrandPage() {
 
           {/* Gallery */}
           <div
-            className="relative h-[50vh] md:h-[60vh] lg:h-[80vh] flex items-center justify-center mt-12 lg:mt-0 lg:sticky lg:top-12 px-4 md:px-12 w-full max-w-2xl mx-auto cursor-pointer group"
+            className="relative h-[65vh] md:h-[60vh] lg:h-[80vh] flex items-center justify-center mt-12 mb-16 lg:mb-0 lg:mt-0 lg:sticky lg:top-24 px-4 md:px-12 w-full max-w-2xl mx-auto cursor-pointer group"
             onClick={handleGalleryClick}
           >
             {(() => {
@@ -277,7 +277,7 @@ export default function BrandPage() {
                       type: "spring",
                       bounce: 0.3
                     }}
-                    className="absolute w-[220px] md:w-[320px] lg:w-[360px] aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl border-[4px] md:border-[6px] border-white bg-white origin-bottom pointer-events-none"
+                    className="absolute w-[280px] md:w-[320px] lg:w-[360px] aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl border-[4px] md:border-[6px] border-white bg-white origin-bottom pointer-events-none"
                     style={{ zIndex: visibleCount - displayIdx }}
                   >
                     <Image src={img} alt={`Gallery ${originalIdx + 1}`} fill className="object-cover" sizes="(max-width: 768px) 220px, (max-width: 1024px) 320px, 360px" unoptimized />
@@ -287,14 +287,13 @@ export default function BrandPage() {
               });
             })()}
 
-            {/* Counter */}
-            <div className="absolute -bottom-4 right-1/2 translate-x-1/2 md:right-0 md:translate-x-0 flex items-center gap-1.5 opacity-30">
-              <span className="text-[9px] font-mono tracking-widest">{(currentGalleryOrder[0] ?? 0) + 1}/{brand.gallery.length}</span>
-            </div>
-
-            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-2 opacity-30 group-hover:opacity-60 transition-opacity pointer-events-none">
-              <span className="text-[9px] uppercase tracking-widest font-sans font-bold">Clique para rodar</span>
-              <ArrowRight className="w-3 h-3" />
+            {/* Counter & Hint */}
+            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+              <span className="text-[9px] font-mono tracking-widest opacity-30">{(currentGalleryOrder[0] ?? 0) + 1}/{brand.gallery.length}</span>
+              <div className="flex items-center gap-2 opacity-30 group-hover:opacity-60 transition-opacity pointer-events-none">
+                <span className="text-[9px] uppercase tracking-widest font-sans font-bold">Clique para rodar</span>
+                <ArrowRight className="w-3 h-3" />
+              </div>
             </div>
           </div>
         </div>
