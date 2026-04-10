@@ -132,8 +132,8 @@ export default function BrandPage() {
         <div className="flex-grow max-w-7xl mx-auto px-8 md:px-16 py-12 grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
           <div className="space-y-12">
             <motion.div
-              initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
-              animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-4"
             >
@@ -147,8 +147,8 @@ export default function BrandPage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
-              animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-8"
             >
@@ -160,8 +160,8 @@ export default function BrandPage() {
                 {brand.details.map((detail: string, i: number) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, filter: "blur(8px)", y: 10 }}
-                    whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 + (i * 0.05), duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     className={`flex items-center gap-4 p-6 rounded-3xl border border-blackout/5 ${brand.accentBorder} transition-colors bg-white/40 backdrop-blur-sm`}
                   >
@@ -173,8 +173,8 @@ export default function BrandPage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, filter: "blur(15px)", y: 20 }}
-              animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="pt-12"
             >

@@ -112,12 +112,13 @@ export default function HomePage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
   const [newsletterSent, setNewsletterSent] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 768 : true
+  );
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
+    window.addEventListener('resize', check, { passive: true });
     return () => window.removeEventListener('resize', check);
   }, []);
 
@@ -672,10 +673,10 @@ export default function HomePage() {
               {/* Column 1: Photo */}
               <div className="relative px-8 md:px-0">
                 <motion.div
-                  initial={{ opacity: 0, filter: "blur(15px)" }}
-                  whileInView={{ opacity: 1, filter: "blur(0px)" }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.8 }}
                   className="relative w-full aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl"
                 >
                   <img
@@ -734,10 +735,10 @@ export default function HomePage() {
               {testimonials.map((tm, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, filter: "blur(15px)" }}
-                  whileInView={{ opacity: 1, filter: "blur(0px)" }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.2, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ delay: i * 0.15, duration: 0.8 }}
                   className="bg-white p-12 rounded-[3rem] shadow-sm hover:shadow-xl transition-all duration-500 group"
                 >
                   <div className="mb-8">
@@ -904,13 +905,9 @@ export default function HomePage() {
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
-            initial={{ opacity: 0, filter: "blur(10px)", scale: 0.8 }}
-            animate={{
-              opacity: 1,
-              filter: "blur(0px)",
-              scale: 1,
-            }}
-            exit={{ opacity: 0, filter: "blur(10px)", scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => {
