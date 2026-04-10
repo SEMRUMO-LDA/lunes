@@ -94,6 +94,12 @@ export default function HomePage() {
   const smoothMouseX = useSpring(mouseX, springConfig);
   const smoothMouseY = useSpring(mouseY, springConfig);
 
+  // Pre-compute transforms (hooks must be called unconditionally)
+  const aura1X = useTransform(smoothMouseX, (v) => v * -1.5);
+  const aura1Y = useTransform(smoothMouseY, (v) => v * -1.5);
+  const aura2X = useTransform(smoothMouseX, (v) => v * 0.8);
+  const aura2Y = useTransform(smoothMouseY, (v) => v * 0.8);
+
   const router = useRouter();
 
   const [hoveredBrand, setHoveredBrand] = useState<typeof SUB_BRANDS[0] | null>(null);
@@ -470,8 +476,8 @@ export default function HomePage() {
             <div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden">
               <motion.div
                 style={{
-                  x: useTransform(smoothMouseX, (v) => v * -1.5),
-                  y: useTransform(smoothMouseY, (v) => v * -1.5),
+                  x: aura1X,
+                  y: aura1Y,
                 }}
                 animate={{
                   scale: [1, 1.15, 1],
@@ -486,8 +492,8 @@ export default function HomePage() {
               />
               <motion.div
                 style={{
-                  x: useTransform(smoothMouseX, (v) => v * 0.8),
-                  y: useTransform(smoothMouseY, (v) => v * 0.8),
+                  x: aura2X,
+                  y: aura2Y,
                 }}
                 animate={{
                   scale: [1.2, 1, 1.2],
