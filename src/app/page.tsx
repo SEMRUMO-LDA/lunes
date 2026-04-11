@@ -8,6 +8,8 @@ import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 const ContactForm = dynamic(() => import("@/src/ContactForm"), { ssr: false });
+import Footer from "@/src/components/Footer";
+import MobileMenu from "@/src/components/MobileMenu";
 import { useTestimonials } from "@/src/hooks/useTestimonials";
 import { useTranslation } from "@/src/hooks/useTranslation";
 import { SUB_BRANDS } from "@/src/data/brands";
@@ -109,9 +111,7 @@ export default function HomePage() {
   const { t } = useTranslation();
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [currentSection, setCurrentSection] = useState<string>('hero');
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
-  const [newsletterSent, setNewsletterSent] = useState(false);
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== 'undefined' ? window.innerWidth < 768 : true
   );
@@ -222,7 +222,7 @@ export default function HomePage() {
 
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 w-full px-8 transition-all duration-500 flex justify-between items-center text-coconut ${
-        isMobileMenuOpen ? "z-[70]" : "z-50"
+        "z-50"
       } ${
         isScrolled
           ? "bg-blackout/95 backdrop-blur-sm py-4 border-b border-coconut/10 shadow-lg"
@@ -281,166 +281,8 @@ export default function HomePage() {
         </button>
 
         {/* Mobile Hamburger Menu */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2 group z-[70]"
-          aria-label="Abrir menu"
-          aria-expanded={isMobileMenuOpen}
-        >
-          <motion.span
-            animate={{
-              rotate: isMobileMenuOpen ? 45 : 0,
-              y: isMobileMenuOpen ? 8 : 0,
-            }}
-            transition={{ duration: 0.3 }}
-            className="w-6 h-0.5 bg-coconut rounded-full group-hover:bg-coconut/80 transition-colors"
-          />
-          <motion.span
-            animate={{
-              opacity: isMobileMenuOpen ? 0 : 1,
-            }}
-            transition={{ duration: 0.2 }}
-            className="w-6 h-0.5 bg-coconut rounded-full group-hover:bg-coconut/80 transition-colors"
-          />
-          <motion.span
-            animate={{
-              rotate: isMobileMenuOpen ? -45 : 0,
-              y: isMobileMenuOpen ? -8 : 0,
-            }}
-            transition={{ duration: 0.3 }}
-            className="w-6 h-0.5 bg-coconut rounded-full group-hover:bg-coconut/80 transition-colors"
-          />
-        </button>
+        <MobileMenu onContactClick={() => setShowContactForm(true)} lineColor="bg-coconut" />
       </nav>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-blackout/98 z-[55] md:hidden"
-            />
-
-            {/* Menu Content */}
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-blackout border-l border-coconut/10 z-[60] md:hidden overflow-y-auto font-sans"
-            >
-              <div className="flex flex-col h-full p-8 pt-24">
-                {/* Menu Items */}
-                <div className="flex flex-col gap-6">
-                  <button
-                    onClick={() => {
-                      scrollToSection('about');
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="text-left text-2xl text-coconut font-light hover:text-coconut/60 transition-all duration-300 py-3 border-b border-coconut/10"
-                  >
-                    {t('nav.about', 'Sobre')}
-                  </button>
-
-                  <div className="space-y-4 py-3 border-b border-coconut/10">
-                    <p className="text-[10px] uppercase tracking-[0.5em] font-sans text-coconut/40 font-bold">{t('nav.ecosystem', 'Ecossistema')}</p>
-                    <button
-                      onClick={() => {
-                        router.push('/move');
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className="flex items-center gap-3 text-xl text-coconut hover:text-move-citrus transition-all duration-300 w-full"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-move-citrus" />
-                      <span>MOVE</span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        router.push('/explore');
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className="flex items-center gap-3 text-xl text-coconut hover:text-explore-cyan transition-all duration-300 w-full"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-explore-cyan" />
-                      <span>EXPLORE</span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        router.push('/feel');
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className="flex items-center gap-3 text-xl text-coconut hover:text-feel-athletics transition-all duration-300 w-full"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-feel-athletics" />
-                      <span>FEEL</span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        router.push('/stay');
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className="flex items-center gap-3 text-xl text-coconut hover:text-stay-creame transition-all duration-300 w-full"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-stay-creame" />
-                      <span>STAY</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Contact Button */}
-                <div className="mt-auto pt-8">
-                  <button
-                    onClick={() => {
-                      setShowContactForm(true);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="w-full border border-coconut/30 rounded-full px-8 py-4 text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-coconut hover:bg-coconut hover:text-blackout transition-all duration-300 bg-coconut/10"
-                  >
-                    {t('nav.contact', 'Contacto')}
-                  </button>
-                </div>
-
-                {/* Footer Links */}
-                <div className="mt-6 pt-6 border-t border-coconut/10 space-y-3">
-                  <a href="/termos" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm text-coconut/40 hover:text-coconut transition-colors">
-                    {t('footer.terms', 'Termos & Condições')}
-                  </a>
-                  <a href="/privacidade" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm text-coconut/40 hover:text-coconut transition-colors">
-                    {t('footer.privacy', 'Política de Privacidade')}
-                  </a>
-                  <a href="/parceiros" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm text-coconut/40 hover:text-coconut transition-colors">
-                    {t('footer.partners', 'Parceiros')}
-                  </a>
-                  <a href="mailto:hello@be-lunes.pt" className="block text-sm text-coconut/40 hover:text-coconut transition-colors">
-                    hello@be-lunes.pt
-                  </a>
-                </div>
-
-                {/* Social Links */}
-                <div className="flex gap-6 justify-center mt-6 pt-6 border-t border-coconut/10">
-                  <InstagramIcon className="w-5 h-5 text-coconut/60 hover:text-coconut cursor-pointer transition-all duration-300" />
-                  <FacebookIcon className="w-5 h-5 text-coconut/60 hover:text-coconut cursor-pointer transition-all duration-300" />
-                  <div
-                    onClick={() => {
-                      setShowContactForm(true);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="p-2 -m-2"
-                  >
-                    <Mail className="w-5 h-5 text-coconut/60 hover:text-coconut cursor-pointer transition-all duration-300" />
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
 
       <div>
         {/* Hero Section */}
@@ -620,24 +462,24 @@ export default function HomePage() {
                         variants={{
                           hover: { scale: 1.1, rotate: -5, transition: { type: "spring", stiffness: 400 } }
                         }}
-                        className={`p-3 rounded-xl transition-colors duration-1000 shadow-2xl backdrop-blur-md ${brand.textColor} bg-white/30 group-hover:${brand.color} group-hover:bg-opacity-80`}
+                        className={`p-3 rounded-xl transition-colors duration-1000 shadow-2xl text-white md:${brand.textColor} bg-white/30 md:group-hover:bg-opacity-80`}
                       >
                         {brand.icon}
                       </motion.div>
-                      <span className={`text-[10px] font-mono tracking-[0.4em] transition-colors duration-1000 ${brand.textColor} opacity-40 group-hover:!text-white group-hover:opacity-40`}>0{idx + 1}</span>
+                      <span className="text-[10px] font-mono tracking-[0.4em] text-white/40 md:text-blackout/20 md:group-hover:!text-white/40 transition-colors duration-1000">0{idx + 1}</span>
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-1 [&_*]:!text-white md:[&_*]:!text-[unset]">
                       <motion.p
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1, duration: 0.8 }}
-                        className={`text-[10px] uppercase tracking-[0.5em] font-sans font-bold mb-2 transition-colors duration-500 text-white/60 md:${brand.textColor} md:opacity-60 md:group-hover:!text-white/60 md:group-hover:opacity-100`}
+                        className={`text-[10px] uppercase tracking-[0.5em] font-sans font-bold mb-2 transition-colors duration-500 ${brand.textColor} opacity-60 group-hover:!text-white/60 group-hover:opacity-100`}
                       >
                         {brand.subtitle}
                       </motion.p>
-                      <h3 className={`text-5xl md:text-6xl italic leading-[0.8] font-serif tracking-tighter transition-colors duration-500 text-white md:${brand.textColor} md:group-hover:!text-white`}>
+                      <h3 className={`text-5xl md:text-6xl italic leading-[0.8] font-serif tracking-tighter transition-colors duration-500 ${brand.textColor} group-hover:!text-white`}>
                         {brand.title}
                       </h3>
                       <motion.div
@@ -647,9 +489,9 @@ export default function HomePage() {
                         transition={{ delay: 0.3, duration: 1 }}
                         className="flex items-center gap-4 pt-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-500 md:translate-y-4 md:group-hover:translate-y-0"
                       >
-                        <div className={`h-[1px] w-8 transition-colors duration-500 bg-white md:${brand.textColor} md:group-hover:bg-white`} />
-                        <span className={`text-[10px] uppercase tracking-[0.5em] font-sans transition-colors duration-500 text-white/80 md:${brand.textColor} md:group-hover:!text-white/80`}>{t('ecosystem.discover', 'Descobrir')}</span>
-                        <ArrowRight className={`w-3 h-3 -rotate-45 transition-colors duration-500 text-white md:${brand.textColor} md:group-hover:!text-white`} />
+                        <div className={`h-[1px] w-8 transition-colors duration-500 ${brand.textColor} bg-current group-hover:bg-white`} />
+                        <span className={`text-[10px] uppercase tracking-[0.5em] font-sans transition-colors duration-500 ${brand.textColor} group-hover:!text-white/80`}>{t('ecosystem.discover', 'Descobrir')}</span>
+                        <ArrowRight className={`w-3 h-3 -rotate-45 transition-colors duration-500 ${brand.textColor} group-hover:!text-white`} />
                       </motion.div>
                     </div>
                   </div>
@@ -722,7 +564,7 @@ export default function HomePage() {
         </section>
 
         {/* Testimonials Section */}
-        <section id="testimonials" className="py-16 md:py-32 bg-blackout/5">
+        <section id="testimonials" className="py-16 md:py-32 bg-coconut">
           <div className="max-w-7xl mx-auto px-8">
             <div className="text-center mb-12 md:mb-24 space-y-4">
               <h2 className="text-4xl md:text-7xl italic tracking-tight">{t('testimonials.title', 'Vozes da Comunidade')}</h2>
@@ -771,132 +613,7 @@ export default function HomePage() {
         </section>
 
         {/* Footer */}
-        <footer id="contact" className="bg-blackout text-coconut pt-32 pb-12 px-8 relative overflow-hidden font-sans">
-          <div className="max-w-7xl mx-auto grid md:grid-cols-5 gap-16 mb-32 relative z-10">
-            <div className="col-span-2 space-y-8">
-              <Image src="/images/brand/LUNES horizontal branco.png" alt="LUNES" width={240} height={48} className="h-10 md:h-12 w-auto" />
-              <p className="text-coconut/80 max-w-md font-light">
-                {t('footer.description', 'LUNES não vende tempo. LUNES devolve o tempo. Junte-se à nossa comunidade e redescubra o seu ritmo natural.')}
-              </p>
-              <div className="flex gap-6">
-                <InstagramIcon className="w-5 h-5 opacity-80 hover:opacity-100 cursor-pointer transition-opacity" />
-                <FacebookIcon className="w-5 h-5 opacity-80 hover:opacity-100 cursor-pointer transition-opacity" />
-                <div
-                  onClick={() => setShowContactForm(true)}
-                  className="relative group p-2 -m-2"
-                >
-                  <div className="absolute inset-0 bg-coconut/10 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
-                  <Mail className="w-5 h-5 opacity-80 hover:opacity-100 cursor-pointer transition-opacity relative z-10" />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">{t('footer.links', 'Links')}</h4>
-              <ul className="space-y-4 text-sm text-coconut/70">
-                <li>
-                  <a href="https://www.livroreclamacoes.pt/inicio/" target="_blank" rel="noopener noreferrer" className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block">
-                    {t('footer.complaints', 'Livro de Reclamações')}
-                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
-                  </a>
-                </li>
-                <li>
-                  <Link
-                    href="/privacidade"
-                    className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block"
-                  >
-                    {t('footer.privacy', 'Política de Privacidade')}
-                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/termos"
-                    className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block"
-                  >
-                    {t('footer.terms', 'Termos & Condições')}
-                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/parceiros"
-                    className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block"
-                  >
-                    {t('footer.partners', 'Parceiros')}
-                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">{t('footer.contacts', 'Contactos')}</h4>
-              <ul className="space-y-4 text-sm text-coconut/70">
-                <li className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 opacity-60" />
-                  <span>+351 928 322 866</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 opacity-60" />
-                  <a href="mailto:hello@be-lunes.pt" className="hover:text-coconut transition-colors group relative w-fit">
-                    hello@be-lunes.pt
-                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold">{t('footer.newsletter', 'Newsletter')}</h4>
-              <p className="text-sm text-coconut/70 font-sans">{t('footer.newsletter.desc', 'Receba inspiração semanal para o seu bem-estar.')}</p>
-              {newsletterSent ? (
-                <p className="text-sm text-explore-cyan font-sans">{t('footer.newsletter.success', 'Subscrito com sucesso!')}</p>
-              ) : (
-                <form onSubmit={async (e) => {
-                  e.preventDefault();
-                  const input = (e.target as HTMLFormElement).querySelector('input') as HTMLInputElement;
-                  const email = input?.value?.trim();
-                  if (!email) return;
-                  try {
-                    await fetch(`${process.env.NEXT_PUBLIC_KIBAN_API_URL}/api/v1/newsletter/subscribe`, {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${process.env.NEXT_PUBLIC_KIBAN_API_KEY}` },
-                      body: JSON.stringify({ email }),
-                    });
-                    setNewsletterSent(true);
-                  } catch {}
-                }} className="flex border-b border-coconut/20 py-2">
-                  <input
-                    type="email"
-                    required
-                    placeholder={t('footer.newsletter.placeholder', 'O seu email')}
-                    className="bg-transparent border-none outline-none text-sm font-sans w-full placeholder:text-coconut/40"
-                  />
-                  <button type="submit"><ArrowRight className="w-4 h-4 opacity-80 hover:opacity-100 transition-opacity" /></button>
-                </form>
-              )}
-            </div>
-          </div>
-
-          <div className="max-w-7xl mx-auto pt-12 border-t border-coconut/10 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] uppercase tracking-[0.5em] font-sans font-medium opacity-50 text-center md:text-left">
-            <div className="flex flex-col items-center md:items-start gap-1">
-              <span>&copy; 2026 LUNES EXPERIENCE LDA</span>
-              <span className="text-[8px] tracking-[0.3em] opacity-30 normal-case">RNAAT n.o 1071/2025</span>
-            </div>
-            <a href="https://aorubro.pt" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity border-b border-coconut/20 pb-0.5">DESENVOLVIDO POR AORUBRO</a>
-          </div>
-
-          {/* Large Background Signature Logo */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[120%] opacity-[0.04] pointer-events-none select-none">
-            <img
-              src="/images/brand/LUNES padrão texto.png"
-              alt=""
-              loading="lazy"
-              className="w-full h-auto brightness-0 invert object-contain"
-            />
-          </div>
-        </footer>
+        <Footer onContactClick={() => setShowContactForm(true)} />
       </div>
 
       {/* Scroll to Top Button */}

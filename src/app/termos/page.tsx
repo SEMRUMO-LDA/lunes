@@ -3,7 +3,9 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
-import { X, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import Footer from "@/src/components/Footer";
+import MobileMenu from "@/src/components/MobileMenu";
 
 const LunesLogo = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 1501 293" className={className}>
@@ -36,15 +38,15 @@ export default function TermosPage() {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="min-h-screen bg-white overflow-y-auto selection:bg-blackout selection:text-white"
     >
-      <div className="max-w-4xl mx-auto px-8 py-24 md:py-32">
-        <button
-          onClick={onClose}
-          className="fixed top-8 right-8 z-[110] p-4 rounded-full bg-blackout text-white hover:scale-110 transition-transform active:scale-95 group"
-        >
-          <X className="w-5 h-5" />
-          <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-[0.3em] whitespace-nowrap pointer-events-none text-blackout font-bold">Fechar</span>
-        </button>
+      {/* Mobile Nav */}
+      <div className="fixed top-0 left-0 w-full z-[110] bg-white/95 backdrop-blur-sm border-b border-blackout/5 px-8 py-4 flex justify-between items-center md:hidden">
+        <a href="/">
+          <LunesLogo className="h-5 w-auto text-blackout" />
+        </a>
+        <MobileMenu />
+      </div>
 
+      <div className="max-w-4xl mx-auto px-8 py-24 md:py-32">
         <div className="mb-16 space-y-6">
           <a href="/" className="block hover:opacity-60 transition-opacity">
             <LunesLogo className="h-5 w-auto text-blackout" />
@@ -207,14 +209,9 @@ export default function TermosPage() {
             <p>Regem-se pela lei portuguesa. O foro competente e o da comarca da sede da Lunes Experience.</p>
           </section>
 
-          <footer className="pt-24 border-t border-blackout/10 flex flex-col items-center gap-8">
-            <Image src="/images/brand/LUNES horizontal preto.png" alt="LUNES" width={160} height={32} className="h-8 w-auto opacity-20" />
-            <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40 text-center">
-              LUNES EXPERIENCE, LDA. &copy; 2026
-            </p>
-          </footer>
         </div>
       </div>
+      <Footer />
     </motion.div>
   );
 }

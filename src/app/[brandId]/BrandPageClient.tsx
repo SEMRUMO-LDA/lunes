@@ -5,8 +5,12 @@ import Image from "next/image";
 import { useParams, useRouter, notFound } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ArrowRight, ArrowUp, Star, Clock, Plus, Minus, User, Users, Building2, Leaf, Heart, RefreshCw, Bird } from "lucide-react";
+import dynamic from "next/dynamic";
 import { getBrandById, SUB_BRANDS } from "@/src/data/brands";
 import { useTours } from "@/src/hooks/useTours";
+const ContactForm = dynamic(() => import("@/src/ContactForm"), { ssr: false });
+import Footer from "@/src/components/Footer";
+import MobileMenu from "@/src/components/MobileMenu";
 
 // LunesLogo SVG
 const LunesLogo = ({ className = "" }: { className?: string }) => (
@@ -68,6 +72,7 @@ export default function BrandPage() {
 
   const [galleryOrder, setGalleryOrder] = useState<number[]>([]);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
 
   useEffect(() => {
     let ticking = false;
@@ -107,8 +112,8 @@ export default function BrandPage() {
   return (
     <>
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-[9999] bg-[#F8F6F4] border-b border-blackout/5 px-8">
-        <div className="max-w-7xl mx-auto w-full flex justify-between items-center py-4">
+      <nav className="fixed top-0 left-0 w-full z-[9999] bg-[#F8F6F4] border-b border-blackout/5 px-8">
+        <div className="flex justify-between items-center py-4">
           <a href="/" className="hover:opacity-60 transition-opacity">
             <LunesLogo className={`h-6 md:h-7 w-auto ${brand.textColor}`} />
           </a>
@@ -121,17 +126,12 @@ export default function BrandPage() {
             <a href="/feel" className="hover:text-feel-sage hover:bg-feel-athletics hover:shadow-[0_0_25px_rgba(234,234,203,0.5)] transition-all duration-300 px-4 py-1.5 rounded-full">FEEL</a>
             <a href="/stay" className="hover:text-stay-pink hover:bg-stay-creame hover:shadow-[0_0_25px_rgba(247,234,223,0.5)] transition-all duration-300 px-4 py-1.5 rounded-full">STAY</a>
           </div>
-          <a href="mailto:hello@be-lunes.pt" className="hidden md:block border border-blackout/20 rounded-full px-8 py-2.5 text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/60 hover:bg-blackout hover:text-white transition-all duration-300">
+          <button onClick={() => setShowContactForm(true)} className="hidden md:block border border-blackout/20 rounded-full px-8 py-2.5 text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/60 hover:bg-blackout hover:text-white transition-all duration-300">
             CONTACTO
-          </a>
+          </button>
 
-          {/* Mobile: X button */}
-          <a
-            href="/"
-            className={`md:hidden p-3 rounded-full transition-all duration-300 ${brand.textColor} min-w-[44px] min-h-[44px] flex items-center justify-center active:scale-90`}
-          >
-            <X className="w-7 h-7" />
-          </a>
+          {/* Mobile: Hamburger menu */}
+          <MobileMenu onContactClick={() => setShowContactForm(true)} />
         </div>
       </nav>
 
@@ -302,7 +302,7 @@ export default function BrandPage() {
             })()}
 
             {/* Counter & Hint */}
-            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
               <span className="text-[9px] font-mono tracking-widest opacity-30">{(currentGalleryOrder[0] ?? 0) + 1}/{brand.gallery.length}</span>
               <div className="flex items-center gap-2 opacity-30 group-hover:opacity-60 transition-opacity pointer-events-none">
                 <span className="text-[9px] uppercase tracking-widest font-sans font-bold">Clique para rodar</span>
@@ -374,15 +374,8 @@ export default function BrandPage() {
                             <span className="text-[10px] text-blackout/40 mt-1 block">{tour.childAge}</span>
                           </div>
                         )}
-                        {tour.capacity && (
-                          <div>
-                            <div className="flex items-center justify-between text-lg font-light text-blackout font-sans">
-                              <span className="font-bold">{tour.capacity}</span>
-                              <div className="flex-grow border-b border-dotted border-blackout/20 mx-4 relative top-1" />
-                              <span className="font-bold">{tour.priceTotal}</span>
-                            </div>
-                            {tour.description && <p className="text-xs text-blackout/50 mt-4 leading-relaxed">{tour.description}</p>}
-                          </div>
+                        {tour.description && (
+                          <p className="text-xs text-blackout/50 mt-2 leading-relaxed">{tour.description}</p>
                         )}
                       </div>
 
@@ -949,6 +942,8 @@ export default function BrandPage() {
         )}
       </div>
 
+      <Footer onContactClick={() => setShowContactForm(true)} />
+
       {/* Scroll to Top */}
       <AnimatePresence>
         {showScrollTop && (
@@ -966,6 +961,12 @@ export default function BrandPage() {
         )}
       </AnimatePresence>
     </motion.div>
+
+    <AnimatePresence>
+      {showContactForm && (
+        <ContactForm onClose={() => setShowContactForm(false)} />
+      )}
+    </AnimatePresence>
     </>
   );
 }

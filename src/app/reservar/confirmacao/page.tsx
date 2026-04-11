@@ -4,6 +4,7 @@ import { Suspense, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import { Check, ArrowRight, Compass } from "lucide-react";
+import Footer from "@/src/components/Footer";
 import { getBookingStatus, type BookingStatus } from "@/src/hooks/useBooking";
 
 // ── Constants ──────────────────────────────────────────────────────────
@@ -229,6 +230,7 @@ function ConfirmacaoPage() {
           </motion.div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
