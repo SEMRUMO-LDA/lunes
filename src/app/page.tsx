@@ -379,7 +379,7 @@ export default function HomePage() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-center pointer-events-none"
             >
-              <h1 className="text-[12vw] md:text-[10vw] leading-none mb-6 italic tracking-tighter font-serif drop-shadow-2xl">
+              <h1 className="text-[15vw] md:text-[10vw] leading-none mb-6 italic tracking-tighter font-serif drop-shadow-2xl">
                 Time to be You.
               </h1>
               <div className="flex items-center justify-center gap-4 opacity-100 mt-4">
@@ -450,6 +450,9 @@ export default function HomePage() {
                     className="absolute inset-0 w-full h-full object-cover opacity-100 md:opacity-0 md:group-hover:opacity-100 grayscale-[0.3] md:group-hover:grayscale-0 md:group-hover:scale-110 transition-all duration-[2000ms] ease-out"
                   />
 
+                  {/* Color tint overlay */}
+                  <div className={`absolute inset-0 ${brand.color} opacity-20 md:opacity-0 mix-blend-multiply transition-opacity duration-1000`} />
+
                   {/* Overlay */}
                   <div
                     className="absolute inset-0 bg-gradient-to-t from-blackout/80 via-blackout/30 to-transparent md:opacity-0 md:group-hover:opacity-80 transition-opacity duration-1000"
@@ -517,7 +520,7 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8 }}
-                  className="relative w-full aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl"
+                  className="relative w-full aspect-[3/4] md:aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl"
                 >
                   <img
                     src="/images/misc/lunes-home-about-1.webp"
@@ -531,7 +534,7 @@ export default function HomePage() {
               {/* Columns 2 & 3: Brand Story */}
               <div className="lg:col-span-2 space-y-12">
                 <div className="space-y-4">
-                  <p className="text-xl md:text-2xl font-serif italic text-blackout">{t('about.greeting', 'Olá, somos a Luísa e o Francisco.')}</p>
+                  <p className="text-2xl md:text-2xl font-serif italic text-blackout">{t('about.greeting', 'Olá, somos a Luísa e o Francisco.')}</p>
 
                   <div className="grid md:grid-cols-2 gap-12 text-base md:text-lg text-blackout/70 leading-relaxed font-normal font-sans">
                     {/* Text Column 1 */}

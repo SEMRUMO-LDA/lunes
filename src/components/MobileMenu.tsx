@@ -175,18 +175,18 @@ export default function MobileMenu({ onContactClick, lineColor = "bg-blackout" }
                 </a>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex gap-5">
-                  <InstagramIcon className="w-5 h-5 text-coconut/30 hover:text-coconut/70 cursor-pointer transition-colors" />
-                  <FacebookIcon className="w-5 h-5 text-coconut/30 hover:text-coconut/70 cursor-pointer transition-colors" />
-                  <a href="mailto:hello@be-lunes.pt">
-                    <Mail className="w-5 h-5 text-coconut/30 hover:text-coconut/70 cursor-pointer transition-colors" />
-                  </a>
-                </div>
-                <div className="flex gap-4 text-coconut/25 text-[10px]">
-                  <a href="/termos" onClick={() => setIsOpen(false)} className="hover:text-coconut/50 transition-colors">Termos</a>
-                  <a href="/privacidade" onClick={() => setIsOpen(false)} className="hover:text-coconut/50 transition-colors">Privacidade</a>
-                </div>
+              <div className="flex justify-center gap-4 text-coconut/25 text-[10px] mb-5">
+                <a href="/termos" onClick={() => setIsOpen(false)} className="hover:text-coconut/50 transition-colors">Termos</a>
+                <span className="opacity-30">|</span>
+                <a href="/privacidade" onClick={() => setIsOpen(false)} className="hover:text-coconut/50 transition-colors">Privacidade</a>
+              </div>
+
+              <div className="flex justify-center gap-8">
+                <InstagramIcon className="w-5 h-5 text-coconut/30 hover:text-coconut/70 cursor-pointer transition-colors" />
+                <FacebookIcon className="w-5 h-5 text-coconut/30 hover:text-coconut/70 cursor-pointer transition-colors" />
+                <a href="mailto:hello@be-lunes.pt">
+                  <Mail className="w-5 h-5 text-coconut/30 hover:text-coconut/70 cursor-pointer transition-colors" />
+                </a>
               </div>
             </motion.div>
           </div>
