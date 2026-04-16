@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: "LUNES Experience",
     title: "LUNES — Time to be You",
     description: "Move. Explore. Feel. Stay. Experiências de bem-estar no Algarve.",
-    images: [{ url: "/images/brand/LUNES horizontal preto.png", width: 1200, height: 630, alt: "LUNES Experience" }],
+    images: [{ url: "/images/brand/lunes-horizontal-preto.png", width: 1200, height: 630, alt: "LUNES Experience" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@type": "Organization",
               name: "LUNES Experience",
               url: "https://www.be-lunes.pt",
-              logo: "https://www.be-lunes.pt/images/brand/LUNES horizontal preto.png",
+              logo: "https://www.be-lunes.pt/images/brand/lunes-horizontal-preto.png",
               description: "Experiências de bem-estar no Algarve — treino personalizado, passeios de barco, permacultura e alojamento.",
               email: "hello@be-lunes.pt",
               address: {

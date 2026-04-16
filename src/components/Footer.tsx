@@ -23,7 +23,7 @@ export default function Footer({ onContactClick }: { onContactClick?: () => void
       <div className="hidden md:block pt-32 pb-12 px-8">
         <div className="max-w-7xl mx-auto grid md:grid-cols-5 gap-16 mb-32 relative z-10">
           <div className="col-span-2 space-y-8">
-            <Image src="/images/brand/LUNES horizontal branco.png" alt="LUNES" width={240} height={48} className="h-12 w-auto" />
+            <Image src="/images/brand/lunes-horizontal-branco.png" alt="LUNES" width={240} height={48} className="h-12 w-auto" />
             <p className="text-coconut/80 max-w-md font-light">
               {t('footer.description', 'Treino personalizado, passeios de barco na costa algarvia, horta em permacultura e alojamento local. Tudo num só lugar, no belo paraíso a sul de portugal chamado Algarve.')}
             </p>
@@ -134,7 +134,7 @@ export default function Footer({ onContactClick }: { onContactClick?: () => void
 
         {/* Logo + tagline centered */}
         <div className="text-center mb-10">
-          <Image src="/images/brand/LUNES horizontal branco.png" alt="LUNES" width={180} height={36} className="h-9 w-auto mx-auto mb-5" />
+          <Image src="/images/brand/lunes-horizontal-branco.png" alt="LUNES" width={180} height={36} className="h-9 w-auto mx-auto mb-5" />
           <p className="text-coconut/60 text-[15px] font-light leading-relaxed max-w-xs mx-auto">
             {t('footer.description', 'Treino personalizado, passeios de barco na costa algarvia, horta em permacultura e alojamento local. Tudo num só lugar, no belo paraíso a sul de portugal chamado Algarve.')}
           </p>
@@ -227,7 +227,7 @@ export default function Footer({ onContactClick }: { onContactClick?: () => void
 
       {/* Background watermark */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[120%] opacity-[0.04] pointer-events-none select-none">
-        <img src="/images/brand/LUNES padrão texto.png" alt="" loading="lazy" className="w-full h-auto brightness-0 invert object-contain" />
+        <img src="/images/brand/lunes-padrao-texto.png" alt="" loading="lazy" className="w-full h-auto brightness-0 invert object-contain" />
       </div>
     </footer>
   );

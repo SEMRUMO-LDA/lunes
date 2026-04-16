@@ -1,4 +1,4 @@
-# Allow access to _next directory (Next.js static assets)
+# Next.js static export with trailingSlash
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
@@ -6,7 +6,16 @@
   RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
 
-  # SPA fallback - serve index.html for all non-file routes
+  # Allow directories (serve index.html inside them)
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Add trailing slash if missing (for directory-based routes)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(.*)$ /$1/ [L,R=301]
+
+  # SPA fallback - serve index.html for all non-file, non-directory routes
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^ /index.html [L]

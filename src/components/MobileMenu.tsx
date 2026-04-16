@@ -196,7 +196,7 @@ export default function MobileMenu({ onContactClick, lineColor = "bg-blackout" }
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
             className="absolute -top-16 -right-16 w-80 h-80 opacity-[0.06] pointer-events-none select-none"
           >
-            <img src="/images/brand/LUNES badge preto.png" alt="" className="w-full h-full object-contain brightness-0 invert" />
+            <img src="/images/brand/lunes-badge-preto.png" alt="" className="w-full h-full object-contain brightness-0 invert" />
           </motion.div>
         </motion.div>
       )}

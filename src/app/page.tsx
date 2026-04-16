@@ -423,7 +423,7 @@ export default function HomePage() {
                     className="w-52 h-52 md:w-64 md:h-64 opacity-15 md:opacity-10"
                   >
                     <img
-                      src="/images/brand/LUNES badge preto.png"
+                      src="/images/brand/lunes-badge-preto.png"
                       alt=""
                       loading="lazy"
                       className="w-full h-full object-contain"

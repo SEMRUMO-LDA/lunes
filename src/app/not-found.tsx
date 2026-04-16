@@ -21,7 +21,7 @@ export default function NotFound() {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          <Image src="/images/brand/LUNES horizontal branco.png" alt="LUNES" width={200} height={40} className="h-10 w-auto mx-auto mb-12 opacity-40" />
+          <Image src="/images/brand/lunes-horizontal-branco.png" alt="LUNES" width={200} height={40} className="h-10 w-auto mx-auto mb-12 opacity-40" />
         </motion.div>
 
         <h1 className="text-[20vw] md:text-[12rem] leading-none font-serif italic tracking-tighter opacity-10">
