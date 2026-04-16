@@ -433,13 +433,13 @@ export default function HomePage() {
               </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {SUB_BRANDS.map((brand, idx) => (
+              {SUB_BRANDS.map((brand) => (
                 <motion.div
                   key={brand.id}
                   whileHover="hover"
                   initial="initial"
                   onClick={() => router.push(`/${brand.id}`)}
-                  className={`group relative h-[500px] md:h-[600px] lg:h-[650px] rounded-[2rem] overflow-hidden cursor-pointer transition-colors duration-1000 ${brand.color}`}
+                  className={`group relative h-[475px] md:h-[570px] lg:h-[617px] rounded-[2rem] overflow-hidden cursor-pointer transition-colors duration-1000 ${brand.color}`}
                   transition={cardTransition}
                 >
                   {/* Background Image */}
@@ -455,52 +455,84 @@ export default function HomePage() {
 
                   {/* Overlay */}
                   <div
-                    className="absolute inset-0 bg-gradient-to-t from-blackout/80 via-blackout/30 to-transparent md:opacity-0 md:group-hover:opacity-80 transition-opacity duration-1000"
+                    className="absolute inset-0 bg-gradient-to-t from-blackout/90 via-blackout/60 to-blackout/30 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-1000"
                   />
 
                   {/* Content Overlay */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-between z-10 transition-colors duration-1000">
-                    <div className="flex justify-between items-start">
-                      <motion.div
-                        variants={{
-                          hover: { scale: 1.1, rotate: -5, transition: { type: "spring", stiffness: 400 } }
-                        }}
-                        className={`p-3 rounded-xl transition-colors duration-1000 shadow-2xl text-white md:${brand.textColor} bg-white/30 md:group-hover:bg-opacity-80`}
-                      >
-                        {brand.icon}
-                      </motion.div>
-                      <span className="text-[10px] font-mono tracking-[0.4em] text-white/40 md:text-blackout/20 md:group-hover:!text-white/40 transition-colors duration-1000">0{idx + 1}</span>
-                    </div>
-
-                    <div className="space-y-1 [&_*]:!text-white md:[&_*]:!text-[unset]">
+                    {/* Top: subtitle + title */}
+                    <div className="space-y-1">
                       <motion.p
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1, duration: 0.8 }}
-                        className={`text-[10px] uppercase tracking-[0.5em] font-sans font-bold mb-2 transition-colors duration-500 ${brand.textColor} opacity-60 group-hover:!text-white/60 group-hover:opacity-100`}
+                        className={`text-[10px] uppercase tracking-[0.5em] font-sans font-bold mb-2 ${brand.textColor} max-md:!text-white/80 opacity-80 group-hover:!text-white/80 transition-colors duration-1000`}
                       >
                         {brand.subtitle}
                       </motion.p>
-                      <h3 className={`text-5xl md:text-6xl italic leading-[0.8] font-serif tracking-tighter transition-colors duration-500 ${brand.textColor} group-hover:!text-white`}>
+                      <h3 className={`text-5xl md:text-6xl italic leading-[0.8] font-serif tracking-tighter ${brand.textColor} max-md:!text-white group-hover:!text-white transition-colors duration-1000`}>
                         {brand.title}
                       </h3>
+                    </div>
+
+                    {/* Bottom */}
+                    <div className="flex items-end justify-between">
+                      <p className={`${brand.textColor} max-md:!text-white/80 group-hover:!text-white/80 text-[13px] font-sans font-bold leading-relaxed opacity-100 md:opacity-0 md:group-hover:!opacity-100 md:translate-y-3 md:group-hover:translate-y-0 transition-all duration-700 delay-100`}>
+                        {brand.shortDescription}
+                      </p>
+
+                      {/* Icon — bottom right */}
                       <motion.div
-                        initial={{ opacity: 0, width: 0 }}
-                        whileInView={{ opacity: 1, width: "100%" }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3, duration: 1 }}
-                        className="flex items-center gap-4 pt-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-500 md:translate-y-4 md:group-hover:translate-y-0"
+                        variants={{
+                          hover: { scale: 1.1, rotate: -5, transition: { type: "spring", stiffness: 400 } }
+                        }}
+                        className={`p-3 rounded-xl transition-colors duration-1000 shadow-2xl ${brand.textColor} max-md:!text-white group-hover:!text-white bg-white/30 shrink-0 ml-4`}
                       >
-                        <div className={`h-[1px] w-8 transition-colors duration-500 ${brand.textColor} bg-current group-hover:bg-white`} />
-                        <span className={`text-[10px] uppercase tracking-[0.5em] font-sans transition-colors duration-500 ${brand.textColor} group-hover:!text-white/80`}>{t('ecosystem.discover', 'Descobrir')}</span>
-                        <ArrowRight className={`w-3 h-3 -rotate-45 transition-colors duration-500 ${brand.textColor} group-hover:!text-white`} />
+                        {brand.icon}
                       </motion.div>
                     </div>
                   </div>
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Ecosystem CTA */}
+        <section className="py-24 md:py-32 px-8 bg-blackout text-coconut text-center relative overflow-hidden">
+          <div className="max-w-2xl mx-auto relative z-10">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="text-3xl md:text-5xl italic leading-tight tracking-tighter mb-6"
+            >
+              {t('cta.title', 'Pronto para redescobrir o seu ritmo natural?')}
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="text-coconut/50 font-sans font-light text-base md:text-lg leading-relaxed mb-10"
+            >
+              {t('cta.text', 'Quer procure movimento, exploração, relaxamento ou simplesmente um lugar para ficar e desconectar, a LUNES tem o espaço ideal para si.')}
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              <button
+                onClick={() => scrollToSection('about')}
+                className="inline-block border border-coconut/20 rounded-full px-10 py-4 text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-coconut hover:bg-coconut hover:text-blackout transition-all duration-300"
+              >
+                {t('cta.button', 'A Nossa História')}
+              </button>
+            </motion.div>
           </div>
         </section>
 
@@ -574,14 +606,14 @@ export default function HomePage() {
               <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold opacity-40">{t('testimonials.subtitle', 'O que dizem sobre a experiência LUNES')}</p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 md:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12">
               {testimonials.map((tm, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.15, duration: 0.8 }}
+                  transition={{ delay: (i % 3) * 0.15, duration: 0.8 }}
                   className="bg-white p-12 rounded-[3rem] shadow-sm hover:shadow-xl transition-all duration-500 group"
                 >
                   <div className="mb-8">

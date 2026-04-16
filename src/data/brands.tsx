@@ -5,6 +5,7 @@ export const SUB_BRANDS = [
     id: "move",
     title: "TIME TO MOVE",
     subtitle: "Movimento com Alma",
+    shortDescription: "Um espaço onde o exercício físico encontra o equilíbrio mental. Treinos desafiantes que respeitam o seu ritmo, focados em fortalecer o seu corpo num ambiente acolhedor.",
     description: "Os nossos treinos são totalmente personalizados, seguros e baseados em ciência, desenhados para si, para os seus objetivos e para o seu estilo de vida. Aqui, cada sessão é uma oportunidade de sentir-se melhor, mais forte e mais confiante.",
     details: [
       "Treino 100% Personalizado",
@@ -31,7 +32,8 @@ export const SUB_BRANDS = [
     id: "explore",
     title: "TIME TO EXPLORE",
     subtitle: "A Liberdade do Horizonte",
-    description: "Há experiências que não se explicam, sentem-se. O mar, a luz, o silêncio e a liberdade de estar presente. Partimos de Portimão para viver a costa sem pressas, com tempo para olhar, respirar e guardar. Seja ao nascer do sol, ao pôr do sol ou num dia tranquilo, este não é apenas um passeio de barco. Partimos sempre de Portimão, para aproveitar cada minuto no mar. Pode escolher um passeio partilhado ou criar uma experiência totalmente privada.",
+    shortDescription: "Aventure-se além do quotidiano. Expedições náuticas e experiências ao ar livre — o silêncio e a imensidão da natureza para se reconectar com o que realmente importa.",
+    description: "Há experiências que não se explicam, sentem-se. O mar, a luz, o silêncio e a liberdade de estar presente. Partimos de Portimão para viver a costa sem pressas, com tempo para olhar, respirar e guardar. Seja ao nascer do sol, ao pôr do sol ou num dia tranquilo, este não é apenas um passeio de barco. Pode escolher um passeio partilhado ou criar uma experiência totalmente privada.",
     details: [
       "Conforto e Segurança Garantidos",
       "Histórias e Cultura da Costa",
@@ -77,6 +79,7 @@ export const SUB_BRANDS = [
     id: "feel",
     title: "TIME TO FEEL",
     subtitle: "A Raiz e a Nutrição",
+    shortDescription: "O regresso à sua base. Experiências desenhadas para nutrir o corpo e acalmar a mente, proporcionando uma verdadeira cura de dentro para fora.",
     description: "Na nossa horta, o tempo abranda. Time to feel é sentir o sabor real do alimento, a energia do cultivo feito com respeito e a tranquilidade de saber a sua origem. Guiados pelos princípios da permacultura, não lutamos contra a natureza, observamos. Criamos sistemas vivos e regenerativos onde a terra, as plantas e os animais vivem em equilíbrio, devolvendo-nos alimento de verdade.",
     details: [
       "Princípios de Permacultura",
@@ -106,6 +109,7 @@ export const SUB_BRANDS = [
     id: "stay",
     title: "TIME TO STAY",
     subtitle: "O Refúgio do Ser",
+    shortDescription: "Um alojamento pensado para que possa simplesmente ser. Design minimalista, luz natural abundante e um ambiente de paz — o refúgio perfeito para respirar fundo.",
     description: "O nosso alojamento local é a materialização física desta identidade visual: espaços amplos, luz natural e uma calma regeneradora. Um lugar desenhado para 'estar', sem a urgência de 'fazer'.",
     details: [
       "Sensação Imediata de Casa",
