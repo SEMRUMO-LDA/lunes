@@ -130,14 +130,13 @@ export function useTours() {
           return orderA - orderB;
         });
 
-        const fallbackImages = [
-          '/images/tours/explore-services-1.webp',
-          '/images/tours/explore-services-2.webp',
-          '/images/tours/explore-services-3.webp',
-          '/images/tours/explore-services-4.webp',
-        ];
+        // No positional fallback for images — it produced mismatches when the CMS
+        // order didn't match the curated images' order. Empty cover_image now falls
+        // back to a neutral placeholder, pushing the operator to upload the right
+        // image for each tour in the CMS.
+        const PLACEHOLDER = '/images/tour-placeholder.svg';
 
-        const mapped: Tour[] = sorted.map((entry: any, idx: number) => {
+        const mapped: Tour[] = sorted.map((entry: any) => {
           const c = entry.content || {};
           // Tours addon v1.0.0 used `time_slots` + `max_capacity`; v1.1.0 renamed
           // to `fixed_slots` + `capacity` and added `short_description`, `cover_image`,
@@ -163,7 +162,7 @@ export function useTours() {
             priceAdult: c.price_adult ? `${c.price_adult}€` : '',
             priceChild: c.price_child ? `${c.price_child}€` : '',
             childAge: c.child_age_range || '2-10 anos',
-            image: c.cover_image || entry.featured_image || fallbackImages[idx] || fallbackImages[0],
+            image: c.cover_image || entry.featured_image || PLACEHOLDER,
             timeSlots: slots,
             digitalTicket: c.is_digital_ticket === true,
             instantConfirmation: c.instant_confirmation === true,
