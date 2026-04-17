@@ -1,9 +1,19 @@
 import { useState, useEffect } from 'react';
 import { kibanService } from '../services/kibanClient';
 
+function formatDurationMinutes(mins: number): string {
+  if (!mins || mins <= 0) return '';
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  if (h && m) return `${h}h${m}`;
+  if (h) return h === 1 ? '1 hora' : `${h} horas`;
+  return `${m} min`;
+}
+
 export interface Tour {
   title: string;
   slug: string;
+  subtitle: string;
   description: string;
   duration: string;
   rating: number;
@@ -14,6 +24,8 @@ export interface Tour {
   childAge: string;
   image: string;
   timeSlots: string[];
+  digitalTicket: boolean;
+  instantConfirmation: boolean;
 }
 
 // Fallback estático — dados atuais do site
@@ -21,6 +33,7 @@ const STATIC_TOURS: Tour[] = [
   {
     title: "Costa de Portimão à Sra. da Rocha",
     slug: "costa-portimao",
+    subtitle: "",
     image: "/images/tours/explore-services-1.webp",
     duration: "2 horas",
     rating: 5,
@@ -30,11 +43,14 @@ const STATIC_TOURS: Tour[] = [
     priceChild: "20€",
     childAge: "2-10 anos",
     description: "Navegamos entre grutas, falésias douradas e praias icónicas. Contamos histórias, exploramos recantos únicos e paramos para mergulho na inesquecível Praia da Marinha.",
-    timeSlots: ["10:00", "14:00"]
+    timeSlots: ["10:00", "14:00"],
+    digitalTicket: true,
+    instantConfirmation: true,
   },
   {
     title: "Rio Arade",
     slug: "rio-arade",
+    subtitle: "",
     image: "/images/tours/explore-services-2.webp",
     duration: "2 horas",
     rating: 5,
@@ -44,11 +60,14 @@ const STATIC_TOURS: Tour[] = [
     priceChild: "20€",
     childAge: "2-10 anos",
     description: "Um passeio calmo, perfeito para quem procura natureza, biodiversidade e silêncio. Aqui o tempo abranda e a ligação ao lugar acontece naturalmente.",
-    timeSlots: ["10:00", "15:00"]
+    timeSlots: ["10:00", "15:00"],
+    digitalTicket: true,
+    instantConfirmation: true,
   },
   {
     title: "Sunrise & Sunset",
     slug: "sunrise-sunset",
+    subtitle: "",
     image: "/images/tours/explore-services-3.webp",
     duration: "2 horas",
     rating: 5,
@@ -58,11 +77,14 @@ const STATIC_TOURS: Tour[] = [
     priceChild: "20€",
     childAge: "2-10 anos",
     description: "Ao nascer ou ao pôr do sol, a luz transforma tudo. As cores, o mar e a atmosfera criam um momento íntimo e memorável, daqueles que se guardam.",
-    timeSlots: ["06:30", "18:00"]
+    timeSlots: ["06:30", "18:00"],
+    digitalTicket: true,
+    instantConfirmation: true,
   },
   {
     title: "Passeios Privados",
     slug: "passeios-privados",
+    subtitle: "",
     image: "/images/tours/explore-services-4.webp",
     duration: "2 horas",
     rating: 5,
@@ -72,7 +94,9 @@ const STATIC_TOURS: Tour[] = [
     priceChild: "",
     childAge: "",
     description: "Uma experiência feita à sua medida, no seu ritmo. Navegue com quem escolhe, descubra a costa com calma e desfrute de uma bebida de boas-vindas a bordo.",
-    timeSlots: ["10:00", "14:00", "18:00"]
+    timeSlots: ["10:00", "14:00", "18:00"],
+    digitalTicket: true,
+    instantConfirmation: true,
   }
 ];
 
@@ -123,14 +147,15 @@ export function useTours() {
             ? c.fixed_slots
             : (Array.isArray(c.time_slots) ? c.time_slots : []);
           const duration = c.duration
-            || (c.duration_minutes ? `${Math.round((c.duration_minutes / 60) * 10) / 10}h` : '');
+            || (c.duration_minutes ? formatDurationMinutes(c.duration_minutes) : '');
           const capacityStr = c.capacity != null ? String(c.capacity)
             : c.max_capacity != null ? String(c.max_capacity)
             : '';
           return {
             title: c.title || entry.title || '',
             slug: entry.slug || '',
-            description: c.short_description || c.description || entry.excerpt || '',
+            subtitle: c.subtitle || '',
+            description: c.full_description || c.short_description || c.description || entry.excerpt || '',
             duration,
             rating: c.rating || 5,
             capacity: capacityStr,
@@ -138,8 +163,10 @@ export function useTours() {
             priceAdult: c.price_adult ? `${c.price_adult}€` : '',
             priceChild: c.price_child ? `${c.price_child}€` : '',
             childAge: c.child_age_range || '2-10 anos',
-            image: c.cover_image || fallbackImages[idx] || fallbackImages[0],
+            image: c.cover_image || entry.featured_image || fallbackImages[idx] || fallbackImages[0],
             timeSlots: slots,
+            digitalTicket: c.is_digital_ticket === true,
+            instantConfirmation: c.instant_confirmation === true,
           };
         });
 

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useParams, useRouter, notFound } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { X, ArrowRight, ArrowUp, Star, Clock, Plus, Minus, User, Users, Building2, Leaf, Heart, RefreshCw, Bird } from "lucide-react";
+import { X, ArrowRight, ArrowUp, Star, Clock, Plus, Minus, User, Users, Building2, Leaf, Heart, RefreshCw, Bird, Smartphone, Zap } from "lucide-react";
 import dynamic from "next/dynamic";
 import { getBrandById, SUB_BRANDS } from "@/src/data/brands";
 import { useTours } from "@/src/hooks/useTours";
@@ -331,14 +331,17 @@ export default function BrandPage() {
                       <Image src={tour.image} alt={tour.title} fill className="object-cover group-hover:scale-110 transition-transform duration-700" sizes="(max-width: 1024px) 100vw, 33vw" unoptimized />
                     </div>
                     <div className="p-8 flex flex-col flex-grow">
-                      <h4 className="text-2xl text-blackout font-light mb-8 text-center">{tour.title}</h4>
+                      <h4 className="text-2xl text-blackout font-light mb-2 text-center">{tour.title}</h4>
+                      {tour.subtitle && (
+                        <p className="text-sm text-blackout/60 italic font-light mb-6 text-center leading-relaxed">{tour.subtitle}</p>
+                      )}
 
-                      <div className="flex justify-between items-center mb-8 px-4">
+                      <div className={`flex justify-between items-center px-4 ${tour.subtitle ? 'mt-2' : 'mt-2'} mb-6`}>
                         <div className="text-center">
                           <span className="text-[10px] uppercase tracking-[0.5em] font-sans block text-blackout/80 mb-2 font-bold">Duração</span>
                           <div className="flex items-center gap-2 justify-center text-blackout/70">
                             <Clock className="w-4 h-4 text-explore-blue" />
-                            <span className="text-sm font-medium">{tour.duration}</span>
+                            <span className="text-sm font-medium">{tour.duration || '—'}</span>
                           </div>
                         </div>
                         <div className="text-center">
@@ -350,9 +353,26 @@ export default function BrandPage() {
                             <Star className="w-3 h-3 fill-current" />
                             <Star className="w-3 h-3 fill-current" />
                           </div>
-                          <span className="text-[10px] text-blackout/40 mt-1 block">5/5</span>
+                          <span className="text-[10px] text-blackout/40 mt-1 block">{tour.rating || 5}/5</span>
                         </div>
                       </div>
+
+                      {(tour.digitalTicket || tour.instantConfirmation) && (
+                        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+                          {tour.digitalTicket && (
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-explore-blue/10 text-explore-blue text-[10px] uppercase tracking-[0.15em] font-sans font-bold">
+                              <Smartphone className="w-3 h-3" />
+                              Bilhete digital
+                            </span>
+                          )}
+                          {tour.instantConfirmation && (
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-explore-blue/10 text-explore-blue text-[10px] uppercase tracking-[0.15em] font-sans font-bold">
+                              <Zap className="w-3 h-3" />
+                              Confirmação imediata
+                            </span>
+                          )}
+                        </div>
+                      )}
 
                       <div className="space-y-4 mb-12 flex-grow">
                         {tour.priceAdult && (
