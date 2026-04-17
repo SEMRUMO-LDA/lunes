@@ -113,20 +113,35 @@ export function useTours() {
           '/images/tours/explore-services-4.webp',
         ];
 
-        const mapped: Tour[] = sorted.map((entry: any, idx: number) => ({
-          title: entry.content?.title || entry.title || '',
-          slug: entry.slug || '',
-          description: entry.content?.description || entry.excerpt || '',
-          duration: entry.content?.duration || '',
-          rating: entry.content?.rating || 5,
-          capacity: entry.content?.capacity || '',
-          priceTotal: entry.content?.price || entry.content?.price_adult ? `${entry.content.price_adult}€` : '',
-          priceAdult: entry.content?.price_adult ? `${entry.content.price_adult}€` : '',
-          priceChild: entry.content?.price_child ? `${entry.content.price_child}€` : '',
-          childAge: entry.content?.child_age_range || '2-10 anos',
-          image: fallbackImages[idx] || fallbackImages[0],
-          timeSlots: entry.content?.time_slots || [],
-        }));
+        const mapped: Tour[] = sorted.map((entry: any, idx: number) => {
+          const c = entry.content || {};
+          // Tours addon v1.0.0 used `time_slots` + `max_capacity`; v1.1.0 renamed
+          // to `fixed_slots` + `capacity` and added `short_description`, `cover_image`,
+          // `duration_minutes`. Read both shapes so the form works regardless of
+          // which schema version the tour was edited under in kibanCMS.
+          const slots: string[] = Array.isArray(c.fixed_slots) && c.fixed_slots.length
+            ? c.fixed_slots
+            : (Array.isArray(c.time_slots) ? c.time_slots : []);
+          const duration = c.duration
+            || (c.duration_minutes ? `${Math.round((c.duration_minutes / 60) * 10) / 10}h` : '');
+          const capacityStr = c.capacity != null ? String(c.capacity)
+            : c.max_capacity != null ? String(c.max_capacity)
+            : '';
+          return {
+            title: c.title || entry.title || '',
+            slug: entry.slug || '',
+            description: c.short_description || c.description || entry.excerpt || '',
+            duration,
+            rating: c.rating || 5,
+            capacity: capacityStr,
+            priceTotal: c.price || (c.price_adult ? `${c.price_adult}€` : ''),
+            priceAdult: c.price_adult ? `${c.price_adult}€` : '',
+            priceChild: c.price_child ? `${c.price_child}€` : '',
+            childAge: c.child_age_range || '2-10 anos',
+            image: c.cover_image || fallbackImages[idx] || fallbackImages[0],
+            timeSlots: slots,
+          };
+        });
 
         if (!cancelled && mapped.length > 0) {
           console.info(`[Kiban CMS] Successfully loaded ${mapped.length} tours.`);
