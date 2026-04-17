@@ -394,9 +394,6 @@ export default function BrandPage() {
                             <span className="text-[10px] text-blackout/40 mt-1 block">{tour.childAge}</span>
                           </div>
                         )}
-                        {tour.description && (
-                          <p className="text-xs text-blackout/50 mt-2 leading-relaxed">{tour.description}</p>
-                        )}
                       </div>
 
                       <button
