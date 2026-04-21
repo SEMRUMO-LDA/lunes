@@ -575,14 +575,14 @@ export default function HomePage() {
                         {t('about.text1', 'A nossa história começou de forma inesperada: de cliente e treinador, transformámo-nos num casal unido por sonhos e cuidado mútuo. Crescemos, curamos e fortalecemo-nos juntos.')}
                       </p>
                       <p>
-                        {t('about.text2', 'É esta parceria de amor e confiança que dá vida à Lunes -- um projeto que carrega a nossa identidade até na fusão dos nossos apelidos,')} <span className="font-semibold uppercase tracking-widest text-[10px] text-blackout border-b border-blackout/20 pb-0.5">Luz e Nunes.</span> {t('about.text2b', 'Mais do que a materialização de um sonho, é a vontade de criar um espaço onde cada momento se torna inesquecível.')}
+                        {t('about.text2', 'É esta parceria de amor e confiança que dá vida à Lunes - um projeto que carrega a nossa identidade até na fusão dos nossos apelidos,')} <span className="font-semibold uppercase tracking-widest text-[10px] text-blackout border-b border-blackout/20 pb-0.5">Luz e Nunes.</span> {t('about.text2b', 'Mais do que a materialização de um sonho, é a vontade de criar um espaço onde cada momento se torna inesquecível.')}
                       </p>
                     </div>
 
                     {/* Text Column 2 */}
                     <div className="space-y-6">
                       <p>
-                        {t('about.text3', 'Acreditamos que o tempo deixou de ser uma imposição. Aqui, o tempo não pressiona; ele acolhe. Convidamo-lo a viver ao seu próprio ritmo, no seu tempo -- finalmente seu.')}
+                        {t('about.text3', 'Acreditamos que o tempo deixou de ser uma imposição. Aqui, o tempo não pressiona; ele acolhe. Convidamo-lo a viver ao seu próprio ritmo, no seu tempo - finalmente seu.')}
                       </p>
                       <p>
                         {t('about.text4', 'A Lunes divide-se em quatro pilares inspirados nos ciclos da natureza:')} <span className="italic font-medium text-blackout text-sm uppercase tracking-wider">Move, Explore, Feel e Stay</span>. {t('about.text4b', 'Quatro formas de regressar ao essencial.')}
