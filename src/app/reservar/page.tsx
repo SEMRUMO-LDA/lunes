@@ -20,6 +20,7 @@ import { useTours } from "@/src/hooks/useTours";
 import {
   checkAvailability,
   createBooking,
+  validateCoupon,
   type TimeSlot,
   type CreateBookingPayload,
 } from "@/src/hooks/useBooking";
@@ -179,6 +180,12 @@ function ReservarPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
+  // Coupon state
+  const [couponInput, setCouponInput] = useState("");
+  const [couponApplied, setCouponApplied] = useState<{ code: string; discountCents: number } | null>(null);
+  const [couponValidating, setCouponValidating] = useState(false);
+  const [couponError, setCouponError] = useState("");
+
   // ─── Derived ───────────────────────────────────────────────────────
 
   const tours = rawTours as any[];
@@ -192,7 +199,9 @@ function ReservarPage() {
 
   const adultPrice = selectedTour ? parsePrice(selectedTour.priceAdult || selectedTour.priceTotal) : 0;
   const childPrice = selectedTour ? parsePrice(selectedTour.priceChild) : 0;
-  const totalPrice = adults * adultPrice + children * childPrice;
+  const subtotal = adults * adultPrice + children * childPrice;
+  const discount = couponApplied ? couponApplied.discountCents / 100 : 0;
+  const totalPrice = Math.max(0, subtotal - discount);
 
   const selectedSlot = selectedSlotIdx !== null ? slots[selectedSlotIdx] : null;
   const maxAvailable = selectedSlot?.available ?? 99;
@@ -253,6 +262,52 @@ function ReservarPage() {
     setStep((s) => Math.max(s - 1, 1));
   }, []);
 
+  // ─── Coupon ────────────────────────────────────────────────────────
+
+  // Clear applied coupon whenever anything that affects validation changes.
+  useEffect(() => {
+    if (couponApplied) {
+      setCouponApplied(null);
+      setCouponError("");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subtotal, formEmail, selectedTour]);
+
+  const applyCoupon = async () => {
+    const code = couponInput.trim();
+    if (!code || !selectedTour || subtotal <= 0) return;
+    if (!formEmail) {
+      setCouponError("Preencha o email no passo anterior.");
+      return;
+    }
+    setCouponValidating(true);
+    setCouponError("");
+    try {
+      const result = await validateCoupon({
+        code,
+        resourceSlug: slugify(selectedTour.title),
+        customerEmail: formEmail,
+        subtotalCents: Math.round(subtotal * 100),
+        currency: "eur",
+      });
+      if (result.valid) {
+        setCouponApplied({ code: result.code, discountCents: result.discountCents });
+      } else {
+        setCouponError(result.message || "Código inválido.");
+      }
+    } catch (err: any) {
+      setCouponError(err.message || "Não foi possível validar o código.");
+    } finally {
+      setCouponValidating(false);
+    }
+  };
+
+  const removeCoupon = () => {
+    setCouponApplied(null);
+    setCouponInput("");
+    setCouponError("");
+  };
+
   // ─── Submit booking ────────────────────────────────────────────────
 
   const handleSubmit = async () => {
@@ -270,6 +325,7 @@ function ReservarPage() {
       email: formEmail,
       phone: formPhone,
       notes: formNotes || undefined,
+      couponCode: couponApplied?.code,
     };
 
     try {
@@ -916,10 +972,77 @@ function ReservarPage() {
                           <span>{children * childPrice}€</span>
                         </div>
                       )}
+                      {couponApplied && discount > 0 && (
+                        <div className="flex justify-between text-explore-blue">
+                          <span>Desconto ({couponApplied.code})</span>
+                          <span>-{discount.toFixed(2).replace(/\.00$/, "")}€</span>
+                        </div>
+                      )}
                       <div className="flex justify-between text-xl pt-4 border-t border-blackout/5">
                         <span className="font-light">Total</span>
                         <span className="font-bold">{totalPrice}€</span>
                       </div>
+                    </div>
+
+                    {/* Promocode */}
+                    <div className="border-t border-blackout/5 pt-6">
+                      <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-blackout/40 block mb-2">
+                        Código promocional
+                      </label>
+                      {couponApplied ? (
+                        <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-explore-cyan/10 border border-explore-cyan/30">
+                          <span className="flex items-center gap-2 text-sm text-explore-blue font-medium">
+                            <Check className="w-4 h-4" />
+                            {couponApplied.code} aplicado
+                          </span>
+                          <button
+                            onClick={removeCoupon}
+                            className="text-[10px] uppercase tracking-[0.2em] font-bold text-blackout/50 hover:text-blackout transition-colors"
+                          >
+                            Remover
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              value={couponInput}
+                              onChange={(e) => {
+                                setCouponInput(e.target.value.toUpperCase());
+                                if (couponError) setCouponError("");
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                  e.preventDefault();
+                                  applyCoupon();
+                                }
+                              }}
+                              placeholder="Introduza o código"
+                              className="flex-1 px-4 py-3 rounded-2xl border border-blackout/10 bg-coconut/30 text-sm tracking-wide focus:outline-none focus:border-explore-cyan transition-colors"
+                              disabled={couponValidating}
+                            />
+                            <button
+                              onClick={applyCoupon}
+                              disabled={couponValidating || !couponInput.trim()}
+                              className={`px-5 py-3 rounded-2xl text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 flex items-center gap-2 ${
+                                couponValidating || !couponInput.trim()
+                                  ? "bg-blackout/5 text-blackout/20 cursor-not-allowed"
+                                  : "bg-explore-cyan text-explore-blue hover:scale-[1.02]"
+                              }`}
+                            >
+                              {couponValidating ? (
+                                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                              ) : (
+                                "Aplicar"
+                              )}
+                            </button>
+                          </div>
+                          {couponError && (
+                            <p className="text-red-500 text-xs mt-2">{couponError}</p>
+                          )}
+                        </>
+                      )}
                     </div>
 
                     {/* Terms */}
