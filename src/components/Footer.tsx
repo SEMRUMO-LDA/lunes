@@ -73,6 +73,15 @@ export default function Footer({ onContactClick }: { onContactClick?: () => void
                   <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
                 </Link>
               </li>
+              <li>
+                <a
+                  href="mailto:hello@be-lunes.pt?subject=LUNES%20-%20CANDIDATURA%20ESPONT%C3%82NEA"
+                  className="relative w-fit hover:text-coconut cursor-pointer transition-colors group block"
+                >
+                  {t('footer.recruitment', 'Recrutamento')}
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-coconut transition-all duration-300 group-hover:w-full" />
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -167,6 +176,7 @@ export default function Footer({ onContactClick }: { onContactClick?: () => void
               <li><Link href="/termos" className="hover:text-coconut transition-colors">{t('footer.terms', 'Termos')}</Link></li>
               <li><Link href="/parceiros" className="hover:text-coconut transition-colors">{t('footer.partners', 'Parceiros')}</Link></li>
               <li><a href="https://www.livroreclamacoes.pt/inicio/" target="_blank" rel="noopener noreferrer" className="hover:text-coconut transition-colors">{t('footer.complaints', 'Reclamações')}</a></li>
+              <li><a href="mailto:hello@be-lunes.pt?subject=LUNES%20-%20CANDIDATURA%20ESPONT%C3%82NEA" className="hover:text-coconut transition-colors">{t('footer.recruitment', 'Recrutamento')}</a></li>
             </ul>
           </div>
           <div>
@@ -225,10 +235,17 @@ export default function Footer({ onContactClick }: { onContactClick?: () => void
         </div>
       </div>
 
-      {/* Background watermark */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[120%] opacity-[0.04] pointer-events-none select-none">
-        <img src="/images/brand/lunes-padrao-texto.png" alt="" loading="lazy" className="w-full h-auto brightness-0 invert object-contain" />
-      </div>
+      {/* Background — tiled LUNES pattern */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-[0.06] pointer-events-none select-none"
+        style={{
+          backgroundImage: "url('/images/brand/lunes-padrao-texto.png')",
+          backgroundRepeat: "repeat",
+          backgroundSize: "420px auto",
+          filter: "brightness(0) invert(1)",
+        }}
+      />
     </footer>
   );
 }
