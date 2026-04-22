@@ -583,32 +583,6 @@ export default function BrandPage() {
           <div className="py-32 border-t border-blackout/5 bg-white">
             <div className="max-w-5xl mx-auto px-8 md:px-16">
 
-              {/* Private Tours */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="mb-24"
-              >
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                  <div className="space-y-6">
-                    <h3 className="text-4xl md:text-5xl font-light italic">Passeios Privados</h3>
-                    <p className="text-lg text-blackout/60 font-light leading-relaxed font-sans">
-                      Uma experiência feita à sua medida, no seu ritmo. Navegue com quem escolhe, descubra a costa com calma e desfrute de uma bebida de boas-vindas a bordo.
-                    </p>
-                    <div className="flex items-baseline gap-4 pt-4">
-                      <span className="text-3xl font-light text-blackout">550€</span>
-                      <span className="text-sm text-blackout/40">Até 17 pessoas</span>
-                    </div>
-                    <p className="text-sm text-blackout/50">Duração: 2 horas</p>
-                  </div>
-                  <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden">
-                    <Image src="/images/tours/explore-services-4.webp" alt="Passeio Privado" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" unoptimized />
-                  </div>
-                </div>
-              </motion.div>
-
               {/* Taylor Made */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -675,6 +649,49 @@ export default function BrandPage() {
                 </a>
               </div>
 
+            </div>
+          </div>
+        )}
+
+        {/* Explore — TripAdvisor testimonials */}
+        {brand.id === 'explore' && (
+          <div className="py-32 border-t border-blackout/5 bg-[#F9FAF9]">
+            <div className="max-w-3xl mx-auto px-8 md:px-16 text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="flex items-center justify-center gap-1 text-[#00AA6C] mb-6">
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                </div>
+
+                <span className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/60 block mb-4">
+                  TripAdvisor
+                </span>
+
+                <h3 className="text-4xl md:text-5xl font-light italic mb-6">
+                  O que dizem sobre nós
+                </h3>
+
+                <p className="text-lg text-blackout/60 font-light leading-relaxed font-sans max-w-2xl mx-auto mb-10">
+                  Os nossos passageiros partilham as suas experiências no TripAdvisor. Leia os testemunhos e, se já navegou connosco, deixe também a sua história.
+                </p>
+
+                <a
+                  href="https://www.tripadvisor.pt/Profile/LunesExperience"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-block px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl`}
+                >
+                  Ver e deixar testemunho
+                </a>
+              </motion.div>
             </div>
           </div>
         )}
@@ -916,7 +933,16 @@ export default function BrandPage() {
                     </div>
                   </div>
 
-                  <div className="mt-12 text-center">
+                  <div className="mt-12 p-6 rounded-3xl bg-stay-pink/15 border border-stay-pink/30 text-center">
+                    <span className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-stay-pink block mb-2">
+                      Reserva Directa
+                    </span>
+                    <p className="text-lg font-light text-blackout">
+                      <span className="font-bold">10% de desconto</span> em reservas feitas diretamente connosco.
+                    </p>
+                  </div>
+
+                  <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                     <a
                       href={brand.reservationLink}
                       target="_blank"
@@ -925,6 +951,12 @@ export default function BrandPage() {
                     >
                       Reservar LUNES STAY
                     </a>
+                    <button
+                      onClick={() => setShowContactForm(true)}
+                      className="inline-block px-12 py-5 rounded-full border border-blackout/20 text-blackout text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:bg-blackout hover:text-coconut transition-all duration-300"
+                    >
+                      Pedir Mais Informações
+                    </button>
                   </div>
 
                   <div className="mt-8 text-center">
