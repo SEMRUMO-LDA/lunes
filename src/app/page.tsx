@@ -293,9 +293,9 @@ export default function HomePage() {
               <img
                 src="/images/tours/explore-services-3.webp"
                 alt=""
-                className="w-full h-full object-cover opacity-40"
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-blackout/50" />
+              <div className="absolute inset-0 bg-blackout/25" />
             </div>
           )}
 
