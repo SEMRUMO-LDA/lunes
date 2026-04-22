@@ -2,13 +2,15 @@
 
 import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import Footer from "@/src/components/Footer";
 import MobileMenu from "@/src/components/MobileMenu";
+import { usePartners } from "@/src/hooks/usePartners";
 
 export default function ParceirosPage() {
   const router = useRouter();
   const goHome = () => router.push("/");
+  const { partners } = usePartners();
 
   return (
     <motion.div
@@ -53,22 +55,45 @@ export default function ParceirosPage() {
           </p>
 
           <div className="grid md:grid-cols-2 gap-8 mt-16">
-            <div className="p-8 rounded-3xl border border-blackout/10 hover:border-blackout/20 transition-all">
-              <h3 className="text-lg font-bold mb-2">Parceria Desportiva</h3>
-              <p className="text-sm text-blackout/50">Em breve...</p>
-            </div>
-            <div className="p-8 rounded-3xl border border-blackout/10 hover:border-blackout/20 transition-all">
-              <h3 className="text-lg font-bold mb-2">Parceria Náutica</h3>
-              <p className="text-sm text-blackout/50">Em breve...</p>
-            </div>
-            <div className="p-8 rounded-3xl border border-blackout/10 hover:border-blackout/20 transition-all">
-              <h3 className="text-lg font-bold mb-2">Parceria Gastronómica</h3>
-              <p className="text-sm text-blackout/50">Em breve...</p>
-            </div>
-            <div className="p-8 rounded-3xl border border-blackout/10 hover:border-blackout/20 transition-all">
-              <h3 className="text-lg font-bold mb-2">Parceria Turismo</h3>
-              <p className="text-sm text-blackout/50">Em breve...</p>
-            </div>
+            {partners.map((partner, idx) => {
+              const Card = (
+                <div className="p-8 rounded-3xl border border-blackout/10 hover:border-blackout/20 hover:shadow-lg transition-all h-full flex flex-col gap-5">
+                  {partner.logo ? (
+                    <div className="h-16 flex items-center">
+                      <img
+                        src={partner.logo}
+                        alt={partner.name}
+                        className="max-h-16 w-auto object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                  ) : null}
+                  <div className="flex-grow">
+                    <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
+                      {partner.name}
+                      {partner.url && <ExternalLink className="w-3.5 h-3.5 opacity-40" />}
+                    </h3>
+                    <p className="text-sm text-blackout/60 leading-relaxed">
+                      {partner.description}
+                    </p>
+                  </div>
+                </div>
+              );
+
+              return partner.url ? (
+                <a
+                  key={idx}
+                  href={partner.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  {Card}
+                </a>
+              ) : (
+                <div key={idx}>{Card}</div>
+              );
+            })}
           </div>
 
           <div className="mt-16 p-12 rounded-3xl bg-blackout/5 text-center">
