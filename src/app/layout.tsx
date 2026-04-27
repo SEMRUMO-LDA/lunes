@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, Kantumruy_Pro } from "next/font/google";
 import Script from "next/script";
 import { TranslationProvider } from "../hooks/useTranslation";
+import KibanSeo from "../components/KibanSeo";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -104,6 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           data-api-key="kiban_live_kExDoEu9ch0gqUdweNil9ddbKl3wqFK"
           strategy="lazyOnload"
         />
+        <KibanSeo />
       </body>
     </html>
   );
