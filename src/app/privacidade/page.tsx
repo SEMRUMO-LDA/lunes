@@ -61,36 +61,36 @@ export default function PrivacidadePage() {
         </div>
 
         <header className="mb-24">
-          <h1 className="text-6xl md:text-8xl italic mb-8 tracking-tighter">Politica de Privacidade</h1>
-          <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40">Data da ultima atualizacao: Fevereiro de 2026</p>
+          <h1 className="text-6xl md:text-8xl italic mb-8 tracking-tighter">Política de Privacidade</h1>
+          <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40">Data da última atualização: Fevereiro de 2026</p>
         </header>
 
         <div className="space-y-16 text-blackout/80 leading-relaxed font-light font-sans">
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">1. Introducao</h2>
+            <h2 className="text-3xl italic text-blackout">1. Introdução</h2>
             <p>
-              A presente Politica de Privacidade estabelece a forma como a Lunes Experience, Lda., com sede na Estrada Municipal 529-1, 8400-492 Porches, pessoa coletiva numero 518855252, doravante designada por &quot;Empresa&quot;, recolhe, utiliza, conserva e protege os dados pessoais dos utilizadores do website <a href="https://www.be-lunes.pt" className="underline underline-offset-4 hover:text-blackout transition-colors">www.be-lunes.pt</a>.
+              A presente Política de Privacidade estabelece a forma como a Lunes Experience, Lda., com sede na Estrada Municipal 529-1, 8400-492 Porches, pessoa coletiva número 518855252, doravante designada por &quot;Empresa&quot;, recolhe, utiliza, conserva e protege os dados pessoais dos utilizadores do website <a href="https://www.be-lunes.pt" className="underline underline-offset-4 hover:text-blackout transition-colors">www.be-lunes.pt</a>.
             </p>
             <p>
-              A Empresa desenvolve a sua atividade nas areas de fitness, atividade maritimo turistica, transporte privado de passageiros e alojamento, disponibilizando servicos para venda online, rececao de pedidos de informacao, reservas e comunicacoes comerciais.
+              A Empresa desenvolve a sua atividade nas áreas de fitness, atividade marítimo-turística, transporte privado de passageiros e alojamento, disponibilizando serviços para venda online, receção de pedidos de informação, reservas e comunicações comerciais.
             </p>
             <p>
-              A Lunes Experience, Lda. assume o compromisso de tratar os dados pessoais de forma licita, leal, transparente e segura, respeitando integralmente a privacidade dos titulares dos dados, em conformidade com a legislacao em vigor em Portugal e na Uniao Europeia.
+              A Lunes Experience, Lda. assume o compromisso de tratar os dados pessoais de forma lícita, leal, transparente e segura, respeitando integralmente a privacidade dos titulares dos dados, em conformidade com a legislação em vigor em Portugal e na União Europeia.
             </p>
           </section>
 
           <section className="space-y-6">
             <h2 className="text-3xl italic text-blackout">2. Enquadramento Legal</h2>
-            <p>O tratamento de dados pessoais e efetuado nos termos e para os efeitos do disposto em:</p>
+            <p>O tratamento de dados pessoais é efetuado nos termos e para os efeitos do disposto em:</p>
             <ul className="list-disc pl-5 space-y-4">
-              <li>Regulamento (UE) 2016/679 do Parlamento Europeu e do Conselho, de 27 de abril de 2016, Regulamento Geral sobre a Protecao de Dados (RGPD)</li>
-              <li>Lei n.o 58/2019, de 8 de agosto, que assegura a execucao do RGPD na ordem juridica portuguesa</li>
-              <li>Demais legislacao nacional e europeia aplicavel em materia de protecao de dados pessoais, privacidade e comunicacoes eletronicas</li>
+              <li>Regulamento (UE) 2016/679 do Parlamento Europeu e do Conselho, de 27 de abril de 2016, Regulamento Geral sobre a Proteção de Dados (RGPD)</li>
+              <li>Lei n.º 58/2019, de 8 de agosto, que assegura a execução do RGPD na ordem jurídica portuguesa</li>
+              <li>Demais legislação nacional e europeia aplicável em matéria de proteção de dados pessoais, privacidade e comunicações eletrónicas</li>
             </ul>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">3. Responsavel pelo Tratamento</h2>
+            <h2 className="text-3xl italic text-blackout">3. Responsável pelo Tratamento</h2>
             <div className="p-8 border border-blackout/10 rounded-2xl bg-blackout/[0.02]">
               <p className="font-bold text-blackout text-[10px] uppercase tracking-[0.2em] mb-4">Lunes Experience, Lda.</p>
               <p>NIF: 518855252</p>
@@ -101,107 +101,107 @@ export default function PrivacidadePage() {
 
           <section className="space-y-6">
             <h2 className="text-3xl italic text-blackout">4. Dados Pessoais Recolhidos</h2>
-            <p>A Empresa podera recolher e tratar dados pessoais de acordo com a natureza da relacao estabelecida com o utilizador, nomeadamente:</p>
+            <p>A Empresa poderá recolher e tratar dados pessoais de acordo com a natureza da relação estabelecida com o utilizador, nomeadamente:</p>
 
             <div className="space-y-8">
               <div>
-                <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">4.1 Dados de Identificacao e Contacto</h3>
+                <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">4.1 Dados de Identificação e Contacto</h3>
                 <ul className="list-disc pl-5 space-y-2">
                   <li>Nome</li>
-                  <li>Endereco de correio eletronico</li>
-                  <li>Numero de telefone</li>
+                  <li>Endereço de correio eletrónico</li>
+                  <li>Número de telefone</li>
                   <li>Morada</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">4.2 Dados de Faturacao e Contratuais</h3>
+                <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">4.2 Dados de Faturação e Contratuais</h3>
                 <ul className="list-disc pl-5 space-y-2">
-                  <li>Numero de identificacao fiscal</li>
-                  <li>Dados necessarios a emissao de faturas e recibos</li>
-                  <li>Informacao relativa a reservas, compras e servicos contratados</li>
+                  <li>Número de identificação fiscal</li>
+                  <li>Dados necessários à emissão de faturas e recibos</li>
+                  <li>Informação relativa a reservas, compras e serviços contratados</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">4.3 Dados de Navegacao e Utilizacao do Website</h3>
+                <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">4.3 Dados de Navegação e Utilização do Website</h3>
                 <ul className="list-disc pl-5 space-y-2">
-                  <li>Endereco IP</li>
+                  <li>Endereço IP</li>
                   <li>Tipo de dispositivo e sistema operativo</li>
                   <li>Browser utilizado</li>
-                  <li>Datas, horarios e duracao das visitas</li>
-                  <li>Paginas visitadas e interacoes realizadas</li>
+                  <li>Datas, horários e duração das visitas</li>
+                  <li>Páginas visitadas e interações realizadas</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">4.4 Dados de Marketing e Comunicacao</h3>
+                <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">4.4 Dados de Marketing e Comunicação</h3>
                 <ul className="list-disc pl-5 space-y-2">
-                  <li>Preferencias de contacto</li>
-                  <li>Subscricao de newsletters</li>
+                  <li>Preferências de contacto</li>
+                  <li>Subscrição de newsletters</li>
                   <li>Registos de consentimento</li>
-                  <li>Historico de comunicacoes</li>
+                  <li>Histórico de comunicações</li>
                 </ul>
               </div>
 
               <div>
                 <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">4.5 Outros Dados Fornecidos Voluntariamente</h3>
-                <p>Informacoes transmitidas atraves de formularios de contacto, pedidos de informacao, reservas, comentarios ou comunicacoes diretas</p>
+                <p>Informações transmitidas através de formulários de contacto, pedidos de informação, reservas, comentários ou comunicações diretas</p>
               </div>
             </div>
           </section>
 
           <section className="space-y-6">
             <h2 className="text-3xl italic text-blackout">5. Finalidades do Tratamento</h2>
-            <p>Os dados pessoais recolhidos sao tratados para as seguintes finalidades:</p>
+            <p>Os dados pessoais recolhidos são tratados para as seguintes finalidades:</p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-5">
-              <li>Gestao de pedidos de contacto, informacoes, reservas e orcamentos</li>
-              <li>Prestacao de servicos nas areas de fitness, nautica, transporte e alojamento</li>
-              <li>Venda online de servicos</li>
-              <li>Gestao administrativa, comercial, contabilistica e fiscal</li>
-              <li>Cumprimento de obrigacoes legais e regulamentares</li>
-              <li>Envio de newsletters e comunicacoes comerciais</li>
-              <li>Gestao da relacao com clientes e utilizadores</li>
-              <li>Analise estatistica e melhoria continua do website</li>
-              <li>Garantia da seguranca do website</li>
+              <li>Gestão de pedidos de contacto, informações, reservas e orçamentos</li>
+              <li>Prestação de serviços nas áreas de fitness, náutica, transporte e alojamento</li>
+              <li>Venda online de serviços</li>
+              <li>Gestão administrativa, comercial, contabilística e fiscal</li>
+              <li>Cumprimento de obrigações legais e regulamentares</li>
+              <li>Envio de newsletters e comunicações comerciais</li>
+              <li>Gestão da relação com clientes e utilizadores</li>
+              <li>Análise estatística e melhoria contínua do website</li>
+              <li>Garantia da segurança do website</li>
             </ul>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">6. Fundamento Juridico do Tratamento</h2>
-            <p>O tratamento de dados pessoais e realizado com base nos seguintes fundamentos juridicos:</p>
+            <h2 className="text-3xl italic text-blackout">6. Fundamento Jurídico do Tratamento</h2>
+            <p>O tratamento de dados pessoais é realizado com base nos seguintes fundamentos jurídicos:</p>
             <ul className="list-disc pl-5 space-y-4">
-              <li>Consentimento do titular dos dados, quando aplicavel</li>
-              <li>Execucao de contrato ou diligencias pre-contratuais a pedido do titular</li>
-              <li>Cumprimento de obrigacoes legais a que a Empresa esteja sujeita</li>
-              <li>Interesse legitimo da Empresa, nomeadamente para a melhoria dos seus servicos e seguranca do website</li>
+              <li>Consentimento do titular dos dados, quando aplicável</li>
+              <li>Execução de contrato ou diligências pré-contratuais a pedido do titular</li>
+              <li>Cumprimento de obrigações legais a que a Empresa esteja sujeita</li>
+              <li>Interesse legítimo da Empresa, nomeadamente para a melhoria dos seus serviços e segurança do website</li>
             </ul>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">7. Conservacao dos Dados</h2>
-            <p>Os dados pessoais sao conservados apenas durante o periodo estritamente necessario para as finalidades que motivaram a sua recolha, ou pelo periodo exigido por lei:</p>
+            <h2 className="text-3xl italic text-blackout">7. Conservação dos Dados</h2>
+            <p>Os dados pessoais são conservados apenas durante o período estritamente necessário para as finalidades que motivaram a sua recolha, ou pelo período exigido por lei:</p>
             <ul className="list-disc pl-5 space-y-4">
-              <li>Dados contratuais e de faturacao: pelo prazo legal aplicavel</li>
-              <li>Dados associados a marketing e newsletters: ate a retirada do consentimento</li>
-              <li>Dados de navegacao: de acordo com os prazos definidos na Politica de Cookies</li>
+              <li>Dados contratuais e de faturação: pelo prazo legal aplicável</li>
+              <li>Dados associados a marketing e newsletters: até à retirada do consentimento</li>
+              <li>Dados de navegação: de acordo com os prazos definidos na Política de Cookies</li>
             </ul>
-            <p>Findos os prazos de conservacao, os dados pessoais serao eliminados ou anonimizados de forma segura.</p>
+            <p>Findos os prazos de conservação, os dados pessoais serão eliminados ou anonimizados de forma segura.</p>
           </section>
 
           <section className="space-y-6">
             <h2 className="text-3xl italic text-blackout">8. Partilha de Dados com Terceiros</h2>
-            <p>Os dados pessoais poderao ser comunicados a terceiros apenas quando tal seja necessario para:</p>
+            <p>Os dados pessoais poderão ser comunicados a terceiros apenas quando tal seja necessário para:</p>
             <ul className="list-disc pl-5 space-y-4">
-              <li>Cumprimento de obrigacoes legais ou ordens de autoridades competentes</li>
-              <li>Prestacao de servicos por entidades subcontratadas (contabilistas, plataformas de pagamento, etc.)</li>
+              <li>Cumprimento de obrigações legais ou ordens de autoridades competentes</li>
+              <li>Prestação de serviços por entidades subcontratadas (contabilistas, plataformas de pagamento, etc.)</li>
             </ul>
-            <p>Estas entidades apenas tratarao os dados mediante instrucoes da Empresa e estao obrigadas a garantir a confidencialidade e seguranca.</p>
+            <p>Estas entidades apenas tratarão os dados mediante instruções da Empresa e estão obrigadas a garantir a confidencialidade e segurança.</p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">9. Transferencias Internacionais de Dados</h2>
-            <p>Sempre que seja necessaria a transferencia de dados para fora do Espaco Economico Europeu, a Empresa assegurara o cumprimento dos requisitos legais aplicaveis.</p>
+            <h2 className="text-3xl italic text-blackout">9. Transferências Internacionais de Dados</h2>
+            <p>Sempre que seja necessária a transferência de dados para fora do Espaço Económico Europeu, a Empresa assegurará o cumprimento dos requisitos legais aplicáveis.</p>
           </section>
 
           <section className="space-y-6">
@@ -209,29 +209,29 @@ export default function PrivacidadePage() {
             <p>O titular dos dados pode, a qualquer momento, exercer os seus direitos:</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 text-sm font-bold uppercase tracking-widest text-blackout/60 transition-colors">
               <span className="hover:text-blackout transition-colors">Direito de acesso</span>
-              <span className="hover:text-blackout transition-colors">Direito de retificacao</span>
+              <span className="hover:text-blackout transition-colors">Direito de retificação</span>
               <span className="hover:text-blackout transition-colors">Direito ao apagamento</span>
-              <span className="hover:text-blackout transition-colors">Direito a limitacao</span>
-              <span className="hover:text-blackout transition-colors">Direito de oposicao</span>
-              <span className="hover:text-blackout transition-colors">Direito a portabilidade</span>
+              <span className="hover:text-blackout transition-colors">Direito à limitação</span>
+              <span className="hover:text-blackout transition-colors">Direito de oposição</span>
+              <span className="hover:text-blackout transition-colors">Direito à portabilidade</span>
               <span className="hover:text-blackout transition-colors">Direito de retirar consentimento</span>
             </div>
-            <p>O exercicio destes direitos pode ser efetuado atraves do email <a href="mailto:hello@be-lunes.pt" className="underline underline-offset-4 hover:text-blackout font-bold">hello@be-lunes.pt</a>.</p>
+            <p>O exercício destes direitos pode ser efetuado através do email <a href="mailto:hello@be-lunes.pt" className="underline underline-offset-4 hover:text-blackout font-bold">hello@be-lunes.pt</a>.</p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">11. Seguranca dos Dados</h2>
-            <p>A Empresa adota medidas tecnicas e organizativas adequadas para proteger os dados pessoais contra a destruicao, perda, alteracao, divulgacao ou acesso nao autorizado.</p>
+            <h2 className="text-3xl italic text-blackout">11. Segurança dos Dados</h2>
+            <p>A Empresa adota medidas técnicas e organizativas adequadas para proteger os dados pessoais contra a destruição, perda, alteração, divulgação ou acesso não autorizado.</p>
           </section>
 
           <section className="space-y-6">
             <h2 className="text-3xl italic text-blackout">12. Cookies</h2>
-            <p>O website utiliza cookies essenciais, funcionais, analiticos e de marketing. A utilizacao de cookies e regulada por uma Politica de Cookies propria.</p>
+            <p>O website utiliza cookies essenciais, funcionais, analíticos e de marketing. A utilização de cookies é regulada por uma Política de Cookies própria.</p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">13. Alteracoes a Politica de Privacidade</h2>
-            <p>A Empresa reserva-se o direito de alterar a presente Politica de Privacidade a qualquer momento. Quaisquer alteracoes serao publicadas no website.</p>
+            <h2 className="text-3xl italic text-blackout">13. Alterações à Política de Privacidade</h2>
+            <p>A Empresa reserva-se o direito de alterar a presente Política de Privacidade a qualquer momento. Quaisquer alterações serão publicadas no website.</p>
           </section>
 
         </div>
