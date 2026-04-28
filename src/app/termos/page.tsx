@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { ArrowLeft } from "lucide-react";
 import Footer from "@/src/components/Footer";
-import MobileMenu from "@/src/components/MobileMenu";
+import SiteHeader from "@/src/components/SiteHeader";
 
 const LunesLogo = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 1501 293" className={className}>
@@ -38,15 +38,9 @@ export default function TermosPage() {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="min-h-screen bg-white overflow-y-auto selection:bg-blackout selection:text-white"
     >
-      {/* Mobile Nav */}
-      <div className="fixed top-0 left-0 w-full z-[110] bg-white/95 backdrop-blur-sm border-b border-blackout/5 px-8 py-4 flex justify-between items-center md:hidden">
-        <a href="/">
-          <LunesLogo className="h-5 w-auto text-blackout" />
-        </a>
-        <MobileMenu />
-      </div>
+      <SiteHeader />
 
-      <div className="max-w-4xl mx-auto px-8 py-24 md:py-32">
+      <div className="max-w-4xl mx-auto px-8 pt-32 pb-24 md:pt-40 md:pb-32">
         <div className="mb-16 space-y-6">
           <a href="/" className="block hover:opacity-60 transition-opacity">
             <LunesLogo className="h-5 w-auto text-blackout" />
@@ -61,46 +55,46 @@ export default function TermosPage() {
         </div>
 
         <header className="mb-24">
-          <h1 className="text-6xl md:text-8xl italic mb-8 tracking-tighter">Termos e Condicoes</h1>
-          <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40">Data da ultima atualizacao: Fevereiro de 2026</p>
+          <h1 className="text-6xl md:text-8xl italic mb-8 tracking-tighter">Termos e Condições</h1>
+          <p className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/40">Data da última atualização: Fevereiro de 2026</p>
         </header>
 
         <div className="space-y-16 text-blackout/80 leading-relaxed font-light font-sans">
           <section className="space-y-6">
             <h2 className="text-3xl italic text-blackout">A Nossa Filosofia</h2>
             <p>
-              Na Lunes acreditamos que o mar nao e apenas um cenario, e um espaco vivo que merece respeito, cuidado e presenca consciente.
+              Na Lunes acreditamos que o mar não é apenas um cenário, é um espaço vivo que merece respeito, cuidado e presença consciente.
             </p>
             <p>
-              Cada experiencia e pensada para criar momentos de conexao, liberdade e bem-estar, com a seguranca como prioridade e um profundo respeito pela natureza, pela comunidade local e por quem partilha o mar connosco.
+              Cada experiência é pensada para criar momentos de conexão, liberdade e bem-estar, com a segurança como prioridade e um profundo respeito pela natureza, pela comunidade local e por quem partilha o mar connosco.
             </p>
             <p>
-              Ao participar numa experiencia Lunes, cada pessoa torna-se parte ativa desta filosofia. Cuidar do oceano, da embarcacao e de todos a bordo faz parte da viagem.
+              Ao participar numa experiência Lunes, cada pessoa torna-se parte ativa desta filosofia. Cuidar do oceano, da embarcação e de todos a bordo faz parte da viagem.
             </p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">1. Identificacao da Empresa</h2>
+            <h2 className="text-3xl italic text-blackout">1. Identificação da Empresa</h2>
             <p>
-              Os presentes Termos e Condicoes regulam a utilizacao do website e a contratacao dos servicos prestados por Lunes Experience, Lda., pessoa coletiva n.o 518855252, doravante designada por &quot;Lunes Experience&quot;.
+              Os presentes Termos e Condições regulam a utilização do website e a contratação dos serviços prestados por Lunes Experience, Lda., pessoa coletiva n.º 518855252, doravante designada por &quot;Lunes Experience&quot;.
             </p>
             <p>Contacto de email: <a href="mailto:hello@be-lunes.pt" className="underline underline-offset-4 font-bold">hello@be-lunes.pt</a></p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">2. Filosofia, Organizacao e Codigo de Conduta</h2>
+            <h2 className="text-3xl italic text-blackout">2. Filosofia, Organização e Código de Conduta</h2>
             <p>
-              A Lunes Experience promove atividades maritimo-turisticas assentes no respeito pela natureza, pelo patrimonio cultural e pelos modos de vida locais. Durante as experiencias, espera-se de todos os participantes uma conduta responsavel, consciente e respeitosa.
+              A Lunes Experience promove atividades marítimo-turísticas assentes no respeito pela natureza, pelo património cultural e pelos modos de vida locais. Durante as experiências, espera-se de todos os participantes uma conduta responsável, consciente e respeitosa.
             </p>
             <p>
-              A Lunes Experience reserva-se o direito de interromper ou cancelar qualquer atividade caso o comportamento de um ou mais participantes coloque em causa a seguranca, o ambiente, a tripulacao, a embarcacao ou a filosofia da experiencia, sem direito a reembolso.
+              A Lunes Experience reserva-se o direito de interromper ou cancelar qualquer atividade caso o comportamento de um ou mais participantes coloque em causa a segurança, o ambiente, a tripulação, a embarcação ou a filosofia da experiência, sem direito a reembolso.
             </p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">3. Ambito de Aplicacao</h2>
+            <h2 className="text-3xl italic text-blackout">3. Âmbito de Aplicação</h2>
             <p>
-              Os presentes Termos e Condicoes aplicam-se a todos os utilizadores do website e a todos os clientes que contratem servicos da Lunes Experience, independentemente do canal de reserva utilizado.
+              Os presentes Termos e Condições aplicam-se a todos os utilizadores do website e a todos os clientes que contratem serviços da Lunes Experience, independentemente do canal de reserva utilizado.
             </p>
           </section>
 
@@ -108,105 +102,105 @@ export default function TermosPage() {
             <h2 className="text-3xl italic text-blackout">4. Reservas</h2>
             <div>
               <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout mb-4">4.1 Processo de Reserva</h3>
-              <p>As reservas podem ser efetuadas atraves do website, por email ou por outros canais devidamente autorizados. A reserva considera-se valida apenas apos o pagamento total do valor e confirmacao expressa pela Lunes Experience.</p>
+              <p>As reservas podem ser efetuadas através do website, por email ou por outros canais devidamente autorizados. A reserva considera-se válida apenas após o pagamento total do valor e confirmação expressa pela Lunes Experience.</p>
             </div>
           </section>
 
           <section className="space-y-6">
             <h2 className="text-3xl italic text-blackout">5. Voucher de Embarque</h2>
             <p>
-              Apos confirmacao do pagamento, o cliente recebera uma comunicacao eletronica que funciona como voucher de embarque, devendo ser apresentada em formato digital ou impresso no momento do check-in.
+              Após confirmação do pagamento, o cliente receberá uma comunicação eletrónica que funciona como voucher de embarque, devendo ser apresentada em formato digital ou impresso no momento do check-in.
             </p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">6. Precos e Promocoes</h2>
+            <h2 className="text-3xl italic text-blackout">6. Preços e Promoções</h2>
             <p>
-              Todos os precos sao apresentados em euros e incluem IVA a taxa legal em vigor. Alteracoes de precos nao afetam reservas ja confirmadas.
+              Todos os preços são apresentados em euros e incluem IVA à taxa legal em vigor. Alterações de preços não afetam reservas já confirmadas.
             </p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">7. Criancas e Condicoes de Participacao</h2>
+            <h2 className="text-3xl italic text-blackout">7. Crianças e Condições de Participação</h2>
             <p>
-              Algumas experiencias podem ter precos diferenciados para criancas. A Lunes Experience reserva-se o direito de solicitar documentacao para verificacao da idade dos menores. Todos os menores devem estar acompanhados por um adulto responsavel.
+              Algumas experiências podem ter preços diferenciados para crianças. A Lunes Experience reserva-se o direito de solicitar documentação para verificação da idade dos menores. Todos os menores devem estar acompanhados por um adulto responsável.
             </p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">8. Horarios, Check-in e Nao Comparecimento</h2>
+            <h2 className="text-3xl italic text-blackout">8. Horários, Check-in e Não Comparecimento</h2>
             <p>
-              O check-in deve ser efetuado ate 30 minutos antes da hora marcada. A nao comparencia ou atraso podera resultar na exclusao do participante, sem direito a reembolso.
+              O check-in deve ser efetuado até 30 minutos antes da hora marcada. A não comparência ou atraso poderá resultar na exclusão do participante, sem direito a reembolso.
             </p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">9. Condicoes Meteorologicas e Seguranca</h2>
+            <h2 className="text-3xl italic text-blackout">9. Condições Meteorológicas e Segurança</h2>
             <p>
-              Todas as atividades estao dependentes das condicoes meteorologicas. A decisao final cabe exclusivamente ao comandante da embarcacao. Em caso de cancelamento por seguranca, o cliente podera optar por reagendamento ou reembolso total.
+              Todas as atividades estão dependentes das condições meteorológicas. A decisão final cabe exclusivamente ao comandante da embarcação. Em caso de cancelamento por segurança, o cliente poderá optar por reagendamento ou reembolso total.
             </p>
             <div className="p-8 border border-blackout/10 rounded-2xl bg-blackout/[0.02] space-y-4">
-              <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout">Seguranca a Bordo</h3>
-              <p>Os participantes devem seguir sempre as instrucoes da tripulacao. O acionamento indevido ou negligente de um colete salva-vidas implica o pagamento de uma taxa de 90EUR.</p>
+              <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout">Segurança a Bordo</h3>
+              <p>Os participantes devem seguir sempre as instruções da tripulação. O acionamento indevido ou negligente de um colete salva-vidas implica o pagamento de uma taxa de 90€.</p>
             </div>
           </section>
 
           <section className="space-y-6">
             <h2 className="text-3xl italic text-blackout">10. Cancelamentos e Reembolsos</h2>
             <ul className="list-disc pl-5 space-y-2">
-              <li>Cancelamento ate 72 horas antes: reembolso total</li>
+              <li>Cancelamento até 72 horas antes: reembolso total</li>
               <li>Cancelamento entre 72 e 24 horas antes: reembolso de 50%</li>
               <li>Cancelamentos com menos de 24 horas: sem reembolso</li>
             </ul>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">11. Condicoes para Embarque e Comportamento</h2>
-            <p>A Lunes Experience podera recusar o embarque a participantes sob efeito excessivo de alcool, substancias ilicitas ou que demonstrem comportamentos de risco.</p>
+            <h2 className="text-3xl italic text-blackout">11. Condições para Embarque e Comportamento</h2>
+            <p>A Lunes Experience poderá recusar o embarque a participantes sob efeito excessivo de álcool, substâncias ilícitas ou que demonstrem comportamentos de risco.</p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">12. Regras a Bordo e Consciencia Ambiental</h2>
+            <h2 className="text-3xl italic text-blackout">12. Regras a Bordo e Consciência Ambiental</h2>
             <ul className="list-disc pl-5 space-y-2">
-              <li>E proibido fumar ou vaporizar a bordo</li>
-              <li>Nao e permitido deitar qualquer objeto ao mar</li>
-              <li>Todos os residuos devem ser entregues a tripulacao no final</li>
+              <li>É proibido fumar ou vaporizar a bordo</li>
+              <li>Não é permitido deitar qualquer objeto ao mar</li>
+              <li>Todos os resíduos devem ser entregues à tripulação no final</li>
             </ul>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">13. Utilizacao de Embarcacoes</h2>
-            <p>Reservamos o direito de substituir a embarcacao por outra de caracteristicas semelhantes por motivos tecnicos ou de seguranca.</p>
+            <h2 className="text-3xl italic text-blackout">13. Utilização de Embarcações</h2>
+            <p>Reservamos o direito de substituir a embarcação por outra de características semelhantes por motivos técnicos ou de segurança.</p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">14. Uso de Imagem e Video</h2>
-            <p>A participacao implica autorizacao para captacao de imagens para fins promocionais, salvo indicacao em contrario ate ao check-in.</p>
+            <h2 className="text-3xl italic text-blackout">14. Uso de Imagem e Vídeo</h2>
+            <p>A participação implica autorização para captação de imagens para fins promocionais, salvo indicação em contrário até ao check-in.</p>
           </section>
 
           <section className="space-y-6">
             <h2 className="text-3xl italic text-blackout">15. Responsabilidade e Bens Pessoais</h2>
-            <p>A empresa dispoe de seguros obrigatorios, mas nao se responsabiliza por perdas ou danos em bens pessoais dos participantes.</p>
+            <p>A empresa dispõe de seguros obrigatórios, mas não se responsabiliza por perdas ou danos em bens pessoais dos participantes.</p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">16. Protecao de Dados</h2>
-            <p>Tratamos os dados em conformidade com o RGPD. Para mais detalhe, consulte a nossa Politica de Privacidade.</p>
+            <h2 className="text-3xl italic text-blackout">16. Proteção de Dados</h2>
+            <p>Tratamos os dados em conformidade com o RGPD. Para mais detalhe, consulte a nossa Política de Privacidade.</p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">17. Reclamacoes</h2>
-            <p>Disponibilizamos Livro de Reclamacoes em formato fisico e eletronico.</p>
+            <h2 className="text-3xl italic text-blackout">17. Reclamações</h2>
+            <p>Disponibilizamos Livro de Reclamações em formato físico e eletrónico.</p>
           </section>
 
           <section className="space-y-6">
-            <h2 className="text-3xl italic text-blackout">18. Alteracoes aos Termos</h2>
+            <h2 className="text-3xl italic text-blackout">18. Alterações aos Termos</h2>
             <p>A Lunes reserva-se o direito de alterar estes Termos a qualquer momento.</p>
           </section>
 
           <section className="space-y-6">
             <h2 className="text-3xl italic text-blackout">19. Lei e Foro</h2>
-            <p>Regem-se pela lei portuguesa. O foro competente e o da comarca da sede da Lunes Experience.</p>
+            <p>Regem-se pela lei portuguesa. O foro competente é o da comarca da sede da Lunes Experience.</p>
           </section>
 
         </div>

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { ArrowLeft, Leaf, Heart, RefreshCw, Bird } from "lucide-react";
 import Footer from "@/src/components/Footer";
-import MobileMenu from "@/src/components/MobileMenu";
+import SiteHeader from "@/src/components/SiteHeader";
 
 const LunesLogo = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 1501 293" className={className}>
@@ -38,15 +38,9 @@ export default function FilosofiaPage() {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="min-h-screen bg-white overflow-y-auto selection:bg-feel-sage selection:text-white"
     >
-      {/* Mobile Nav */}
-      <div className="fixed top-0 left-0 w-full z-[110] bg-white/95 backdrop-blur-sm border-b border-blackout/5 px-8 py-4 flex justify-between items-center md:hidden">
-        <a href="/">
-          <LunesLogo className="h-5 w-auto text-blackout" />
-        </a>
-        <MobileMenu />
-      </div>
+      <SiteHeader />
 
-      <div className="max-w-4xl mx-auto px-8 py-24 md:py-32">
+      <div className="max-w-4xl mx-auto px-8 pt-32 pb-24 md:pt-40 md:pb-32">
         <div className="mb-16 space-y-6">
           <a href="/" className="block hover:opacity-60 transition-opacity">
             <LunesLogo className="h-5 w-auto text-blackout" />
@@ -68,7 +62,7 @@ export default function FilosofiaPage() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-feel-sage mb-6"
           >
-            A Raiz e a Nutricao
+            A Raiz e a Nutrição
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -84,7 +78,7 @@ export default function FilosofiaPage() {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="text-xl md:text-2xl text-blackout/50 font-light italic max-w-2xl"
           >
-            Basicamente e voltar as raizes, e uma forma de pensar, desenhar e viver que respeita os ritmos da natureza, reduz dependencias externas e cria abundancia real com menos esforco.
+            Basicamente é voltar às raízes, é uma forma de pensar, desenhar e viver que respeita os ritmos da natureza, reduz dependências externas e cria abundância real com menos esforço.
           </motion.p>
         </header>
 
@@ -100,7 +94,7 @@ export default function FilosofiaPage() {
           >
             <h2 className="text-3xl md:text-4xl italic text-blackout">TIME TO FEEL: O Regresso aos Sentidos</h2>
             <p className="text-lg">
-              Aqui, acreditamos que a verdadeira conexao comeca no sentir. Nao se trata apenas de agricultura, mas sim de:
+              Aqui, acreditamos que a verdadeira conexão começa no sentir. Não se trata apenas de agricultura, mas sim de:
             </p>
             <div className="space-y-4 pl-6 border-l-2 border-feel-sage/40">
               <p className="text-lg">Sentir o <span className="font-medium text-blackout">sabor real</span> dos alimentos.</p>
@@ -108,7 +102,7 @@ export default function FilosofiaPage() {
               <p className="text-lg">Sentir a <span className="font-medium text-blackout">tranquilidade</span> de saber exatamente de onde vem o que comemos.</p>
             </div>
             <p className="text-lg">
-              Na nossa horta, o que se sente primeiro e a calma. Depois vem o foco, a presenca total no agora. Esse estado nao e um acaso; e a consequencia direta da forma como escolhemos cuidar da terra.
+              Na nossa horta, o que se sente primeiro é a calma. Depois vem o foco, a presença total no agora. Esse estado não é um acaso; é a consequência direta da forma como escolhemos cuidar da terra.
             </p>
           </motion.section>
 
@@ -120,25 +114,25 @@ export default function FilosofiaPage() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-8"
           >
-            <h2 className="text-3xl md:text-4xl italic text-blackout">A Nossa Essencia: Principios da Permacultura</h2>
+            <h2 className="text-3xl md:text-4xl italic text-blackout">A Nossa Essência: Princípios da Permacultura</h2>
             <p className="text-lg">
-              Guiamo-nos por uma etica simples mas profunda, baseada na permacultura:
+              Guiamo-nos por uma ética simples mas profunda, baseada na permacultura:
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="p-8 rounded-2xl bg-feel-athletics/30 border border-feel-sage/10 space-y-4">
                 <Leaf className="w-6 h-6 text-feel-sage" />
                 <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout">Cuidar da Terra</h3>
-                <p className="text-sm text-blackout/70">Preservar solos, agua, florestas e todos os sistemas vivos.</p>
+                <p className="text-sm text-blackout/70">Preservar solos, água, florestas e todos os sistemas vivos.</p>
               </div>
               <div className="p-8 rounded-2xl bg-feel-athletics/30 border border-feel-sage/10 space-y-4">
                 <Heart className="w-6 h-6 text-feel-sage" />
                 <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout">Cuidar das Pessoas</h3>
-                <p className="text-sm text-blackout/70">Garantir que todos tem acesso ao que precisam para viver com dignidade.</p>
+                <p className="text-sm text-blackout/70">Garantir que todos têm acesso ao que precisam para viver com dignidade.</p>
               </div>
               <div className="p-8 rounded-2xl bg-feel-athletics/30 border border-feel-sage/10 space-y-4">
                 <RefreshCw className="w-6 h-6 text-feel-sage" />
                 <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout">Partilha Justa</h3>
-                <p className="text-sm text-blackout/70">Distribuir excedentes, limitar o consumo e devolver a Terra o que ela nos da.</p>
+                <p className="text-sm text-blackout/70">Distribuir excedentes, limitar o consumo e devolver à Terra o que ela nos dá.</p>
               </div>
             </div>
           </motion.section>
@@ -153,14 +147,14 @@ export default function FilosofiaPage() {
           >
             <h2 className="text-3xl md:text-4xl italic text-blackout">Observar em vez de Impor</h2>
             <p className="text-lg">
-              A nossa forma de viver e produzir baseia-se numa ideia simples: a natureza ja sabe o que esta a fazer.
+              A nossa forma de viver e produzir baseia-se numa ideia simples: a natureza já sabe o que está a fazer.
             </p>
             <p className="text-lg">
-              Em vez de lutar contra ela, observamos. Em vez de impor solucoes rapidas, criamos sistemas que se equilibram sozinhos com o tempo. A natureza ensina-nos que quando respeitamos os ciclos naturais, tudo se torna mais simples, mais eficiente e mais saudavel.
+              Em vez de lutar contra ela, observamos. Em vez de impor soluções rápidas, criamos sistemas que se equilibram sozinhos com o tempo. A natureza ensina-nos que quando respeitamos os ciclos naturais, tudo se torna mais simples, mais eficiente e mais saudável.
             </p>
             <div className="p-8 rounded-2xl bg-blackout/[0.02] border border-blackout/5">
               <p className="text-lg italic text-blackout/60">
-                O crescimento pode ser mais lento, mas e real. O alimento pode parecer menos abundante, mas e completo.
+                O crescimento pode ser mais lento, mas é real. O alimento pode parecer menos abundante, mas é completo.
               </p>
             </div>
           </motion.section>
@@ -175,21 +169,21 @@ export default function FilosofiaPage() {
           >
             <h2 className="text-3xl md:text-4xl italic text-blackout">Um Ecossistema Vivo e Conectado</h2>
             <p className="text-lg">
-              Aqui, cada elemento tem uma funcao e nada existe isolado: o solo alimenta as plantas, as plantas protegem o solo, as galinhas fertilizam a terra, e a terra, regenerada, devolve alimento de verdade.
+              Aqui, cada elemento tem uma função e nada existe isolado: o solo alimenta as plantas, as plantas protegem o solo, as galinhas fertilizam a terra, e a terra, regenerada, devolve alimento de verdade.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-8 rounded-2xl bg-feel-athletics/30 border border-feel-sage/10 space-y-4">
                 <Leaf className="w-6 h-6 text-feel-sage" />
                 <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout">O Solo Vivo</h3>
                 <p className="text-sm text-blackout/70">
-                  Os nossos legumes crescem numa terra rica e viva, cheia de microvida, alimentada apenas com sol, agua e tempo.
+                  Os nossos legumes crescem numa terra rica e viva, cheia de microvida, alimentada apenas com sol, água e tempo.
                 </p>
               </div>
               <div className="p-8 rounded-2xl bg-feel-athletics/30 border border-feel-sage/10 space-y-4">
                 <Bird className="w-6 h-6 text-feel-sage" />
                 <h3 className="text-sm uppercase tracking-[0.3em] font-bold text-blackout">Animais em Liberdade</h3>
                 <p className="text-sm text-blackout/70">
-                  As nossas galinhas vivem livres, num ambiente natural, onde desfrutam do ar puro, do sol e da generosidade da terra. Cuidamos para que tenham uma pastagem rica e variada, repleta de leguminosas e outros alimentos naturais, garantindo-lhes nao so nutricao, mas verdadeiro bem-estar.
+                  As nossas galinhas vivem livres, num ambiente natural, onde desfrutam do ar puro, do sol e da generosidade da terra. Cuidamos para que tenham uma pastagem rica e variada, repleta de leguminosas e outros alimentos naturais, garantindo-lhes não só nutrição, mas verdadeiro bem-estar.
                 </p>
               </div>
             </div>

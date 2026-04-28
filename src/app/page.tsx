@@ -221,12 +221,10 @@ export default function HomePage() {
       {/* Custom cursor removed — using default browser cursor */}
 
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 w-full px-8 transition-all duration-500 flex justify-between items-center text-coconut ${
-        "z-50"
-      } ${
+      <nav className={`fixed top-0 left-0 w-full px-8 py-4 transition-all duration-500 flex justify-between items-center text-coconut z-50 ${
         isScrolled
-          ? "bg-blackout/95 backdrop-blur-sm py-4 border-b border-coconut/10 shadow-lg"
-          : "py-6 mix-blend-difference"
+          ? "bg-blackout/95 backdrop-blur-sm border-b border-coconut/10 shadow-lg"
+          : "mix-blend-difference"
       }`}>
         <div className="flex items-center cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           <LunesLogo className="h-6 md:h-7 w-auto group-hover:drop-shadow-[0_0_10px_rgba(251,249,249,0.6)] transition-all duration-300" />

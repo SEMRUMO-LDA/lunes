@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { ArrowLeft } from "lucide-react";
 import Footer from "@/src/components/Footer";
-import MobileMenu from "@/src/components/MobileMenu";
+import SiteHeader from "@/src/components/SiteHeader";
 
 const LunesLogo = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 1501 293" className={className}>
@@ -38,15 +38,9 @@ export default function PrivacidadePage() {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="min-h-screen bg-white overflow-y-auto selection:bg-blackout selection:text-white"
     >
-      {/* Mobile Nav */}
-      <div className="fixed top-0 left-0 w-full z-[110] bg-white/95 backdrop-blur-sm border-b border-blackout/5 px-8 py-4 flex justify-between items-center md:hidden">
-        <a href="/">
-          <LunesLogo className="h-5 w-auto text-blackout" />
-        </a>
-        <MobileMenu />
-      </div>
+      <SiteHeader />
 
-      <div className="max-w-4xl mx-auto px-8 py-24 md:py-32">
+      <div className="max-w-4xl mx-auto px-8 pt-32 pb-24 md:pt-40 md:pb-32">
         <div className="mb-16 space-y-6">
           <a href="/" className="block hover:opacity-60 transition-opacity">
             <LunesLogo className="h-5 w-auto text-blackout" />
