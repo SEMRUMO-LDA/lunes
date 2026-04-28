@@ -287,33 +287,15 @@ export default function HomePage() {
       <div>
         {/* Hero Section */}
         <section className="relative h-screen flex flex-col items-center justify-center bg-blackout text-coconut overflow-hidden select-none">
-          {/* Mobile Background Image */}
-          {isMobile && (
-            <div className="absolute inset-0 z-0">
-              <img
-                src="/images/tours/explore-services-3.webp"
-                alt=""
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-blackout/25" />
-            </div>
-          )}
-
-          {/* YouTube Background Video (desktop only) */}
-          {!isMobile && (
-            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[115vh] min-w-[177.77vh] min-h-[56.25vw]">
-                <iframe
-                  src="https://www.youtube.com/embed/5ZBRAddjwwU?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&autohide=1&modestbranding=1&playlist=5ZBRAddjwwU&rel=0&enablejsapi=1"
-                  className="w-full h-full pointer-events-none opacity-30 contrast-125 scale-110"
-                  allow="autoplay; encrypted-media"
-                  loading="lazy"
-                  title="Lunes Background Video"
-                />
-              </div>
-              <div className="absolute inset-0 bg-blackout/40" />
-            </div>
-          )}
+          {/* Hero Background Image */}
+          <div className="absolute inset-0 z-0">
+            <img
+              src="/images/hero-sunset-cave.webp"
+              alt=""
+              className="w-full h-full object-cover"
+            />
+            <div className={`absolute inset-0 ${isMobile ? "bg-blackout/25" : "bg-blackout/40"}`} />
+          </div>
 
           {/* Grainy Cinematic Overlay (desktop only) */}
           {!isMobile && (
