@@ -56,9 +56,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="theme-color" content="#1E1E1E" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <link rel="preconnect" href="https://www.youtube.com" />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero-sunset-cave.webp"
+          fetchPriority="high"
+        />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://www.youtube.com" />
       </head>
       <body className="bg-blackout">
         <script

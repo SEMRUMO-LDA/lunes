@@ -292,6 +292,10 @@ export default function HomePage() {
             <img
               src="/images/hero-sunset-cave.webp"
               alt=""
+              width={1920}
+              height={1080}
+              fetchPriority="high"
+              decoding="async"
               className="w-full h-full object-cover"
             />
             <div className={`absolute inset-0 ${isMobile ? "bg-blackout/25" : "bg-blackout/40"}`} />
