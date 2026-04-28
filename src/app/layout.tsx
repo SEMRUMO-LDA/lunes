@@ -105,6 +105,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           data-api-key="kiban_live_kExDoEu9ch0gqUdweNil9ddbKl3wqFK"
           strategy="lazyOnload"
         />
+        <Script
+          src="https://kiban.pt/api/v1/whatsapp-widget/widget.js"
+          data-api-key="kiban_live_kExDoEu9ch0gqUdweNil9ddbKl3wqFK"
+          strategy="lazyOnload"
+        />
         <KibanSeo />
       </body>
     </html>
