@@ -283,6 +283,16 @@ function ReservarPage() {
   const applyCoupon = async () => {
     const code = couponInput.trim();
     if (!code || !selectedTour || subtotal <= 0) return;
+
+    // When the booking will redirect to a Stripe Payment Link (per-tour or
+    // global fallback), Stripe is the source of truth for promo codes — skip
+    // the local validation API and just forward the code at submit.
+    if (selectedTour.externalBookingUrl || process.env.NEXT_PUBLIC_DEFAULT_PAYMENT_LINK) {
+      setCouponApplied({ code, discountCents: 0 });
+      setCouponError("");
+      return;
+    }
+
     if (!formEmail) {
       setCouponError("Preencha o email no passo anterior.");
       return;
@@ -327,7 +337,14 @@ function ReservarPage() {
     // (Stripe Payment Links accept `prefilled_email` and `prefilled_promo_code`)
     // and pass the booking context as `client_reference_id` so it shows up in
     // the Stripe dashboard alongside the payment.
-    const externalUrl: string = selectedTour.externalBookingUrl || "";
+    //
+    // Tour-specific link wins; otherwise NEXT_PUBLIC_DEFAULT_PAYMENT_LINK acts
+    // as a global fallback so the form works while individual links are still
+    // being set up in the CMS.
+    const externalUrl: string =
+      selectedTour.externalBookingUrl ||
+      process.env.NEXT_PUBLIC_DEFAULT_PAYMENT_LINK ||
+      "";
     if (externalUrl) {
       try {
         const url = new URL(externalUrl);
