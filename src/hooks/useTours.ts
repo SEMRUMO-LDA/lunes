@@ -26,6 +26,12 @@ export interface Tour {
   timeSlots: string[];
   digitalTicket: boolean;
   instantConfirmation: boolean;
+  /**
+   * Optional Stripe Payment Link (or any external checkout URL). When set,
+   * the booking form short-circuits to this URL instead of calling the
+   * internal /bookings/v2/checkout endpoint.
+   */
+  externalBookingUrl?: string;
 }
 
 // Fallback estático — dados atuais do site
@@ -166,6 +172,7 @@ export function useTours() {
             timeSlots: slots,
             digitalTicket: c.is_digital_ticket === true,
             instantConfirmation: c.instant_confirmation === true,
+            externalBookingUrl: c.external_booking_url || c.stripe_payment_link || '',
           };
         });
 

@@ -146,6 +146,13 @@ function ReservarPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tourParam = searchParams.get("tour");
+  // Promo code can come in via ?promocode=TIAGO10 (also accept ?coupon= and ?promo=).
+  const promoFromUrl = (
+    searchParams.get("promocode") ||
+    searchParams.get("coupon") ||
+    searchParams.get("promo") ||
+    ""
+  ).trim();
 
   const { tours: rawTours, loading: toursLoading } = useTours();
 
@@ -180,8 +187,8 @@ function ReservarPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  // Coupon state
-  const [couponInput, setCouponInput] = useState("");
+  // Coupon state — pre-fills from ?promocode= so partner links can carry a code.
+  const [couponInput, setCouponInput] = useState(promoFromUrl);
   const [couponApplied, setCouponApplied] = useState<{ code: string; discountCents: number } | null>(null);
   const [couponValidating, setCouponValidating] = useState(false);
   const [couponError, setCouponError] = useState("");
@@ -314,6 +321,34 @@ function ReservarPage() {
     if (!selectedTour || !selectedDate || !selectedSlot) return;
     setSubmitting(true);
     setSubmitError("");
+
+    // If the tour has an external Stripe Payment Link configured, route the
+    // customer there directly. We forward email + promo code as query params
+    // (Stripe Payment Links accept `prefilled_email` and `prefilled_promo_code`)
+    // and pass the booking context as `client_reference_id` so it shows up in
+    // the Stripe dashboard alongside the payment.
+    const externalUrl: string = selectedTour.externalBookingUrl || "";
+    if (externalUrl) {
+      try {
+        const url = new URL(externalUrl);
+        if (formEmail) url.searchParams.set("prefilled_email", formEmail);
+        const code = (couponApplied?.code || couponInput).trim();
+        if (code) url.searchParams.set("prefilled_promo_code", code);
+        // Pack booking details into client_reference_id (max 200 chars, alphanumeric/_/-/=).
+        const ref = [
+          slugify(selectedTour.title),
+          formatDate(selectedDate),
+          selectedSlot.time.replace(":", ""),
+          `a${adults}`,
+          `c${children}`,
+        ].join("_").slice(0, 200);
+        url.searchParams.set("client_reference_id", ref);
+        window.location.href = url.toString();
+        return;
+      } catch {
+        // Malformed URL — fall through to the API-based flow.
+      }
+    }
 
     const payload: CreateBookingPayload = {
       tour: slugify(selectedTour.title),
