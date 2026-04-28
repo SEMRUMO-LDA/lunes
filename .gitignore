@@ -29,3 +29,7 @@ dist
 npm-debug.log*
 pnpm-debug.log*
 next-env.d.ts
+
+# Build artifacts / local-only
+*.zip
+.claude/

@@ -8,6 +8,7 @@ import { X, ArrowRight, ArrowUp, Star, Clock, Plus, Minus, User, Users, Building
 import dynamic from "next/dynamic";
 import { getBrandById, SUB_BRANDS } from "@/src/data/brands";
 import { useTours } from "@/src/hooks/useTours";
+import { usePageGallery } from "@/src/hooks/usePageGallery";
 const ContactForm = dynamic(() => import("@/src/ContactForm"), { ssr: false });
 import Footer from "@/src/components/Footer";
 import MobileMenu from "@/src/components/MobileMenu";
@@ -69,6 +70,8 @@ export default function BrandPage() {
   const router = useRouter();
   const brand = getBrandById(brandId || "");
   const { tours: dynamicTours } = useTours();
+  const { images: cmsGallery } = usePageGallery(brandId, brand?.gallery ?? []);
+  const gallery = cmsGallery;
 
   const [galleryOrder, setGalleryOrder] = useState<number[]>([]);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -93,7 +96,7 @@ export default function BrandPage() {
   }
 
   const handleGalleryClick = () => {
-    const totalCards = brand.gallery.length;
+    const totalCards = gallery.length;
     setGalleryOrder(prev => {
       const currentOrder = prev.length ? prev : Array.from({ length: totalCards }, (_, i) => i);
       const newOrder = [...currentOrder];
@@ -107,7 +110,7 @@ export default function BrandPage() {
 
   const currentGalleryOrder = galleryOrder.length
     ? galleryOrder
-    : Array.from({ length: brand.gallery.length }, (_, i) => i);
+    : Array.from({ length: gallery.length }, (_, i) => i);
 
   return (
     <>
@@ -264,8 +267,8 @@ export default function BrandPage() {
               const offsetsY = [0, -10, 15];
 
               return currentGalleryOrder.slice(0, visibleCount).map((originalIdx: number, displayIdx: number) => {
-                const img = brand.gallery[originalIdx];
-                if (!img) return null;
+                const item = gallery[originalIdx];
+                if (!item) return null;
 
                 return (
                   <motion.div
@@ -294,7 +297,7 @@ export default function BrandPage() {
                     className="absolute w-[280px] md:w-[320px] lg:w-[360px] aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl border-[4px] md:border-[6px] border-white bg-white origin-bottom pointer-events-none"
                     style={{ zIndex: visibleCount - displayIdx }}
                   >
-                    <Image src={img} alt={`Gallery ${originalIdx + 1}`} fill className="object-cover" sizes="(max-width: 768px) 220px, (max-width: 1024px) 320px, 360px" unoptimized />
+                    <Image src={item.src} alt={item.alt || `${brand.title} ${originalIdx + 1}`} fill className="object-cover" sizes="(max-width: 768px) 220px, (max-width: 1024px) 320px, 360px" unoptimized />
                     <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] pointer-events-none rounded-xl" />
                   </motion.div>
                 );
@@ -303,7 +306,7 @@ export default function BrandPage() {
 
             {/* Counter & Hint */}
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
-              <span className="text-[9px] font-mono tracking-widest opacity-30">{(currentGalleryOrder[0] ?? 0) + 1}/{brand.gallery.length}</span>
+              <span className="text-[9px] font-mono tracking-widest opacity-30">{(currentGalleryOrder[0] ?? 0) + 1}/{gallery.length}</span>
               <div className="flex items-center gap-2 opacity-30 group-hover:opacity-60 transition-opacity pointer-events-none">
                 <span className="text-[9px] uppercase tracking-widest font-sans font-bold">Clique para rodar</span>
                 <ArrowRight className="w-3 h-3" />
