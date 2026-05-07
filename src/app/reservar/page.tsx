@@ -114,6 +114,35 @@ function parsePrice(raw: string | number | undefined): number {
   return isNaN(n) ? 0 : n;
 }
 
+// Format a list of {date,time} slots into a short human string for the
+// "no slots" empty-state on date_slots tours. Picks up to N upcoming dates,
+// groups duplicates, and joins them with comma + final " e ".
+function formatDateSlotsList(slots: Array<{ date: string; time: string }>, max = 4): string {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const upcoming = slots
+    .filter(s => {
+      const d = new Date(`${s.date}T00:00:00`);
+      return !isNaN(d.getTime()) && d.getTime() >= today.getTime();
+    })
+    .sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+  const seen = new Set<string>();
+  const labels: string[] = [];
+  for (const s of upcoming) {
+    if (seen.has(s.date)) continue;
+    seen.add(s.date);
+    const d = new Date(`${s.date}T00:00:00`);
+    labels.push(d.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long' }));
+    if (labels.length >= max) break;
+  }
+  if (labels.length === 0) return '';
+  if (labels.length === 1) return labels[0];
+  const head = labels.slice(0, -1).join(', ');
+  const tail = labels[labels.length - 1];
+  const more = upcoming.length > max ? '…' : '';
+  return `${head} e ${tail}${more}`;
+}
+
 // ── Calendar helpers ───────────────────────────────────────────────────
 
 function getCalendarDays(year: number, month: number) {
@@ -236,10 +265,14 @@ function ReservarPage() {
     setSlots([]);
     setSelectedSlotIdx(null);
 
-    // Build fallback slots from tour data
-    const fallbackSlots = selectedTour.timeSlots?.length
-      ? selectedTour.timeSlots.map((t: string) => ({ time: t, available: 16 }))
-      : [{ time: "10:00", available: 16 }, { time: "14:00", available: 16 }];
+    // For date_slots tours, the API is the source of truth — never fall back to
+    // synthetic slots, since most dates are intentionally unavailable.
+    const isDateSlots = selectedTour.scheduleType === 'date_slots';
+    const fallbackSlots = isDateSlots
+      ? []
+      : selectedTour.timeSlots?.length
+        ? selectedTour.timeSlots.map((t: string) => ({ time: t, available: 16 }))
+        : [{ time: "10:00", available: 16 }, { time: "14:00", available: 16 }];
 
     checkAvailability(slugify(selectedTour.title), formatDate(selectedDate))
       .then((data) => {
@@ -700,8 +733,19 @@ function ReservarPage() {
                       <Loader2 className="w-8 h-8 animate-spin text-explore-blue" />
                     </div>
                   ) : slots.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center py-16 text-blackout/30">
-                      <p className="text-sm">Sem horários para esta data</p>
+                    <div className="flex flex-col items-center justify-center py-16 text-blackout/30 px-4 text-center">
+                      {selectedTour?.scheduleType === 'date_slots' ? (
+                        <>
+                          <p className="text-sm">Esta experiência só corre em datas específicas.</p>
+                          <p className="text-xs mt-2 opacity-80">
+                            {selectedTour.dateSlots && selectedTour.dateSlots.length > 0
+                              ? `Datas disponíveis: ${formatDateSlotsList(selectedTour.dateSlots)}`
+                              : 'Escolhe outra data.'}
+                          </p>
+                        </>
+                      ) : (
+                        <p className="text-sm">Sem horários para esta data</p>
+                      )}
                     </div>
                   ) : (
                     <div className="space-y-3">

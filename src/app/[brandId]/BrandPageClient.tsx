@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import { getBrandById, SUB_BRANDS } from "@/src/data/brands";
 import { useTours } from "@/src/hooks/useTours";
 import { usePageGallery } from "@/src/hooks/usePageGallery";
+import { useTripAdvisor } from "@/src/hooks/useTripAdvisor";
 const ContactForm = dynamic(() => import("@/src/ContactForm"), { ssr: false });
 import Footer from "@/src/components/Footer";
 import MobileMenu from "@/src/components/MobileMenu";
@@ -71,6 +72,7 @@ export default function BrandPage() {
   const brand = getBrandById(brandId || "");
   const { tours: dynamicTours } = useTours();
   const { images: cmsGallery } = usePageGallery(brandId, brand?.gallery ?? []);
+  const { data: tripAdvisor, loading: taLoading, isLive: taIsLive } = useTripAdvisor('pt');
   const gallery = cmsGallery;
 
   const [galleryOrder, setGalleryOrder] = useState<number[]>([]);
@@ -656,45 +658,155 @@ export default function BrandPage() {
           </div>
         )}
 
-        {/* Explore — TripAdvisor testimonials */}
+        {/* Explore — TripAdvisor testimonials (dynamic) */}
         {brand.id === 'explore' && (
           <div className="py-32 border-t border-blackout/5 bg-[#F9FAF9]">
-            <div className="max-w-3xl mx-auto px-8 md:px-16 text-center">
+            <div className="max-w-5xl mx-auto px-8 md:px-16">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="text-center mb-16"
               >
-                <div className="flex items-center justify-center gap-1 text-[#00AA6C] mb-6">
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
+                {/* TripAdvisor Logo */}
+                <div className="flex items-center justify-center gap-2 mb-6">
+                  <svg viewBox="0 0 32 32" className="w-8 h-8" fill="#00AA6C">
+                    <circle cx="16" cy="16" r="16" />
+                    <path d="M16 8c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14.4c-3.5 0-6.4-2.9-6.4-6.4S12.5 9.6 16 9.6s6.4 2.9 6.4 6.4-2.9 6.4-6.4 6.4z" fill="white" />
+                    <circle cx="12.8" cy="16" r="2.4" fill="white" />
+                    <circle cx="19.2" cy="16" r="2.4" fill="white" />
+                    <circle cx="16" cy="11.2" r="1.6" fill="white" />
+                  </svg>
+                  <span className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-[#00AA6C]">
+                    TripAdvisor
+                  </span>
                 </div>
 
-                <span className="text-[10px] uppercase tracking-[0.5em] font-sans font-bold text-blackout/60 block mb-4">
-                  TripAdvisor
-                </span>
+                {/* Dynamic Rating */}
+                <div className="flex items-center justify-center gap-1 text-[#00AA6C] mb-4">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className={`w-6 h-6 ${i < Math.round(tripAdvisor.rating) ? 'fill-current' : 'opacity-20'}`} />
+                  ))}
+                </div>
 
-                <h3 className="text-4xl md:text-5xl font-light italic mb-6">
+                <div className="flex items-center justify-center gap-3 mb-6">
+                  <span className="text-4xl font-bold text-blackout font-sans">{tripAdvisor.rating.toFixed(1)}</span>
+                  <div className="text-left">
+                    <span className="text-sm text-blackout/80 font-sans font-medium block">{tripAdvisor.numReviews} avaliações</span>
+                    {tripAdvisor.rankingString && (
+                      <span className="text-[11px] text-blackout/40 font-sans block">{tripAdvisor.rankingString}</span>
+                    )}
+                  </div>
+                </div>
+
+                <h3 className="text-4xl md:text-5xl font-light italic mb-4">
                   O que dizem sobre nós
                 </h3>
 
-                <p className="text-lg text-blackout/60 font-light leading-relaxed font-sans max-w-2xl mx-auto mb-10">
+                <p className="text-lg text-blackout/60 font-light leading-relaxed font-sans max-w-2xl mx-auto">
                   Os nossos passageiros partilham as suas experiências no TripAdvisor. Leia os testemunhos e, se já navegou connosco, deixe também a sua história.
                 </p>
+              </motion.div>
 
+              {/* Reviews Cards */}
+              {tripAdvisor.reviews.length > 0 && (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                  {tripAdvisor.reviews.slice(0, 5).map((review, idx) => (
+                    <motion.a
+                      key={review.id}
+                      href={review.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1, duration: 0.6 }}
+                      className="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 border border-blackout/5 flex flex-col group cursor-pointer"
+                    >
+                      {/* Rating stars */}
+                      <div className="flex items-center gap-0.5 text-[#00AA6C] mb-4">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'fill-current' : 'opacity-20'}`} />
+                        ))}
+                      </div>
+
+                      {/* Title */}
+                      {review.title && review.title !== '.' && (
+                        <h4 className="text-lg font-medium text-blackout mb-3 font-sans group-hover:text-[#00AA6C] transition-colors duration-300">
+                          {review.title}
+                        </h4>
+                      )}
+
+                      {/* Review text */}
+                      <p className="text-sm text-blackout/60 font-light leading-relaxed font-sans mb-6 flex-grow">
+                        &quot;{review.text}&quot;
+                      </p>
+
+                      {/* User info */}
+                      <div className="flex items-center gap-3 mt-auto pt-4 border-t border-blackout/5">
+                        {review.user?.avatar?.small ? (
+                          <img
+                            src={review.user.avatar.small}
+                            alt={review.user.username}
+                            className="w-10 h-10 rounded-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                        ) : (
+                          <div className="w-10 h-10 rounded-full bg-[#00AA6C]/10 flex items-center justify-center">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5 text-[#00AA6C]">
+                              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                              <circle cx="12" cy="7" r="4" />
+                            </svg>
+                          </div>
+                        )}
+                        <div>
+                          <span className="text-sm font-medium text-blackout block font-sans">
+                            {review.user.username}
+                          </span>
+                          <div className="flex items-center gap-2">
+                            {review.trip_type && (
+                              <span className="text-[10px] text-blackout/40 font-sans">
+                                {review.trip_type}
+                              </span>
+                            )}
+                            {review.published_date && (
+                              <span className="text-[10px] text-blackout/30 font-sans">
+                                · {new Date(review.published_date).toLocaleDateString('pt-PT', { month: 'short', year: 'numeric' })}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.a>
+                  ))}
+                </div>
+              )}
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
-                  href="https://www.tripadvisor.pt/Profile/LunesExperience"
+                  href={tripAdvisor.webUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`inline-block px-12 py-5 rounded-full ${brand.color} ${brand.textColor} text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:scale-105 transition-all duration-300 shadow-xl`}
                 >
-                  Ver e deixar testemunho
+                  Ver todas as avaliações
                 </a>
-              </motion.div>
+                <a
+                  href={tripAdvisor.writeReviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-12 py-5 rounded-full border border-[#00AA6C]/30 text-[#00AA6C] text-[10px] uppercase tracking-[0.5em] font-sans font-bold hover:bg-[#00AA6C] hover:text-white transition-all duration-300"
+                >
+                  Deixar testemunho
+                </a>
+              </div>
+
+              {/* TripAdvisor attribution (required by Display Requirements) */}
+              <p className="text-center text-[10px] text-blackout/30 mt-8 font-sans">
+                Dados fornecidos pelo TripAdvisor® Content API · Atualizado automaticamente
+              </p>
             </div>
           </div>
         )}
@@ -1006,6 +1118,9 @@ export default function BrandPage() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            id="lunes-scroll-top"
+            data-kiban-stack-corner="bottomRight"
+            data-kiban-stack-height="40"
             className="fixed bottom-6 right-6 z-[110] w-10 h-10 flex items-center justify-center rounded-full shadow-lg bg-blackout text-coconut border border-coconut/10 transition-all duration-300 group"
           >
             <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform duration-300" />

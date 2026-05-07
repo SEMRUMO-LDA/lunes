@@ -10,6 +10,8 @@ function formatDurationMinutes(mins: number): string {
   return `${m} min`;
 }
 
+export interface DateSlot { date: string; time: string }
+
 export interface Tour {
   title: string;
   slug: string;
@@ -32,6 +34,10 @@ export interface Tour {
    * internal /bookings/v2/checkout endpoint.
    */
   externalBookingUrl?: string;
+  /** "fixed_slots" | "recurring" | "date_slots" — drives calendar UX. */
+  scheduleType?: string;
+  /** When scheduleType === "date_slots", explicit list of bookable {date,time}. */
+  dateSlots?: DateSlot[];
 }
 
 // Fallback estático — dados atuais do site
@@ -156,6 +162,13 @@ export function useTours() {
           const capacityStr = c.capacity != null ? String(c.capacity)
             : c.max_capacity != null ? String(c.max_capacity)
             : '';
+          const dateSlotsRaw = Array.isArray(c.date_slots) ? c.date_slots : [];
+          const dateSlots: DateSlot[] = dateSlotsRaw
+            .map((s: any) => ({
+              date: typeof s?.date === 'string' ? s.date : '',
+              time: typeof s?.time === 'string' ? s.time : '',
+            }))
+            .filter((s: DateSlot) => s.date && s.time);
           return {
             title: c.title || entry.title || '',
             slug: entry.slug || '',
@@ -173,6 +186,8 @@ export function useTours() {
             digitalTicket: c.is_digital_ticket === true,
             instantConfirmation: c.instant_confirmation === true,
             externalBookingUrl: c.external_booking_url || c.stripe_payment_link || '',
+            scheduleType: typeof c.schedule_type === 'string' ? c.schedule_type : undefined,
+            dateSlots,
           };
         });
 
