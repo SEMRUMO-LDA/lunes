@@ -94,24 +94,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <TranslationProvider>
           {children}
         </TranslationProvider>
+        {/* KIBAN universal widget loader — auto-injects every enabled add-on
+            (cookie-notice/Silktide, accessibility, whatsapp, i18n, …). New
+            widgets activated in the admin appear without a redeploy. */}
         <Script
-          src="https://kiban.pt/api/v1/i18n/widget.js"
-          data-api-key="kiban_live_kExDoEu9ch0gqUdweNil9ddbKl3wqFK"
-          strategy="lazyOnload"
-        />
-        <Script
-          src="https://kiban.pt/api/v1/cookie-notice/widget.js"
-          data-api-key="kiban_live_kExDoEu9ch0gqUdweNil9ddbKl3wqFK"
-          strategy="lazyOnload"
-        />
-        <Script
-          src="https://kiban.pt/api/v1/accessibility/widget.js"
-          data-api-key="kiban_live_kExDoEu9ch0gqUdweNil9ddbKl3wqFK"
-          strategy="lazyOnload"
-        />
-        <Script
-          src="https://kiban.pt/api/v1/whatsapp-widget/widget.js"
-          data-api-key="kiban_live_kExDoEu9ch0gqUdweNil9ddbKl3wqFK"
+          src={`${process.env.NEXT_PUBLIC_KIBAN_API_URL}/api/v1/widgets/loader.js`}
+          data-api-key={process.env.NEXT_PUBLIC_KIBAN_API_KEY}
+          data-tenant={process.env.NEXT_PUBLIC_KIBAN_TENANT}
           strategy="lazyOnload"
         />
         <KibanSeo />
